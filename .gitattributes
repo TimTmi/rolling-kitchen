@@ -1,0 +1,4 @@
+*.unity linguist-vendored
+*.asset linguist-vendored
+*.meta linguist-vendored
+*.wlt linguist-vendored
