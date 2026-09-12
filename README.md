@@ -10,6 +10,7 @@
    * **Pandazole - Kitchen Food low poly pack**
    * **Free Pack - Stick Man**
    * **Toony Kitchen & Ingredients Model FREE**
+   * **Low-Poly Park**
 
 ### Third-Party Assets
 
@@ -21,3 +22,4 @@ These assets are not included in repository. Obtain them from their original sou
 | Pandazole - Kitchen Food low poly pack | Pandazole           | [Unity Asset Store](https://assetstore.unity.com/packages/3d/props/food/pandazole-kitchen-food-low-poly-pack-204525) |
 | Free Pack - Stick Man                  | PolyOne Studio                   | [Unity Asset Store](https://assetstore.unity.com/packages/3d/characters/free-pack-stick-man-389802)                  |
 | Toony Kitchen & Ingredients Model FREE | Sigun Studio        | [Unity Asset Store](https://assetstore.unity.com/packages/3d/props/toony-kitchen-ingredients-model-free-301805)      |
+| Low-Poly Park | Thunderent | [Unity Asset Store](https://assetstore.unity.com/packages/3d/environments/urban/low-poly-park-61922) |
