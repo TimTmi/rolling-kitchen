@@ -10,8 +10,6 @@ namespace Features.Service
         {
             Core.CursorController.Lock();
             crosshairController.Show();
-            
-            Debug.Log($"Cursor: {Cursor.lockState}, visible: {Cursor.visible}");
         }
     }
 }
