@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         if (_characterController.isGrounded && gravity < 0)
             _verticalVelocity = gravity;
         
-        Vector3 move = new(_moveInput.x, _verticalVelocity, _moveInput.y);
+        Vector3 move = transform.right * _moveInput.x + transform.up * _verticalVelocity + transform.forward * _moveInput.y;
         _characterController.Move(Time.deltaTime * moveSpeed * move);
         
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime *  _lookInput.x);
