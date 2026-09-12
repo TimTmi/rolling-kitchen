@@ -6,10 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 60f;
     [SerializeField] private float gravity = -2f;
 
     private CharacterController _characterController;
-    private Vector3 _moveInput;
+    
+    private Vector2 _moveInput;
+    private Vector2 _lookInput;
+    
     private float _verticalVelocity;
     
     private void Awake()
@@ -21,6 +25,11 @@ public class PlayerController : MonoBehaviour
     {
         _moveInput = context.ReadValue<Vector2>();
     }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        _lookInput = context.ReadValue<Vector2>();
+    }
     
     private void Update()
     {
@@ -30,5 +39,7 @@ public class PlayerController : MonoBehaviour
         
         Vector3 move = new(_moveInput.x, _verticalVelocity, _moveInput.y);
         _characterController.Move(Time.deltaTime * moveSpeed * move);
+        
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime *  _lookInput.x);
     }
 }
