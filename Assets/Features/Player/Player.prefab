@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.InteractionController
   camera: {fileID: 5196402675555266435}
-  interactionDistance: 0.6
+  interactionDistance: 2
 --- !u!1 &5567718862651363030
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace Features.Interaction
     {
         [SerializeField] private Camera camera;
         
-        [SerializeField] private float interactionDistance = 0.6f;
+        [SerializeField] private float interactionDistance = 2f;
 
         public event Action<IInteractable> FocusGained;
         public event Action<IInteractable> FocusLost;
@@ -18,6 +18,12 @@ namespace Features.Interaction
 
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if (!context.started || _focusedInteractable == null)
+            {
+                return;
+            }
+            
+            _focusedInteractable.Interact();
             Interacted?.Invoke(_focusedInteractable);
         }
         
@@ -29,7 +35,10 @@ namespace Features.Interaction
                     out RaycastHit hit,
                     interactionDistance))
             {
-                if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
+                Debug.Log(hit.collider.name);
+                IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
+                Debug.Log(interactable);
+                if (interactable != null)
                 {
                     if (_focusedInteractable == null)
                     {
