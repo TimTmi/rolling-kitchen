@@ -23,3 +23,12 @@ These assets are not included in repository. Obtain them from their original sou
 | Free Pack - Stick Man                  | PolyOne Studio                   | [Unity Asset Store](https://assetstore.unity.com/packages/3d/characters/free-pack-stick-man-389802)                  |
 | Toony Kitchen & Ingredients Model FREE | Sigun Studio        | [Unity Asset Store](https://assetstore.unity.com/packages/3d/props/toony-kitchen-ingredients-model-free-301805)      |
 | Low-Poly Park | Thunderent | [Unity Asset Store](https://assetstore.unity.com/packages/3d/environments/urban/low-poly-park-61922) |
+
+### Ingredient Images
+
+The UI ingredient icons in `Assets/Features/Ingredients/Art/` are generated from the Toony Kitchen ingredient prefabs and are not included in the repository. After importing the third-party assets (see Setup), regenerate them:
+
+1. Open any scene in the Unity Editor.
+2. Run **Tools → Generate Ingredient Images**.
+
+This renders every prefab in `Assets/ThirdParty/Unity/Toony Kitchen Ingredients Free/Prefabs/Ingredients/` to a transparent 512×512 PNG (perspective camera, Unity-preview-style 30°/30° angle). Output goes to `Assets/Features/Ingredients/Art/`. Camera angle and resolution can be changed via the constants at the top of `Assets/Features/Ingredients/Editor/IngredientImageGenerator.cs`.
