@@ -24,6 +24,7 @@ namespace Features.Interaction
             }
             
             _focusedInteractable.Interact();
+            _focusedInteractable = null;
             Interacted?.Invoke(_focusedInteractable);
         }
         
