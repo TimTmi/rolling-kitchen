@@ -35,31 +35,38 @@ namespace Features.Interaction
                     out RaycastHit hit,
                     interactionDistance))
             {
-                Debug.Log(hit.collider.name);
                 IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
-                Debug.Log(interactable);
                 if (interactable != null)
                 {
-                    if (_focusedInteractable == null)
-                    {
-                        _focusedInteractable = interactable;
-                        FocusGained?.Invoke(interactable);
-                    }
-                    else if (interactable != _focusedInteractable)
-                    {
-                        IInteractable previousInteractable = _focusedInteractable;
-                        _focusedInteractable = interactable;
-                        FocusLost?.Invoke(previousInteractable);
-                        FocusGained?.Invoke(_focusedInteractable);
-                    }
+                    GainFocus(interactable);
+                    return;
                 }
             }
-            else if (_focusedInteractable != null)
+
+            LoseFocus();
+        }
+
+        private void GainFocus(IInteractable interactable)
+        {
+            if (_focusedInteractable == null)
+            {
+                _focusedInteractable = interactable;
+                FocusGained?.Invoke(interactable);
+            }
+            else if (interactable != _focusedInteractable)
             {
                 IInteractable previousInteractable = _focusedInteractable;
-                _focusedInteractable = null;
+                _focusedInteractable = interactable;
                 FocusLost?.Invoke(previousInteractable);
+                FocusGained?.Invoke(_focusedInteractable);
             }
+        }
+
+        private void LoseFocus()
+        {
+            IInteractable previousInteractable = _focusedInteractable;
+            _focusedInteractable = null;
+            FocusLost?.Invoke(previousInteractable);
         }
     }
 }

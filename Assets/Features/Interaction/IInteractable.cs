@@ -5,6 +5,6 @@ namespace Features.Interaction
     public interface IInteractable 
     {
         void Interact();
-        string GetInteractionMessage();
+        string GetInteractionPrompt();
     }
 }

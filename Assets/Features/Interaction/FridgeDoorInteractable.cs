@@ -22,7 +22,7 @@ namespace Features.Interaction
             hinge.localRotation = _open ? Quaternion.Euler(openRotation) : _closedRotation;
         }
 
-        public string GetInteractionMessage()
+        public string GetInteractionPrompt()
         {
             return _open ? "Close Fridge" : "Open Fridge";
         }
