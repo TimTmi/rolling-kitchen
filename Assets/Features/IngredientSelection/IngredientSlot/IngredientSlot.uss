@@ -1,0 +1,25 @@
+.ingredient-slot {
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    min-width: 140px;
+    min-height: 140px;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.ingredient-slot:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ingredient-image {
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 6px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ingredient-label {
+    color: rgb(235, 235, 235);
+    -unity-font-style: bold;
+}

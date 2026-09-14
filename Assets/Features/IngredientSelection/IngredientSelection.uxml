@@ -1,0 +1,20 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="IngredientSlot" src="project://database/Assets/Features/IngredientSelection/IngredientSlot/IngredientSlot.uxml?fileID=9197481963319205126&amp;guid=b4f12e8dbb64867b89324b5d3e710b8e&amp;type=3#IngredientSlot"/>
+    <Style src="project://database/Assets/Features/IngredientSelection/IngredientSelection.uss?fileID=7433441132597879392&amp;guid=91d3f331c4c39332cb8460064ecdb1c2&amp;type=3#IngredientSelection"/>
+    <ui:VisualElement name="IngredientSelection" picking-mode="Ignore" class="ingredient-selection">
+        <ui:VisualElement name="Panel" class="panel">
+            <ui:ScrollView name="IngredientList" class="ingredient-list">
+                <ui:Instance template="IngredientSlot" name="IngredientSlot"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot2"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot3"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot4"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot5"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot6"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot7"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot8"/>
+                <ui:Instance template="IngredientSlot" name="IngredientSlot9"/>
+            </ui:ScrollView>
+            <ui:Button text="Put back" name="PutBackButton" class="put-back-button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
