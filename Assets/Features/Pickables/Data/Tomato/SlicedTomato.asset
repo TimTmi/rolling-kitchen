@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
   m_Name: SlicedTomato
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Tomato
+  displayName: Sliced Tomato
   icon: {fileID: 7934239682363468368, guid: 387a7e0edd67b6e6fb393ce0904302ee, type: 3}
   prefab: {fileID: 6213259828783532099, guid: 7985cb9eff186a545b6d64a3a08f3aa0, type: 3}

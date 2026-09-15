@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
   m_Name: RawFries
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Potato
+  displayName: Fries (Raw)
   icon: {fileID: -8294466014649415594, guid: bfe0ef9affbd6080396652b7b4ff5017, type: 3}
   prefab: {fileID: 7020080757568558857, guid: 063f229038acda848aac31560db6b1dd, type: 3}

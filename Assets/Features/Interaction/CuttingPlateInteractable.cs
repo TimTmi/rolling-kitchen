@@ -4,12 +4,17 @@ namespace Features.Interaction
 {
     public class CuttingPlateInteractable : MonoBehaviour, IInteractable
     {
-        public void Interact()
+        public bool CanInteract(in InteractionContext context)
         {
-            throw new System.NotImplementedException();
+            return true;
+        }
+        
+        public void Interact(in  InteractionContext context)
+        {
+            
         }
 
-        public string GetInteractionPrompt()
+        public string GetInteractionPrompt(in InteractionContext context)
         {
             return "cutting board";
         }

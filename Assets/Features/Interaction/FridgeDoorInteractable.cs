@@ -4,27 +4,19 @@ namespace Features.Interaction
 {
     public class FridgeDoorInteractable : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Transform hinge;
-
-        [SerializeField] private Vector3 openRotation;
-
-        private Quaternion _closedRotation;
-        private bool _open = false;
-
-        private void Awake()
+        public bool CanInteract(in InteractionContext context)
         {
-            _closedRotation = Quaternion.Euler(hinge.localRotation.eulerAngles);
-        }
-        
-        public void Interact()
-        {
-            _open = !_open;
-            hinge.localRotation = _open ? Quaternion.Euler(openRotation) : _closedRotation;
+            return true;
         }
 
-        public string GetInteractionPrompt()
+        public void Interact(in InteractionContext context)
         {
-            return _open ? "Close Fridge" : "Open Fridge";
+            
+        }
+
+        public string GetInteractionPrompt(in InteractionContext context)
+        {
+            return "Open Fridge";
         }
     }
 }

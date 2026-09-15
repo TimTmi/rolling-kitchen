@@ -1,4 +1,5 @@
 using System;
+using Features.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ namespace Features.Interaction
     public class InteractionController : MonoBehaviour
     {
         [SerializeField] private Camera camera;
+        [SerializeField] private PlayerController playerController;
 
         [SerializeField] private LayerMask interactionLayer;
         [SerializeField] private float interactionDistance = 2f;
@@ -24,7 +26,7 @@ namespace Features.Interaction
                 return;
             }
             
-            _focusedInteractable.Interact();
+            _focusedInteractable.Interact(new(playerController.HeldPickable));
             _focusedInteractable = null;
             Interacted?.Invoke(_focusedInteractable);
         }

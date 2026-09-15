@@ -5802,6 +5802,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720273813}
   m_Mesh: {fileID: 4300050, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!114 &736064154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1380899563304524212, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+  m_PrefabInstance: {fileID: 3193077325376431241}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97c33c7c64623c38b5b510d92175621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1 &745724714
 GameObject:
   m_ObjectHideFlags: 0
@@ -9332,6 +9343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.HUD.HUDController
   interactionController: {fileID: 88830869}
+  playerController: {fileID: 736064154}
 --- !u!1 &1365547971
 GameObject:
   m_ObjectHideFlags: 0

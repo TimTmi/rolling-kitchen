@@ -1,4 +1,5 @@
 using Features.Interaction;
+using Features.Player;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,7 @@ namespace Features.HUD
     public class HUDController : MonoBehaviour
     {
         [SerializeField] private InteractionController interactionController;
+        [SerializeField] private PlayerController playerController;
         
         private PanelRenderer _panelRenderer;
         private int _uiVersion = 0;
@@ -47,7 +49,7 @@ namespace Features.HUD
         private void OnFocusGained(IInteractable interactable)
         {
             _interactionPrompt.visible = true;
-            _interactionPrompt.text = interactable.GetInteractionPrompt();
+            _interactionPrompt.text = interactable.GetInteractionPrompt(new(playerController.HeldPickable));
         }
 
         private void OnFocusLost(IInteractable interactable)

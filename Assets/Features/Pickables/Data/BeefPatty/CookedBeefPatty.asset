@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
   m_Name: CookedBeefPatty
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Beef Patty
+  displayName: Beef Patty (Cooked)
   icon: {fileID: -366265374277833554, guid: 25ee15b001b41c3f19bf6a4483a79589, type: 3}
   prefab: {fileID: 5182101408359990397, guid: 1cadb7e9b63d1484db6a657066fdcd48, type: 3}

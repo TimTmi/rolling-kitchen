@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.InteractionController
   camera: {fileID: 5196402675555266435}
+  playerController: {fileID: 1380899563304524212}
   interactionLayer:
     serializedVersion: 2
     m_Bits: 0

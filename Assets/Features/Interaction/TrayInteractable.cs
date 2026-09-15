@@ -4,14 +4,19 @@ namespace Features.Interaction
 {
     public class TrayInteractable : MonoBehaviour, IInteractable
     {
-        public void Interact()
+        public bool CanInteract(in InteractionContext context)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
-        public string GetInteractionPrompt()
+        public void Interact(in InteractionContext context)
         {
-            return "tray";
+            
+        }
+
+        public string GetInteractionPrompt(in InteractionContext context)
+        {
+            return "Place Item";
         }
     }
 }

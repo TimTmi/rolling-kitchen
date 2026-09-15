@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
   m_Name: CookedSlicedOnion
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Onion
+  displayName: Sliced Onion (Cooked)
   icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
   prefab: {fileID: 2385259768114628809, guid: 8ad32adf99278b14aa04d2ca31350936, type: 3}

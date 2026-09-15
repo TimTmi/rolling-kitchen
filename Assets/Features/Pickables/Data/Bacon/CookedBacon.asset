@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
   m_Name: CookedBacon
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Bacon
+  displayName: Bacon (Cooked)
   icon: {fileID: -4396206974578190670, guid: d3e0aa57d53b2c4c7bf7ed67e8783041, type: 3}
   prefab: {fileID: 169273373082673612, guid: 34e35973ce913774d8913218b2fa9924, type: 3}

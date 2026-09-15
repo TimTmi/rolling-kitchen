@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
   m_Name: MeltedCheeseSlice
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Cheese Slice
+  displayName: Cheese Slice (Melted)
   icon: {fileID: -4415907369559253599, guid: dc96591ee14a0b6e3ba94f829dcd8724, type: 3}
   prefab: {fileID: 5356622305639973082, guid: e07133125b3d43f429d54b2689beea9a, type: 3}
