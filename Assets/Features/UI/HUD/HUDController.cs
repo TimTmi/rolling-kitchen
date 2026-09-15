@@ -3,46 +3,29 @@ using Features.Player;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Features.HUD
+namespace Features.UI.HUD
 {
-    [RequireComponent(typeof(PanelRenderer))]
-    public class HUDController : MonoBehaviour
+    public class HUDController : UIController
     {
         [SerializeField] private InteractionController interactionController;
         [SerializeField] private PlayerController playerController;
         
-        private PanelRenderer _panelRenderer;
-        private int _uiVersion = 0;
-        
         private Label _interactionPrompt;
-        
-        private void Awake()
-        {
-            _panelRenderer = GetComponent<PanelRenderer>();
-        }
 
-        private void OnEnable()
+        protected override void OnEnabled()
         {
-            _panelRenderer.RegisterUIReloadCallback(OnUIReload);
             interactionController.FocusGained += OnFocusGained;
             interactionController.FocusLost += OnFocusLost;
         }
 
-        private void OnDisable()
+        protected override void OnDisabled()
         {
-            _panelRenderer.UnregisterUIReloadCallback(OnUIReload);
             interactionController.FocusGained -= OnFocusGained;
             interactionController.FocusLost -= OnFocusLost;
         }
 
-        private void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+        protected override void BindElements(VisualElement root)
         {
-            if (version <= _uiVersion)
-            {
-                return;
-            }
-            _uiVersion = version;
-            
             _interactionPrompt = root.Q<Label>("InteractionPrompt");
         }
 

@@ -2572,6 +2572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 280953995}
   - component: {fileID: 280953996}
+  - component: {fileID: 280953997}
   m_Layer: 0
   m_Name: IngredientSelection
   m_TagString: Untagged
@@ -2652,6 +2653,19 @@ PanelRenderer:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_Position: 0
+--- !u!114 &280953997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280953994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2c30e61e33c9eae81e25b1c6a0a0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.UI.PickableSelection.PickableSelectionController
+  panelRenderer: {fileID: 0}
 --- !u!1 &283738089
 GameObject:
   m_ObjectHideFlags: 0
@@ -6045,6 +6059,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: serviceController
+      value: 
+      objectReference: {fileID: 1476286822}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: pickableSelectionController
+      value: 
+      objectReference: {fileID: 280953997}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9342,6 +9364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9d567c0e0d0ddcfad11b1a6d2640b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.HUD.HUDController
+  panelRenderer: {fileID: 1349066855}
   interactionController: {fileID: 88830869}
   playerController: {fileID: 736064154}
 --- !u!1 &1365547971
@@ -9733,6 +9756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc59d1274decb5b6b9a79fbfd5e5bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServiceController
+  pickableSelectionController: {fileID: 0}
 --- !u!4 &1476286823
 Transform:
   m_ObjectHideFlags: 0
