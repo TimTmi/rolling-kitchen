@@ -1,4 +1,4 @@
-.ingredient-slot {
+.pickable-slot {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
@@ -8,18 +8,18 @@
     padding: 8px;
 }
 
-.ingredient-slot:hover {
+.pickable-slot:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.ingredient-image {
+.pickable-image {
     flex-grow: 1;
     width: 100%;
     margin-bottom: 6px;
     -unity-background-scale-mode: scale-to-fit;
 }
 
-.ingredient-label {
+.pickable-label {
     color: rgb(235, 235, 235);
     -unity-font-style: bold;
 }

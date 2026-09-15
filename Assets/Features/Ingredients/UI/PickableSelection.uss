@@ -1,4 +1,4 @@
-.ingredient-selection {
+.pickable-selection {
     position: absolute;
     left: 0;
     top: 0;
@@ -20,12 +20,12 @@
     align-items: stretch;
 }
 
-.ingredient-list {
+.pickable-list {
     flex-grow: 1;
     margin-bottom: 16px;
 }
 
-.ingredient-list .unity-scroll-view__content-container {
+.pickable-list .unity-scroll-view__content-container {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
