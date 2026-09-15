@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
   m_Name: BurntSlicedOnion
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   displayName: Sliced Onion (Burnt)
   icon: {fileID: 5461640353098145479, guid: ce5d39d28718ca86e92d460e582be5b2, type: 3}
   prefab: {fileID: 2033258318072254537, guid: a89a611e242383a4b9b6804172fd57d1, type: 3}

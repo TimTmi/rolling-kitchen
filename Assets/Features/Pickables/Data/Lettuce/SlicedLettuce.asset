@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
   m_Name: SlicedLettuce
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   displayName: Sliced Lettuce
   icon: {fileID: 3847864973036105750, guid: 45ba80656d072ccb5ac7e0ee74b6ba26, type: 3}
   prefab: {fileID: 4440254739439378873, guid: 0b0e09c45f8c10f4c88deff94e2f2d57, type: 3}

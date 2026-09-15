@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
   m_Name: RawBeefPatty
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   displayName: Beef Patty (Raw)
   icon: {fileID: -8360093787744726278, guid: d1b7e55977134f4d2babcc74250d83f9, type: 3}
   prefab: {fileID: 6808599801469802662, guid: 714cbdecdcb0a4645891357863b99738, type: 3}

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
   m_Name: BurntBacon
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   displayName: Bacon (Burnt)
   icon: {fileID: 7229437425236201674, guid: e29cf0a378bead1e58ac4a5e63cb53a2, type: 3}
   prefab: {fileID: 5947795732387088951, guid: d34f0d4b298c1b64ab19c3ac93740128, type: 3}

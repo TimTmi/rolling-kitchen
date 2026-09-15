@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
   m_Name: BottomBurgerBun
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   displayName: Bottom Burger Bun
   icon: {fileID: -3649519605363859031, guid: 9f7610a9a5cc669f986bdc0aa64f7a69, type: 3}
   prefab: {fileID: 4388043220188942857, guid: 7e1981e7585dae14f96b91844f507d9c, type: 3}
