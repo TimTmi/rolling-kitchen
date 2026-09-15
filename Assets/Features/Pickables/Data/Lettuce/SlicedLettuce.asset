@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Name: SlicedLettuce
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  displayName: Lettuce
+  icon: {fileID: 3847864973036105750, guid: 45ba80656d072ccb5ac7e0ee74b6ba26, type: 3}
+  prefab: {fileID: 4440254739439378873, guid: 0b0e09c45f8c10f4c88deff94e2f2d57, type: 3}

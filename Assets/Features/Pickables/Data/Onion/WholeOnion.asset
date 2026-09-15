@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
+  m_Name: WholeOnion
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
+  displayName: Onion
+  icon: {fileID: 138702223785225510, guid: 81ad4b0fe28c593d9b8abb8d69764a05, type: 3}
+  prefab: {fileID: 5555530854312248496, guid: a1df86e9064b07043b74eb68305ef751, type: 3}
