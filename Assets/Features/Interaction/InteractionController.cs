@@ -7,7 +7,8 @@ namespace Features.Interaction
     public class InteractionController : MonoBehaviour
     {
         [SerializeField] private Camera camera;
-        
+
+        [SerializeField] private LayerMask interactionLayer;
         [SerializeField] private float interactionDistance = 2f;
 
         public event Action<IInteractable> FocusGained;
@@ -34,7 +35,9 @@ namespace Features.Interaction
                     camera.transform.position,
                     camera.transform.forward,
                     out RaycastHit hit,
-                    interactionDistance))
+                    interactionDistance,
+                    interactionLayer,
+                    QueryTriggerInteraction.Ignore))
             {
                 IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
                 if (interactable != null)

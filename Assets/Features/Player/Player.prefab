@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 1380899563304524212}
   - component: {fileID: 624016185816141062}
   - component: {fileID: 1434372053100935930}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,6 +372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.InteractionController
   camera: {fileID: 5196402675555266435}
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   interactionDistance: 2
 --- !u!1 &5567718862651363030
 GameObject:
