@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
-  m_Name: WholeOnion
+  m_Name: Onion
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
   displayName: Onion
   icon: {fileID: 138702223785225510, guid: 81ad4b0fe28c593d9b8abb8d69764a05, type: 3}

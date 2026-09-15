@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
-  m_Name: WholeTomato
+  m_Name: CheeseSlice
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Tomato
-  icon: {fileID: -3962807554240710951, guid: 9314f8184d23cc8dfaf656452893e002, type: 3}
-  prefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
+  displayName: Cheese Slice
+  icon: {fileID: 432296731012170486, guid: a4101a3fac8db440e9001a58c7f2ca43, type: 3}
+  prefab: {fileID: 302116531988806050, guid: 363955a43b263b04db87c074f8c0e964, type: 3}

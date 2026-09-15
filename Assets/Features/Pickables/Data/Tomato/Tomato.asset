@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe9dd7fc0d7c7276daf8a7934a3201dd, type: 3}
-  m_Name: WholeBurgerBun
+  m_Name: Tomato
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
-  displayName: Burger Bun
-  icon: {fileID: 5248698440384363030, guid: 66a31519eda33aacba10834cf1ea5787, type: 3}
-  prefab: {fileID: 6530758574615387552, guid: a6920e4c6f3cae3429ef390f653da2d4, type: 3}
+  displayName: Tomato
+  icon: {fileID: -3962807554240710951, guid: 9314f8184d23cc8dfaf656452893e002, type: 3}
+  prefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
