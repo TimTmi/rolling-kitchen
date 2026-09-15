@@ -20,4 +20,6 @@
     -unity-font-style: bold;
     color: rgb(255, 255, 255);
     visibility: hidden;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(0, 0, 0);
 }
