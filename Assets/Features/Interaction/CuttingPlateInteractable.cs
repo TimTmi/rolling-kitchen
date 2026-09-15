@@ -1,3 +1,4 @@
+using Features.Pickables;
 using UnityEngine;
 
 namespace Features.Interaction
@@ -6,7 +7,10 @@ namespace Features.Interaction
     {
         public bool CanInteract(in InteractionContext context)
         {
-            return true;
+            var pickable = context.HeldPickable;
+
+            return pickable is IngredientData ingredientData &&
+                ingredientData.HasProcess(ProcessType.Slice);
         }
         
         public void Interact(in  InteractionContext context)
@@ -16,7 +20,7 @@ namespace Features.Interaction
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return "cutting board";
+            return "Slice";
         }
     }
 }

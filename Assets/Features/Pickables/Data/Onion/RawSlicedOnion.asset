@@ -15,3 +15,10 @@ MonoBehaviour:
   displayName: Sliced Onion (Raw)
   icon: {fileID: -8481521276803907915, guid: 2e0df490706be91498e87fd850a2dc0c, type: 3}
   prefab: {fileID: 5644882134637122624, guid: 52becfe3247a3b94f9595ae258529e66, type: 3}
+  processes:
+  - type: 1
+    results:
+    - {fileID: 11400000, guid: 572ebaab9b63db7f19fea24a0282bbe6, type: 2}
+  - type: 2
+    results:
+    - {fileID: 11400000, guid: 572ebaab9b63db7f19fea24a0282bbe6, type: 2}

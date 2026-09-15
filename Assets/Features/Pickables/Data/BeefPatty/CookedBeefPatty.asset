@@ -15,3 +15,7 @@ MonoBehaviour:
   displayName: Beef Patty (Cooked)
   icon: {fileID: -366265374277833554, guid: 25ee15b001b41c3f19bf6a4483a79589, type: 3}
   prefab: {fileID: 5182101408359990397, guid: 1cadb7e9b63d1484db6a657066fdcd48, type: 3}
+  processes:
+  - type: 1
+    results:
+    - {fileID: 11400000, guid: 0e976d0eb45c36d478d197ae31078464, type: 2}
