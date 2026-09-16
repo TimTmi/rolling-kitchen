@@ -15,7 +15,7 @@ MonoBehaviour:
   id: onion
   displayName: Onion
   icon: {fileID: 138702223785225510, guid: 81ad4b0fe28c593d9b8abb8d69764a05, type: 3}
-  prefab: {fileID: 5555530854312248496, guid: a1df86e9064b07043b74eb68305ef751, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 92253f20989b26a92a348609bade6a2d, type: 3}
   processes:
   - type: 0
     results:

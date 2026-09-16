@@ -15,7 +15,7 @@ MonoBehaviour:
   id: tomato
   displayName: Tomato
   icon: {fileID: -3962807554240710951, guid: 9314f8184d23cc8dfaf656452893e002, type: 3}
-  prefab: {fileID: 5901808493792163828, guid: 6e011445eacb66d44917ee533cd703ac, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: b1f9efadd8c76f34c9fadb35fc51c9c4, type: 3}
   processes:
   - type: 0
     results:

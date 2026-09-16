@@ -15,7 +15,7 @@ MonoBehaviour:
   id: potato
   displayName: Potato
   icon: {fileID: -3982510667573690041, guid: 5427da612b0ba5535a41ccff6abbb128, type: 3}
-  prefab: {fileID: 4159441662099504553, guid: c5b380bdc61749e47912f8a006348bce, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 7a8a78a22f6a3572bb3b8bad125f591d, type: 3}
   processes:
   - type: 0
     results:

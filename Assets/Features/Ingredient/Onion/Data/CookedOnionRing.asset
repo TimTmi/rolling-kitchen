@@ -15,7 +15,7 @@ MonoBehaviour:
   id: cooked_onion_ring
   displayName: Onion Ring
   icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
-  prefab: {fileID: 2385259768114628809, guid: 8ad32adf99278b14aa04d2ca31350936, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 59723b214674a7e53aa2018edfd52175, type: 3}
   processes:
   - type: 1
     results:

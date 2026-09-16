@@ -15,7 +15,7 @@ MonoBehaviour:
   id: raw_fries
   displayName: Fries
   icon: {fileID: -8294466014649415594, guid: bfe0ef9affbd6080396652b7b4ff5017, type: 3}
-  prefab: {fileID: 7020080757568558857, guid: 063f229038acda848aac31560db6b1dd, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: fa10fa2c3ded3eae4a999db8d317fe95, type: 3}
   processes:
   - type: 2
     results:

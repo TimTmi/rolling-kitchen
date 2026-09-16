@@ -15,7 +15,7 @@ MonoBehaviour:
   id: raw_onion_ring
   displayName: Onion Ring
   icon: {fileID: -8481521276803907915, guid: 2e0df490706be91498e87fd850a2dc0c, type: 3}
-  prefab: {fileID: 5644882134637122624, guid: 52becfe3247a3b94f9595ae258529e66, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 899337cfad1e01bf8b5e677be9679624, type: 3}
   processes:
   - type: 1
     results:

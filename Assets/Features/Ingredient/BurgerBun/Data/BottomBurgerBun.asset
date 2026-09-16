@@ -15,5 +15,5 @@ MonoBehaviour:
   id: bottom_burger_bun
   displayName: Bottom Burger Bun
   icon: {fileID: -3649519605363859031, guid: 9f7610a9a5cc669f986bdc0aa64f7a69, type: 3}
-  prefab: {fileID: 4388043220188942857, guid: 7e1981e7585dae14f96b91844f507d9c, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 086af9b772226d93a88597c73b6e6f63, type: 3}
   processes: []
