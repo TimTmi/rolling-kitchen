@@ -5,12 +5,13 @@ using Features.Pickables;
 using Features.Player;
 using Features.UI.PickableSelection;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Features.Service
 {
     public class ServiceController : MonoBehaviour
     {
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerInput playerInput;
         [SerializeField] private FridgeDoorInteractable fridgeDoorInteractable;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
         
@@ -31,7 +32,7 @@ namespace Features.Service
 
         private void OnFridgeOpened(IReadOnlyList<PickableData> pickables)
         {
-            playerController.SetInputActive(false);
+            playerInput.SwitchCurrentActionMap("UI");
             Core.CursorController.Unlock();
             ShowPickableSelection(pickables);
         }
