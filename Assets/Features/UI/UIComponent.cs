@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Features.UI
 {
-    public abstract class UIController : MonoBehaviour
+    public abstract class UIComponent : MonoBehaviour
     {
         [SerializeField] private PanelRenderer panelRenderer;
 

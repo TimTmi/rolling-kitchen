@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Features.UI.PickableSelection
 {
-    public class PickableSelectionController : UIController
+    public class PickableSelectionController : UIComponent
     {
         [SerializeField] private VisualTreeAsset pickableSlotTemplate;
 
@@ -34,12 +34,15 @@ namespace Features.UI.PickableSelection
             
             foreach (var pickable in pickables) {
                 var slot = pickableSlotTemplate.Instantiate();
+                var button = slot.Q<Button>("PickableSlot");
                 var icon = slot.Q<Image>("Icon");
                 var label = slot.Q<Label>("Label");
 
                 icon.sprite = pickable.icon;
                 label.text = pickable.displayName;
-                
+
+                button.clicked += () => PickableSelected?.Invoke(pickable);
+
                 _list.Add(slot);
             }
 

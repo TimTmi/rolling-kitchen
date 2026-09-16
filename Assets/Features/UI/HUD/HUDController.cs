@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace Features.UI.HUD
 {
-    public class HUDController : UIController
+    public class HUDController : UIComponent
     {
         [SerializeField] private InteractionController interactionController;
         [SerializeField] private PlayerController playerController;
