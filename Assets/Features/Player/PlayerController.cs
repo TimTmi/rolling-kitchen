@@ -6,6 +6,7 @@ namespace Features.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private PlayerInput playerInput;
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera camera;
     
@@ -52,6 +53,11 @@ namespace Features.Player
             _pitch -= Time.deltaTime * rotationSpeed * _lookInput.y;
             _pitch = Mathf.Clamp(_pitch, minPitch, maxPitch);
             camera.transform.localRotation = Quaternion.Euler(_pitch, 0, 0);
+        }
+
+        public void SetInputActive(bool active)
+        {
+            playerInput.SwitchCurrentActionMap(active ? "Player" : "UI");
         }
     }
 }

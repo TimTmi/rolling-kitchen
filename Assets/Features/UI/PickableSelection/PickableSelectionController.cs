@@ -44,8 +44,6 @@ namespace Features.UI.PickableSelection
             }
 
             _root.style.display = DisplayStyle.Flex;
-            
-            print("!");
         }
 
         public void Hide()
