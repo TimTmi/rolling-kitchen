@@ -15,7 +15,7 @@ MonoBehaviour:
   id: raw_bacon
   displayName: Bacon
   icon: {fileID: -7976991477107485572, guid: 8a9a129c3720a6017841bd16198cfac0, type: 3}
-  prefab: {fileID: 1655350519324790408, guid: 0a11f0d465e90eb4ab0932a667ee109c, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 60061fea4294e6403bc0b718bf8f2178, type: 3}
   processes:
   - type: 1
     results:

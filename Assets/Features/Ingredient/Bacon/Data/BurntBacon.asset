@@ -15,5 +15,5 @@ MonoBehaviour:
   id: burnt_bacon
   displayName: Bacon
   icon: {fileID: 7229437425236201674, guid: e29cf0a378bead1e58ac4a5e63cb53a2, type: 3}
-  prefab: {fileID: 5947795732387088951, guid: d34f0d4b298c1b64ab19c3ac93740128, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 59380f2b7edcc319d91c0f7570db445d, type: 3}
   processes: []
