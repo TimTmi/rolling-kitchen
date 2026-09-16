@@ -5,11 +5,17 @@
     min-width: 140px;
     min-height: 140px;
     border-radius: 8px;
+    border-width: 0;
     padding: 8px;
+    background-color: transparent;
 }
 
 .pickable-slot:hover {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pickable-slot:active {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .pickable-image {
