@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
+  m_Name: Lettuce
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
+  id: lettuce
+  displayName: Lettuce
+  icon: {fileID: 65217185051169063, guid: 4cb3a6dca8f078131a19c8f236fd513b, type: 3}
+  prefab: {fileID: 3284953982482233977, guid: 7268ea2a665cd7e478afe8a5e7d1c184, type: 3}
+  processes:
+  - type: 0
+    results:
+    - {fileID: 11400000, guid: f7f33f2c5970ebdde8fa3191b311734d, type: 2}
+    - {fileID: 11400000, guid: f7f33f2c5970ebdde8fa3191b311734d, type: 2}
