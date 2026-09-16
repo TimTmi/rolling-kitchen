@@ -54,22 +54,29 @@ namespace Features.Interaction
 
         private void GainFocus(IInteractable interactable)
         {
-            if (_focusedInteractable == null)
+            if (_focusedInteractable == interactable)
             {
-                _focusedInteractable = interactable;
-                FocusGained?.Invoke(interactable);
+                return;
             }
-            else if (interactable != _focusedInteractable)
+            
+            IInteractable previousInteractable = _focusedInteractable;
+            _focusedInteractable = interactable;
+
+            if (previousInteractable != null)
             {
-                IInteractable previousInteractable = _focusedInteractable;
-                _focusedInteractable = interactable;
                 FocusLost?.Invoke(previousInteractable);
-                FocusGained?.Invoke(_focusedInteractable);
             }
+            
+            FocusGained?.Invoke(interactable);
         }
 
         private void LoseFocus()
         {
+            if (_focusedInteractable == null)
+            {
+                return;
+            }
+            
             IInteractable previousInteractable = _focusedInteractable;
             _focusedInteractable = null;
             FocusLost?.Invoke(previousInteractable);
