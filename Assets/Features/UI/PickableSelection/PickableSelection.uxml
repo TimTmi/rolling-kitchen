@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/Features/UI/PickableSelection/PickableSelection.uss?fileID=7433441132597879392&amp;guid=91d3f331c4c39332cb8460064ecdb1c2&amp;type=3#PickableSelection"/>
     <ui:VisualElement name="PickableSelection" picking-mode="Ignore" class="pickable-selection">
         <ui:VisualElement name="Panel" class="panel">
-            <ui:Button text="✕" name="CloseButton" class="close-button"/>
+            <ui:Button name="CloseButton" class="close-button"/>
             <ui:ScrollView name="List" class="pickable-list">
                 <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot"/>
                 <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot2"/>
