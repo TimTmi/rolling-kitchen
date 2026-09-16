@@ -42,8 +42,8 @@ namespace Features.UI.PickableSelection
                 var icon = slot.Q<Image>("Icon");
                 var label = slot.Q<Label>("Label");
 
-                icon.sprite = pickable.icon;
-                label.text = pickable.displayName;
+                icon.sprite = pickable.Icon;
+                label.text = pickable.DisplayName;
 
                 button.clicked += () => PickableSelected?.Invoke(pickable);
 

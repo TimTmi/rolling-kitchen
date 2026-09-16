@@ -5,8 +5,17 @@ namespace Features.Pickables
     [CreateAssetMenu(fileName = "PickableData", menuName = "Scriptable Objects/PickableData")]
     public class PickableData : ScriptableObject
     {
-        public string displayName;
-        public Sprite icon;
-        public GameObject prefab;
+        [SerializeField] private string id;
+        public string Id => id;
+        
+        [SerializeField] private string displayName;
+        public string DisplayName => displayName;
+        
+        [SerializeField] private Sprite icon;
+        public Sprite Icon => icon;
+        
+        [SerializeField] private GameObject prefab;
+        public GameObject Prefab => prefab;
+        
     }
 }
