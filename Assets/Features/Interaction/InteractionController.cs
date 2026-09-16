@@ -26,9 +26,11 @@ namespace Features.Interaction
                 return;
             }
             
-            _focusedInteractable.Interact(new(playerController.HeldPickable));
+            var interactable = _focusedInteractable;
+            interactable.Interact(new(playerController.HeldPickable));
             _focusedInteractable = null;
-            Interacted?.Invoke(_focusedInteractable);
+
+            Interacted?.Invoke(interactable);
         }
         
         private void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Features.Interaction;
 using Features.Pickables;
 using Features.Player;
+using Features.UI;
 using Features.UI.PickableSelection;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,7 @@ namespace Features.Service
     public class ServiceController : MonoBehaviour
     {
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private UIController uiController;
         [SerializeField] private FridgeDoorInteractable fridgeDoorInteractable;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
         
@@ -29,14 +31,37 @@ namespace Features.Service
         {
             fridgeDoorInteractable.Opened -= OnFridgeOpened;
         }
+        
+        public void OnCancel(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+            {
+                return;
+            }
 
-        private void OnFridgeOpened(IReadOnlyList<PickableData> pickables)
+            HideUIComponent();
+        }
+
+        private void OnFridgeOpened(IReadOnlyList<PickableData> pickables) => ShowPickableSelection(pickables);
+
+        private void ShowPickableSelection(IReadOnlyList<PickableData> pickables)
+        {
+            pickableSelectionController.SetPickables(pickables);
+            ShowUIComponent(pickableSelectionController);
+        }
+
+        private void ShowUIComponent(UIComponent component)
         {
             playerInput.SwitchCurrentActionMap("UI");
             Core.CursorController.Unlock();
-            ShowPickableSelection(pickables);
+            uiController.ShowComponent(component);
         }
 
-        private void ShowPickableSelection(IReadOnlyList<PickableData> pickables) => pickableSelectionController.Show(pickables);
+        private void HideUIComponent()
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+            Core.CursorController.Lock();
+            uiController.HideComponent();
+        }
     }
 }

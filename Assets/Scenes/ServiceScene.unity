@@ -4207,6 +4207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478365382}
+  - component: {fileID: 478365383}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -4231,6 +4232,18 @@ Transform:
   - {fileID: 280953995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &478365383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478365381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99aaeaf193bcd1d4482162248495b5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIController
 --- !u!1 &501356590
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,7 +6628,19 @@ MonoBehaviour:
     m_ActionId: 7607c7b6-cd76-4816-beef-bd0341cfe950
     m_ActionName: 'UI/Submit[/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1476286822}
+        m_TargetAssemblyTypeName: Features.Service.ServiceController, Assembly-CSharp
+        m_MethodName: OnCancel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 15cef263-9014-4fd5-94d9-4e4a6234a6ef
     m_ActionName: 'UI/Cancel[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -9981,6 +10006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServiceController
   playerInput: {fileID: 850837745}
+  uiController: {fileID: 478365383}
   fridgeDoorInteractable: {fileID: 2101523324}
   pickableSelectionController: {fileID: 280953997}
 --- !u!4 &1476286823
@@ -14859,5 +14885,5 @@ SceneRoots:
   - {fileID: 3193077325376431241}
   - {fileID: 2115665341}
   - {fileID: 1476286823}
-  - {fileID: 478365382}
   - {fileID: 850837744}
+  - {fileID: 478365382}

@@ -8,6 +8,7 @@ namespace Features.UI
         [SerializeField] private PanelRenderer panelRenderer;
 
         private int _uiVersion = -1;
+        private VisualElement _root;
 
         private void OnEnable()
         {
@@ -37,6 +38,7 @@ namespace Features.UI
                 return;
             }
             _uiVersion = version;
+            _root = root;
             
             BindElements(root);
             Initialize();
@@ -46,6 +48,16 @@ namespace Features.UI
 
         protected virtual void Initialize()
         {
+        }
+
+        public virtual void Show()
+        {
+            _root.style.display = DisplayStyle.Flex;
+        }
+
+        public virtual void Hide()
+        {
+            _root.style.display = DisplayStyle.None;
         }
     }
 }

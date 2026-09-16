@@ -10,7 +10,6 @@ namespace Features.UI.PickableSelection
     {
         [SerializeField] private VisualTreeAsset pickableSlotTemplate;
 
-        private VisualElement _root;
         private ScrollView _list;
         private Button _putBackButton;
         
@@ -18,7 +17,6 @@ namespace Features.UI.PickableSelection
 
         protected override void BindElements(VisualElement root)
         {
-            _root = root;
             _list = root.Q<ScrollView>("List");
             _putBackButton = root.Q<Button>("PutBackButton");
         }
@@ -28,7 +26,7 @@ namespace Features.UI.PickableSelection
             Hide();
         }
 
-        public void Show(IReadOnlyList<PickableData> pickables)
+        public void SetPickables(IReadOnlyList<PickableData> pickables)
         {
             _list.Clear();
             
@@ -45,13 +43,6 @@ namespace Features.UI.PickableSelection
 
                 _list.Add(slot);
             }
-
-            _root.style.display = DisplayStyle.Flex;
-        }
-
-        public void Hide()
-        {
-            _root.style.display = DisplayStyle.None;
         }
     }
 }
