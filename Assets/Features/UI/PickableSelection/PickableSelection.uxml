@@ -5,15 +5,15 @@
         <ui:VisualElement name="Panel" class="panel">
             <ui:Button text="✕" name="CloseButton" class="close-button"/>
             <ui:ScrollView name="List" class="pickable-list">
-                <ui:Instance template="PickableSlot" name="IngredientSlot"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot2"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot3"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot4"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot5"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot6"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot7"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot8"/>
-                <ui:Instance template="PickableSlot" name="IngredientSlot9"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot2"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot3"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot4"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot5"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot6"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot7"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot8"/>
+                <ui:Instance class="pickable-slot-item" template="PickableSlot" name="IngredientSlot9"/>
             </ui:ScrollView>
             <ui:Button text="Put back" name="PutBackButton" class="put-back-button"/>
         </ui:VisualElement>

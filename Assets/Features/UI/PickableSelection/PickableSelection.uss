@@ -48,6 +48,10 @@
     justify-content: center;
 }
 
+.pickable-slot-item {
+    width: 25%;
+}
+
 .put-back-button {
     background-color: rgba(255, 255, 255, 0.12);
     color: rgb(235, 235, 235);

@@ -37,6 +37,7 @@ namespace Features.UI.PickableSelection
             
             foreach (var pickable in pickables) {
                 var slot = pickableSlotTemplate.Instantiate();
+                slot.AddToClassList("pickable-slot-item");
                 var button = slot.Q<Button>("PickableSlot");
                 var icon = slot.Q<Image>("Icon");
                 var label = slot.Q<Label>("Label");
