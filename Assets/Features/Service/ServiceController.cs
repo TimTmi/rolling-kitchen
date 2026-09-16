@@ -25,11 +25,13 @@ namespace Features.Service
         private void OnEnable()
         {
             fridgeDoorInteractable.Opened += OnFridgeOpened;
+            pickableSelectionController.CloseRequested += HideUIComponent;
         }
 
         private void OnDisable()
         {
             fridgeDoorInteractable.Opened -= OnFridgeOpened;
+            pickableSelectionController.CloseRequested -= HideUIComponent;
         }
         
         public void OnCancel(InputAction.CallbackContext context)
