@@ -2579,7 +2579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &280953995
 Transform:
   m_ObjectHideFlags: 0
@@ -2665,7 +2665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2c30e61e33c9eae81e25b1c6a0a0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.UI.PickableSelection.PickableSelectionController
-  panelRenderer: {fileID: 0}
+  panelRenderer: {fileID: 280953996}
+  pickableSlotTemplate: {fileID: 9197481963319205126, guid: b4f12e8dbb64867b89324b5d3e710b8e, type: 3}
 --- !u!1 &283738089
 GameObject:
   m_ObjectHideFlags: 0
@@ -6064,6 +6065,50 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1476286822}
     - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: ingredients.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c35248bfbcdc745e9651bdb84c19163, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c648db004c9253b8d9baacbbd6b8cc0f, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a92b209f9bac128d59fd0537b3d43b9f, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 14e00ea7b34e31447a9e2b85d28af07e, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a8d4ad2a2034abf62a3b4e42dc0bd701, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 022e0dabc2fdd8d2cafa02f21f8954bc, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b4f0036dd2fe2f27b9c244044afdf55, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 378edb16c398f72b98d8f18602a57c2b, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 48991a730df62f61eb601a711ca98e15, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      propertyPath: 'ingredients.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 48991a730df62f61eb601a711ca98e15, type: 2}
+    - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
       propertyPath: pickableSelectionController
       value: 
       objectReference: {fileID: 280953997}
@@ -6883,6 +6928,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895644401}
   m_Mesh: {fileID: 4300036, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!143 &907233538 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 7342712725652904354, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+  m_PrefabInstance: {fileID: 3193077325376431241}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &914100170
 GameObject:
   m_ObjectHideFlags: 0
@@ -9756,7 +9806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc59d1274decb5b6b9a79fbfd5e5bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServiceController
-  pickableSelectionController: {fileID: 0}
+  fridgeDoorInteractable: {fileID: 2101523324}
+  pickableSelectionController: {fileID: 280953997}
 --- !u!4 &1476286823
 Transform:
   m_ObjectHideFlags: 0
@@ -14095,6 +14146,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099219874}
   m_Mesh: {fileID: 4300014, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!114 &2101523324 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+  m_PrefabInstance: {fileID: 780631187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9477d9905550ad149aa30616c59b9d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.FridgeInteractable
 --- !u!1 &2102212955
 GameObject:
   m_ObjectHideFlags: 0
@@ -14590,6 +14652,10 @@ PrefabInstance:
       propertyPath: gravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1380899563304524212, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 907233538}
     - target: {fileID: 1434372053100935930, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
       propertyPath: interactionLayer.m_Bits
       value: 55

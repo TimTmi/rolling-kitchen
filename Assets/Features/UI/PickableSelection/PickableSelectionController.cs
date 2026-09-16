@@ -25,7 +25,7 @@ namespace Features.UI.PickableSelection
 
         protected override void Initialize()
         {
-            _root.style.display = DisplayStyle.None;
+            Hide();
         }
 
         public void Show(IReadOnlyList<PickableData> pickables)
@@ -44,6 +44,8 @@ namespace Features.UI.PickableSelection
             }
 
             _root.style.display = DisplayStyle.Flex;
+            
+            print("!");
         }
 
         public void Hide()
