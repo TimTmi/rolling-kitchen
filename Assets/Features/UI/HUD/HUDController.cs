@@ -31,8 +31,15 @@ namespace Features.UI.HUD
 
         private void OnFocusGained(IInteractable interactable)
         {
+            InteractionContext context = new(handController.HeldPickableData);
+
+            if (!interactable.CanInteract(context))
+            {
+                return;
+            }
+            
             _interactionPrompt.visible = true;
-            _interactionPrompt.text = interactable.GetInteractionPrompt(new(handController.HeldPickableData));
+            _interactionPrompt.text = interactable.GetInteractionPrompt(context);
         }
 
         private void OnFocusLost(IInteractable interactable)
