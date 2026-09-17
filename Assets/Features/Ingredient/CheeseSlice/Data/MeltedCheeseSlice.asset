@@ -15,5 +15,5 @@ MonoBehaviour:
   id: melted_cheese_slice
   displayName: Cheese Slice
   icon: {fileID: -4415907369559253599, guid: dc96591ee14a0b6e3ba94f829dcd8724, type: 3}
-  prefab: {fileID: 5356622305639973082, guid: e07133125b3d43f429d54b2689beea9a, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: b5251fdf3a5ee5bda9561cea6bea0bd3, type: 3}
   processes: []
