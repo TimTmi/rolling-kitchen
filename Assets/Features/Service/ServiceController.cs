@@ -13,9 +13,12 @@ namespace Features.Service
     public class ServiceController : MonoBehaviour
     {
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
         [SerializeField] private FridgeDoorInteractable fridgeDoorInteractable;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
+
+        private Action<PickableData> _selectionHandler;
         
         void Start()
         {
@@ -26,6 +29,7 @@ namespace Features.Service
         {
             fridgeDoorInteractable.Opened += OnFridgeOpened;
             pickableSelectionController.CloseRequested += HideUIComponent;
+            pickableSelectionController.PickableSelected += OnPickableSelected;
         }
 
         private void OnDisable()
@@ -44,12 +48,25 @@ namespace Features.Service
             HideUIComponent();
         }
 
-        private void OnFridgeOpened(IReadOnlyList<PickableData> pickables) => ShowPickableSelection(pickables);
-
-        private void ShowPickableSelection(IReadOnlyList<PickableData> pickables)
+        private void OnFridgeOpened(IReadOnlyList<PickableData> pickables)
         {
+            ShowPickableSelection(pickables, (data => handController.PickUp(data)));
+        }
+
+        private void ShowPickableSelection(IReadOnlyList<PickableData> pickables, Action<PickableData> selectionHandler)
+        {
+            _selectionHandler = selectionHandler;
+            
             pickableSelectionController.SetPickables(pickables);
             ShowUIComponent(pickableSelectionController);
+        }
+
+        private void OnPickableSelected(PickableData pickable)
+        {
+            HideUIComponent();
+            
+            _selectionHandler?.Invoke(pickable);
+            _selectionHandler = null;
         }
 
         private void ShowUIComponent(UIComponent component)

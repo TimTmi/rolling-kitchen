@@ -7,8 +7,17 @@ namespace Features.Player
     {
         private PickableData _heldPickableData;
         public PickableData HeldPickableData => _heldPickableData;
-        
-        private GameObject _heldPrefab;
-        public GameObject HeldPrefab => _heldPrefab;
+
+        public void PickUp(PickableData pickableData)
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+            
+            _heldPickableData = pickableData;
+
+            GameObject instance = Instantiate(_heldPickableData.Prefab, gameObject.transform);
+        }
     }
 }
