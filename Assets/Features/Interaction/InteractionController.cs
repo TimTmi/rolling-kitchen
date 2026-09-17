@@ -22,8 +22,8 @@ namespace Features.Interaction
         public void OnInteract(InputAction.CallbackContext context)
         {
             InteractionContext interactionContext = new(handController.HeldPickableData);
-            
-            if (!context.started || _focusedInteractable == null || !_focusedInteractable.CanInteract(interactionContext))
+
+            if (!context.performed || _focusedInteractable == null || !_focusedInteractable.CanInteract(interactionContext))
             {
                 return;
             }
