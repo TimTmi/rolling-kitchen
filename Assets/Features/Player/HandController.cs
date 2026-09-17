@@ -7,6 +7,8 @@ namespace Features.Player
     {
         private PickableData _heldPickableData;
         public PickableData HeldPickableData => _heldPickableData;
+        
         private GameObject _heldPrefab;
+        public GameObject HeldPrefab => _heldPrefab;
     }
 }

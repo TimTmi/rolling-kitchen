@@ -8,7 +8,7 @@ namespace Features.Interaction
     public class InteractionController : MonoBehaviour
     {
         [SerializeField] private Camera camera;
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private HandController handController;
 
         [SerializeField] private LayerMask interactionLayer;
         [SerializeField] private float interactionDistance = 2f;
@@ -27,7 +27,7 @@ namespace Features.Interaction
             }
             
             var interactable = _focusedInteractable;
-            interactable.Interact(new(playerController.HeldPickable));
+            interactable.Interact(new(handController.HeldPickableData));
             _focusedInteractable = null;
 
             Interacted?.Invoke(interactable);

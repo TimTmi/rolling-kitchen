@@ -8,7 +8,7 @@ namespace Features.UI.HUD
     public class HUDController : UIComponent
     {
         [SerializeField] private InteractionController interactionController;
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private HandController handController;
         
         private Label _interactionPrompt;
 
@@ -32,7 +32,7 @@ namespace Features.UI.HUD
         private void OnFocusGained(IInteractable interactable)
         {
             _interactionPrompt.visible = true;
-            _interactionPrompt.text = interactable.GetInteractionPrompt(new(playerController.HeldPickable));
+            _interactionPrompt.text = interactable.GetInteractionPrompt(new(handController.HeldPickableData));
         }
 
         private void OnFocusLost(IInteractable interactable)

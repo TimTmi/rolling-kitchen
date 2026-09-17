@@ -9615,7 +9615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.HUD.HUDController
   panelRenderer: {fileID: 1349066855}
   interactionController: {fileID: 88830869}
-  playerController: {fileID: 736064154}
+  handController: {fileID: 3193077325376431242}
 --- !u!1 &1365547971
 GameObject:
   m_ObjectHideFlags: 0
@@ -14862,6 +14862,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 907233538}
     - target: {fileID: 1434372053100935930, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+      propertyPath: handController
+      value: 
+      objectReference: {fileID: 3193077325376431242}
+    - target: {fileID: 1434372053100935930, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
       propertyPath: interactionLayer.m_Bits
       value: 55
       objectReference: {fileID: 0}
@@ -14874,6 +14878,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+--- !u!114 &3193077325376431242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6890123952573489311, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+  m_PrefabInstance: {fileID: 3193077325376431241}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f365693e6a65f6b3375b036944fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Player.HandController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

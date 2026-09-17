@@ -21,8 +21,6 @@ namespace Features.Player
         private float _pitch;
         private float _verticalVelocity;
 
-        public PickableData HeldPickable { get; private set; }
-
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();

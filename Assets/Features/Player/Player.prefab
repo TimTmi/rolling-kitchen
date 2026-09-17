@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.InteractionController
   camera: {fileID: 5196402675555266435}
-  playerController: {fileID: 1380899563304524212}
+  handController: {fileID: 0}
   interactionLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -335,6 +335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7449558235799839445}
+  - component: {fileID: 6890123952573489311}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -357,3 +358,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1340647868459270164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6890123952573489311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598417197617780207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f365693e6a65f6b3375b036944fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Player.HandController
