@@ -6,7 +6,7 @@ namespace Features.Interaction
     {
         public bool CanInteract(in InteractionContext context)
         {
-            return true;
+            return context.HeldPickable != null;
         }
 
         public void Interact(in InteractionContext context)
