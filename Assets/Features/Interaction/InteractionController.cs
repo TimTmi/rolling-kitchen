@@ -30,7 +30,7 @@ namespace Features.Interaction
             
             var interactable = _focusedInteractable;
             interactable.Interact(interactionContext);
-            _focusedInteractable = null;
+            LoseFocus();
 
             Interacted?.Invoke(interactable);
         }

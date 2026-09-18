@@ -6139,7 +6139,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5551870642171148458, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 935022608}
   m_SourcePrefab: {fileID: 100100000, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
 --- !u!1 &801299437
 GameObject:
@@ -7323,6 +7326,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934564389}
   m_Mesh: {fileID: 4300028, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!1 &935022605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5551870642171148458, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+  m_PrefabInstance: {fileID: 780631187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &935022608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935022605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17e575e0f159fdc69e136cf8e1017b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.BinInteractable
 --- !u!1 &993624558
 GameObject:
   m_ObjectHideFlags: 0
@@ -10023,6 +10043,7 @@ MonoBehaviour:
   fridgeInteractable: {fileID: 2101523324}
   burgerBoxStackInteractable: {fileID: 395407478}
   friesBoxStackInteractable: {fileID: 1491294714}
+  binInteractable: {fileID: 935022608}
   pickableSelectionController: {fileID: 280953997}
 --- !u!4 &1476286823
 Transform:
