@@ -1081,7 +1081,6 @@ Transform:
   m_Children:
   - {fileID: 7545913768692134452}
   - {fileID: 4677908327191611944}
-  - {fileID: 5143386348659984041}
   - {fileID: 4215050403789488069}
   m_Father: {fileID: 25090257171027504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1555,8 +1554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9477d9905550ad149aa30616c59b9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.FridgeInteractable
-  hinge: {fileID: 3216869831584000389}
-  openRotation: {x: 0, y: -90, z: 0}
+  ingredients: []
 --- !u!1 &5291286197952972574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,12 +1670,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298452132392015394}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 2.3, z: 1.6}
-  m_LocalScale: {x: 0.6, y: 1, z: 2}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7026031114989276086}
+  m_Father: {fileID: 9155500317466119810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7536933956064151735
 BoxCollider:
@@ -1698,8 +1696,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.55, y: 1, z: 2}
+  m_Center: {x: -0.75, y: 2.3, z: 1.6000004}
 --- !u!1 &5343509716584357300
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,6 +2420,7 @@ Transform:
   m_Children:
   - {fileID: 4111302250340617044}
   - {fileID: 7132469582781239726}
+  - {fileID: 5143386348659984041}
   m_Father: {fileID: 3340448189482058887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8116814910022827343
