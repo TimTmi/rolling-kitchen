@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
+using Features.Pickables;
 using UnityEngine;
 
-namespace Features.Pickables
+namespace Features.Ingredient
 {
     public enum ProcessType
     {
@@ -14,8 +15,13 @@ namespace Features.Pickables
     [Serializable]
     public class IngredientProcess
     {
-        public ProcessType type;
-        public IngredientData[] results;
+        [SerializeField] private ProcessType type;
+        [SerializeField] private float duration;
+        [SerializeField] private IngredientData result;
+
+        public ProcessType Type => type;
+        public float Duration => duration;
+        public IngredientData Result => result;
     }
     
     [CreateAssetMenu(fileName = "IngredientData", menuName = "Scriptable Objects/IngredientData")]
@@ -23,11 +29,11 @@ namespace Features.Pickables
     {
         public IngredientProcess[] processes;
         
-        public bool HasProcess(ProcessType type) => processes.Any(x => x.type == type);
+        public bool HasProcess(ProcessType type) => processes.Any(x => x.Type == type);
 
         public bool TryGetProcess(ProcessType type, out IngredientProcess process)
         {
-            process = processes.FirstOrDefault(x => x.type == type);
+            process = processes.FirstOrDefault(x => x.Type == type);
             return process != null;
         }
     }

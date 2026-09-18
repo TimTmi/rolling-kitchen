@@ -16,4 +16,7 @@ MonoBehaviour:
   displayName: Cheese Slice
   icon: {fileID: 432296731012170486, guid: a4101a3fac8db440e9001a58c7f2ca43, type: 3}
   prefab: {fileID: 6926362284556185432, guid: 67499929948bfe3b292805415bb07040, type: 3}
-  processes: []
+  processes:
+  - type: 1
+    duration: 3
+    result: {fileID: 11400000, guid: aef6b88e0215cf144a69ab8da95a0c73, type: 2}

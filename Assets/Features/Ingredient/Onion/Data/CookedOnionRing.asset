@@ -17,9 +17,6 @@ MonoBehaviour:
   icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
   prefab: {fileID: 6926362284556185432, guid: 59723b214674a7e53aa2018edfd52175, type: 3}
   processes:
-  - type: 1
-    results:
-    - {fileID: 11400000, guid: 5862bbd6c2e51c9de8c5d7093d3657d5, type: 2}
   - type: 2
-    results:
-    - {fileID: 11400000, guid: 5862bbd6c2e51c9de8c5d7093d3657d5, type: 2}
+    duration: 6
+    result: {fileID: 11400000, guid: 65b2dfff4b9073ea9b2b6d5a5070bce1, type: 2}

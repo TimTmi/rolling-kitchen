@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Features.Ingredient;
 using Features.Pickables;
 using Features.Service;
 using UnityEngine;

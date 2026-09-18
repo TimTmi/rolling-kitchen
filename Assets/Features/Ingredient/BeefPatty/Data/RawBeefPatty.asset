@@ -18,5 +18,5 @@ MonoBehaviour:
   prefab: {fileID: 6926362284556185432, guid: c52e6be2c966920fba34a2dd06385e14, type: 3}
   processes:
   - type: 1
-    results:
-    - {fileID: 11400000, guid: 12fa918c3067c778d99aa3fb64d6aeae, type: 2}
+    duration: 8
+    result: {fileID: 11400000, guid: 12fa918c3067c778d99aa3fb64d6aeae, type: 2}
