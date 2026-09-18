@@ -1,0 +1,40 @@
+.pickable-slot {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 8px;
+    border-width: 0;
+    padding: 8px;
+    background-color: transparent;
+}
+
+.pickable-slot:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pickable-slot:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* height: 0 + padding-bottom: 100% → the frame is exactly as tall as it is wide,
+   because percentage padding resolves against the parent's width. */
+.pickable-icon {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    margin-bottom: 6px;
+}
+
+.pickable-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.pickable-label {
+    color: rgb(235, 235, 235);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}

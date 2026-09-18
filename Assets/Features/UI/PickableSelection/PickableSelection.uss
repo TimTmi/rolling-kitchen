@@ -1,0 +1,79 @@
+.pickable-selection {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.panel {
+    width: 60%;
+    height: 70%;
+    background-color: rgb(32, 34, 40);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+    border-radius: 12px;
+    padding: 20px;
+    align-items: stretch;
+}
+
+.close-button {
+    align-self: flex-end;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-width: 0;
+    border-radius: 8px;
+    background-image: url('project://database/Assets/Features/UI/x.png?fileID=2800000&guid=de6bfd61a407e57d79453f7a43eaefbe&type=3#x');
+}
+
+.close-button:hover {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+.pickable-list {
+    flex-grow: 1;
+    margin-bottom: 16px;
+}
+
+.pickable-list .unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pickable-list .unity-scroller--horizontal {
+    display: none;
+}
+
+.pickable-list .unity-scroller--vertical {
+    width: 10px;
+}
+
+.pickable-list .unity-scroller--vertical .unity-base-slider__tracker {
+    display: none;
+}
+
+.pickable-list .unity-scroller--vertical .unity-scroller__low-button,
+.pickable-list .unity-scroller--vertical .unity-scroller__high-button {
+    display: none;
+}
+
+.pickable-list .unity-scroller--vertical .unity-base-slider__dragger {
+    width: 10px;
+    border-width: 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.pickable-list .unity-scroller--vertical .unity-base-slider__dragger:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.pickable-slot-item {
+    width: 25%;
+}

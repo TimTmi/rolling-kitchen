@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
+  m_Name: SlicedTomato
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
+  id: sliced_tomato
+  displayName: Tomato
+  icon: {fileID: 7934239682363468368, guid: 387a7e0edd67b6e6fb393ce0904302ee, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 245592333cb6e1361969f2c76ed1698a, type: 3}
+  processes: []

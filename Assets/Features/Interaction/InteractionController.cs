@@ -1,4 +1,5 @@
 using System;
+using Features.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,9 @@ namespace Features.Interaction
     public class InteractionController : MonoBehaviour
     {
         [SerializeField] private Camera camera;
-        
+        [SerializeField] private HandController handController;
+
+        [SerializeField] private LayerMask interactionLayer;
         [SerializeField] private float interactionDistance = 2f;
 
         public event Action<IInteractable> FocusGained;
@@ -18,14 +21,18 @@ namespace Features.Interaction
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if (!context.started || _focusedInteractable == null)
+            InteractionContext interactionContext = new(handController.HeldPickableData);
+
+            if (!context.performed || _focusedInteractable == null || !_focusedInteractable.CanInteract(interactionContext))
             {
                 return;
             }
             
-            _focusedInteractable.Interact();
+            var interactable = _focusedInteractable;
+            interactable.Interact(interactionContext);
             _focusedInteractable = null;
-            Interacted?.Invoke(_focusedInteractable);
+
+            Interacted?.Invoke(interactable);
         }
         
         private void Update()
@@ -34,7 +41,9 @@ namespace Features.Interaction
                     camera.transform.position,
                     camera.transform.forward,
                     out RaycastHit hit,
-                    interactionDistance))
+                    interactionDistance,
+                    interactionLayer,
+                    QueryTriggerInteraction.Ignore))
             {
                 IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
                 if (interactable != null)
@@ -49,22 +58,29 @@ namespace Features.Interaction
 
         private void GainFocus(IInteractable interactable)
         {
-            if (_focusedInteractable == null)
+            if (_focusedInteractable == interactable)
             {
-                _focusedInteractable = interactable;
-                FocusGained?.Invoke(interactable);
+                return;
             }
-            else if (interactable != _focusedInteractable)
+            
+            IInteractable previousInteractable = _focusedInteractable;
+            _focusedInteractable = interactable;
+
+            if (previousInteractable != null)
             {
-                IInteractable previousInteractable = _focusedInteractable;
-                _focusedInteractable = interactable;
                 FocusLost?.Invoke(previousInteractable);
-                FocusGained?.Invoke(_focusedInteractable);
             }
+            
+            FocusGained?.Invoke(interactable);
         }
 
         private void LoseFocus()
         {
+            if (_focusedInteractable == null)
+            {
+                return;
+            }
+            
             IInteractable previousInteractable = _focusedInteractable;
             _focusedInteractable = null;
             FocusLost?.Invoke(previousInteractable);

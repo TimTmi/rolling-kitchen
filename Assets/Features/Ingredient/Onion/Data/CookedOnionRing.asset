@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
+  m_Name: CookedOnionRing
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
+  id: cooked_onion_ring
+  displayName: Onion Ring
+  icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: 59723b214674a7e53aa2018edfd52175, type: 3}
+  processes:
+  - type: 1
+    results:
+    - {fileID: 11400000, guid: 5862bbd6c2e51c9de8c5d7093d3657d5, type: 2}
+  - type: 2
+    results:
+    - {fileID: 11400000, guid: 5862bbd6c2e51c9de8c5d7093d3657d5, type: 2}

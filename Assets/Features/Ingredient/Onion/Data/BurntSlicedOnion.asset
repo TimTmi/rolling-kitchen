@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43df6f0a9845d2b90a27c6aeb9abb376, type: 3}
+  m_Name: BurntSlicedOnion
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
+  id: burnt_sliced_onion
+  displayName: Onion
+  icon: {fileID: 5461640353098145479, guid: ce5d39d28718ca86e92d460e582be5b2, type: 3}
+  prefab: {fileID: 6926362284556185432, guid: ec96d646b727243f4a0f21ff0a1d05d8, type: 3}
+  processes: []

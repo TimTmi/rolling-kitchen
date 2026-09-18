@@ -1,7 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Features/HUD/HUD.uss?fileID=7433441132597879392&amp;guid=3b832a1b13c4cc0c3b1f1abcbe35e420&amp;type=3#HUD"/>
-    <ui:VisualElement name="Center" class="center" style="flex-grow: 1;">
-        <ui:Image name="Crosshair" source="project://database/Assets/Features/HUD/crosshair.png?fileID=2800000&amp;guid=363e54c8f409c9118a2d0d0388b0a52e&amp;type=3#crosshair" class="crosshair"/>
-        <ui:Label text="Label" name="InteractionPrompt" enabled="true" class="interaction-prompt"/>
-    </ui:VisualElement>
-</ui:UXML>

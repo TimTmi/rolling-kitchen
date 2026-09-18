@@ -1,11 +1,12 @@
+using Features.Pickables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Features.Player
 {
-    [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera camera;
     
         [SerializeField] private float minPitch = -60f;
@@ -13,18 +14,16 @@ namespace Features.Player
         [SerializeField] private float moveSpeed = 2f;
         [SerializeField] private float rotationSpeed = 32f;
         [SerializeField] private float gravity = -2f;
-
-        private CharacterController _characterController;
     
         private Vector2 _moveInput;
         private Vector2 _lookInput;
 
         private float _pitch;
         private float _verticalVelocity;
-    
+
         private void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            characterController = GetComponent<CharacterController>();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -40,11 +39,11 @@ namespace Features.Player
         private void Update()
         {
             _verticalVelocity += Time.deltaTime * gravity;
-            if (_characterController.isGrounded && gravity < 0)
+            if (characterController.isGrounded && gravity < 0)
                 _verticalVelocity = gravity;
         
             Vector3 move = transform.right * _moveInput.x + transform.up * _verticalVelocity + transform.forward * _moveInput.y;
-            _characterController.Move(Time.deltaTime * moveSpeed * move);
+            characterController.Move(Time.deltaTime * moveSpeed * move);
         
             transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed *  _lookInput.x);
 
