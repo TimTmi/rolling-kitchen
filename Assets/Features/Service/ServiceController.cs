@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Features.Interaction;
+using Features.Pickable;
 using Features.Pickables;
 using Features.Player;
 using Features.UI;
@@ -16,6 +17,8 @@ namespace Features.Service
         [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
         [SerializeField] private FridgeDoorInteractable fridgeDoorInteractable;
+        [SerializeField] private PickableInteractable burgerBoxStackInteractable;
+        [SerializeField] private PickableInteractable friesBoxStackInteractable;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
 
         private Action<PickableData> _selectionHandler;
@@ -30,12 +33,16 @@ namespace Features.Service
             fridgeDoorInteractable.Opened += OnFridgeOpened;
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
+            burgerBoxStackInteractable.PickedUp += OnPickablePickedUp;
+            friesBoxStackInteractable.PickedUp += OnPickablePickedUp;
         }
 
         private void OnDisable()
         {
             fridgeDoorInteractable.Opened -= OnFridgeOpened;
             pickableSelectionController.CloseRequested -= HideUIComponent;
+            burgerBoxStackInteractable.PickedUp -= OnPickablePickedUp;
+            friesBoxStackInteractable.PickedUp -= OnPickablePickedUp;
         }
         
         public void OnCancel(InputAction.CallbackContext context)
@@ -81,6 +88,11 @@ namespace Features.Service
             playerInput.SwitchCurrentActionMap("Player");
             Core.CursorController.Lock();
             uiController.HideComponent();
+        }
+
+        private void OnPickablePickedUp(PickableData pickableData)
+        {
+            handController.PickUp(pickableData);
         }
     }
 }

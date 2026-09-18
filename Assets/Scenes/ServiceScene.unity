@@ -3568,6 +3568,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361417376}
   m_Mesh: {fileID: 4300020, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!114 &395407478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2038368935210794915, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+  m_PrefabInstance: {fileID: 780631187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c261f450671056a59f96ff54a949f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickable.PickableInteractable
 --- !u!1 &401772450
 GameObject:
   m_ObjectHideFlags: 0
@@ -10009,6 +10020,8 @@ MonoBehaviour:
   handController: {fileID: 3193077325376431242}
   uiController: {fileID: 478365383}
   fridgeDoorInteractable: {fileID: 2101523324}
+  burgerBoxStackInteractable: {fileID: 395407478}
+  friesBoxStackInteractable: {fileID: 1491294714}
   pickableSelectionController: {fileID: 280953997}
 --- !u!4 &1476286823
 Transform:
@@ -10205,6 +10218,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490970960}
   m_Mesh: {fileID: 4300044, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!114 &1491294714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4545425207054761063, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+  m_PrefabInstance: {fileID: 780631187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c261f450671056a59f96ff54a949f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickable.PickableInteractable
 --- !u!1 &1493433149
 GameObject:
   m_ObjectHideFlags: 0
