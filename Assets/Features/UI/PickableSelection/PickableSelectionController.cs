@@ -11,7 +11,6 @@ namespace Features.UI.PickableSelection
         [SerializeField] private VisualTreeAsset pickableSlotTemplate;
 
         private ScrollView _list;
-        private Button _putBackButton;
         private Button _closeButton;
 
         public event Action<PickableData> PickableSelected;
@@ -20,7 +19,6 @@ namespace Features.UI.PickableSelection
         protected override void BindElements(VisualElement root)
         {
             _list = root.Q<ScrollView>("List");
-            _putBackButton = root.Q<Button>("PutBackButton");
             _closeButton = root.Q<Button>("CloseButton");
 
             _closeButton.clicked += () => CloseRequested?.Invoke();

@@ -77,16 +77,3 @@
 .pickable-slot-item {
     width: 25%;
 }
-
-.put-back-button {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: rgb(235, 235, 235);
-    border-width: 0;
-    border-radius: 8px;
-    padding: 10px 24px;
-    -unity-font-style: bold;
-}
-
-.put-back-button:hover {
-    background-color: rgba(255, 255, 255, 0.22);
-}
