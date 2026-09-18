@@ -17,7 +17,7 @@ namespace Features.Service
         [SerializeField] private InteractionController interactionController;
         [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
-        [SerializeField] private FridgeDoorInteractable fridgeDoorInteractable;
+        [SerializeField] private FridgeInteractable fridgeInteractable;
         [SerializeField] private PickableContainerInteractable burgerBoxStackInteractable;
         [SerializeField] private PickableContainerInteractable friesBoxStackInteractable;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
@@ -31,8 +31,8 @@ namespace Features.Service
 
         private void OnEnable()
         {
-            fridgeDoorInteractable.Opened += OnFridgeOpened;
-            fridgeDoorInteractable.PutBackRequested += OnPickablePutBackRequested;
+            fridgeInteractable.Opened += OnFridgeOpened;
+            fridgeInteractable.PutBackRequested += OnPickablePutBackRequested;
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
             
@@ -44,8 +44,8 @@ namespace Features.Service
 
         private void OnDisable()
         {
-            fridgeDoorInteractable.Opened -= OnFridgeOpened;
-            fridgeDoorInteractable.PutBackRequested -= OnPickablePutBackRequested;
+            fridgeInteractable.Opened -= OnFridgeOpened;
+            fridgeInteractable.PutBackRequested -= OnPickablePutBackRequested;
             pickableSelectionController.CloseRequested -= HideUIComponent;
             burgerBoxStackInteractable.PickUpRequested -= OnPickablePickUpRequested;
             friesBoxStackInteractable.PickUpRequested -= OnPickablePickUpRequested;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class FridgeDoorInteractable : MonoBehaviour, IInteractable
+    public class FridgeInteractable : MonoBehaviour, IInteractable
     {
         [SerializeField] private IngredientData[] ingredients;
 
