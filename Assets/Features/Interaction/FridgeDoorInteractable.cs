@@ -11,20 +11,39 @@ namespace Features.Interaction
         [SerializeField] private IngredientData[] ingredients;
 
         public event Action<IReadOnlyList<IngredientData>> Opened;
+        public event Action PutBackRequested;
         
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable == null;
+            return context.HeldPickable == null || context.HeldPickable is IngredientData;
         }
 
         public void Interact(in InteractionContext context)
         {
-            Opened?.Invoke(ingredients);
+            if (context.HeldPickable == null)
+            {
+                Opened?.Invoke(ingredients);
+            }
+            else if  (context.HeldPickable is IngredientData)
+            {
+                PutBackRequested?.Invoke();
+            }
         }
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return "Open Fridge";
+            if (context.HeldPickable == null)
+            {
+                return "Open Fridge";
+            }
+            else if (context.HeldPickable is IngredientData)
+            {
+                return $"Put {context.HeldPickable.DisplayName} Back";
+            }
+            else
+            {
+                return "Fridge";
+            }
         }
     }
 }

@@ -10,14 +10,20 @@ namespace Features.Player
 
         public void PickUp(PickableData pickableData)
         {
+            Remove();
+            
+            _heldPickableData = pickableData;
+            GameObject instance = Instantiate(_heldPickableData.Prefab, gameObject.transform);
+        }
+
+        public void Remove()
+        {
             foreach (Transform child in transform)
             {
                 Destroy(child.gameObject);
             }
             
-            _heldPickableData = pickableData;
-
-            GameObject instance = Instantiate(_heldPickableData.Prefab, gameObject.transform);
+            _heldPickableData = null;
         }
     }
 }

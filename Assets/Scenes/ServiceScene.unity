@@ -10017,6 +10017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServiceController
   playerInput: {fileID: 850837745}
+  interactionController: {fileID: 88830869}
   handController: {fileID: 3193077325376431242}
   uiController: {fileID: 478365383}
   fridgeDoorInteractable: {fileID: 2101523324}
