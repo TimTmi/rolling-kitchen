@@ -16,7 +16,7 @@ namespace Features.Interaction
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return "Place Item";
+            return "Place";
         }
     }
 }

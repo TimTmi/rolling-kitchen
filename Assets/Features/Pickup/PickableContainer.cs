@@ -26,13 +26,9 @@ namespace Features.Pickup
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            if (context.HeldPickable == null)
+            if (context.HeldPickable != null && context.HeldPickable.Data == pickable.Data)
             {
-                return $"Pick {pickable.Data.DisplayName} Up";
-            }
-            if (context.HeldPickable.Data == pickable.Data)
-            {
-                return $"Put {pickable.Data.DisplayName} Back";
+                return $"Put Back";
             }
 
             return pickable.Data.DisplayName;

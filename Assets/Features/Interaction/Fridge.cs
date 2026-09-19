@@ -36,7 +36,7 @@ namespace Features.Interaction
             }
             if (context.HeldPickable is Pickup.Ingredient)
             {
-                return $"Put {context.HeldPickable.Data.DisplayName} Back";
+                return $"Put Back";
             }
 
             return "Fridge";

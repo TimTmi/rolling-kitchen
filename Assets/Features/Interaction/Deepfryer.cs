@@ -1,23 +1,22 @@
-using System;
 using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class Bin : MonoBehaviour, IInteractable
+    public class Deepfryer : MonoBehaviour, IInteractable
     {
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable != null;
+            throw new System.NotImplementedException();
         }
 
         public void Interact(in InteractionContext context)
         {
-            context.Remove();
+            throw new System.NotImplementedException();
         }
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return $"Throw Away";
+            return "Fry";
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Features.Pickup
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return $"Pick {Data.DisplayName} Up";
+            return Data.DisplayName;
         }
     }
 }
