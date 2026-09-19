@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Features.Pickup
 {
-    public class PickableContainerInteractable : MonoBehaviour, IInteractable
+    public class PickableContainer : MonoBehaviour, IInteractable
     {
         [SerializeField] private Pickable pickable;
         

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class CuttingPlateInteractable : MonoBehaviour, IInteractable
+    public class CuttingPlate : MonoBehaviour, IInteractable
     {
         public bool CanInteract(in InteractionContext context)
         {

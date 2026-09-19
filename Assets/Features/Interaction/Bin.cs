@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class BinInteractable : MonoBehaviour, IInteractable
+    public class Bin : MonoBehaviour, IInteractable
     {
         public bool CanInteract(in InteractionContext context)
         {

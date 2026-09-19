@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class FridgeInteractable : MonoBehaviour, IInteractable
+    public class Fridge : MonoBehaviour, IInteractable
     {
         [SerializeField] private Pickup.Ingredient[] ingredients;
 

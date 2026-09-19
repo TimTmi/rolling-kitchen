@@ -10040,10 +10040,10 @@ MonoBehaviour:
   interactionController: {fileID: 88830869}
   handController: {fileID: 3193077325376431242}
   uiController: {fileID: 478365383}
-  fridgeInteractable: {fileID: 2101523324}
+  fridge: {fileID: 2101523324}
   burgerBoxStackInteractable: {fileID: 395407478}
   friesBoxStackInteractable: {fileID: 1491294714}
-  binInteractable: {fileID: 935022608}
+  bin: {fileID: 935022608}
   pickableSelectionController: {fileID: 280953997}
 --- !u!4 &1476286823
 Transform:

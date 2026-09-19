@@ -16,10 +16,7 @@ namespace Features.Service
         [SerializeField] private InteractionController interactionController;
         [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
-        [SerializeField] private FridgeInteractable fridgeInteractable;
-        [SerializeField] private PickableContainerInteractable burgerBoxStackInteractable;
-        [SerializeField] private PickableContainerInteractable friesBoxStackInteractable;
-        [SerializeField] private BinInteractable binInteractable;
+        [SerializeField] private Fridge fridge;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
 
         private Action<Pickable> _selectionHandler;
@@ -31,7 +28,7 @@ namespace Features.Service
 
         private void OnEnable()
         {
-            fridgeInteractable.Opened += OnFridgeOpened;
+            fridge.Opened += OnFridgeOpened;
             
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
@@ -39,7 +36,7 @@ namespace Features.Service
 
         private void OnDisable()
         {
-            fridgeInteractable.Opened -= OnFridgeOpened;
+            fridge.Opened -= OnFridgeOpened;
             pickableSelectionController.CloseRequested -= HideUIComponent;
         }
         

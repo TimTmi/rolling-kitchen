@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class TrayInteractable : MonoBehaviour, IInteractable
+    public class Tray : MonoBehaviour, IInteractable
     {
         public bool CanInteract(in InteractionContext context)
         {
