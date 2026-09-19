@@ -22,7 +22,7 @@ namespace Features.Interaction
             {
                 Opened?.Invoke(ingredients);
             }
-            else if  (context.HeldPickable is Pickup.Ingredient)
+            else if (context.HeldPickable is Pickup.Ingredient)
             {
                 context.Remove();
             }
@@ -34,14 +34,12 @@ namespace Features.Interaction
             {
                 return "Open Fridge";
             }
-            else if (context.HeldPickable is Pickup.Ingredient)
+            if (context.HeldPickable is Pickup.Ingredient)
             {
                 return $"Put {context.HeldPickable.Data.DisplayName} Back";
             }
-            else
-            {
-                return "Fridge";
-            }
+
+            return "Fridge";
         }
     }
 }
