@@ -21,9 +21,10 @@ namespace Features.Interaction
         {
             var ingredient = (Pickup.Ingredient)context.HeldPickable;
 
+            int slot = AcquireSlot();
+            _cooking[slot] = ingredient;
             ingredient.transform.SetParent(transform);
-            ingredient.transform.SetLocalPositionAndRotation(ArrangementPosition(_cooking.Count), Quaternion.Euler(defaultRotation));
-            _cooking.Add(ingredient);
+            ingredient.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(defaultRotation));
 
             context.Release();
         }
@@ -39,9 +40,14 @@ namespace Features.Interaction
             {
                 Pickup.Ingredient ingredient = _cooking[i];
 
-                if (ingredient == null || !ingredient.transform.IsChildOf(transform))
+                if (ingredient == null)
                 {
-                    _cooking.RemoveAt(i);
+                    continue;
+                }
+
+                if (!ingredient.transform.IsChildOf(transform))
+                {
+                    _cooking[i] = null;
                     continue;
                 }
 
@@ -55,9 +61,21 @@ namespace Features.Interaction
 
                 if (ingredient.CookingProgress >= process.Duration)
                 {
-                    ReplaceWithResults(ingredient, process);
+                    ReplaceWithResults(i, ingredient, process);
                 }
             }
+        }
+
+        private int AcquireSlot()
+        {
+            int vacant = _cooking.FindIndex(x => x == null);
+            if (vacant >= 0)
+            {
+                return vacant;
+            }
+
+            _cooking.Add(null);
+            return _cooking.Count - 1;
         }
 
         private Vector3 ArrangementPosition(int slot)
@@ -65,17 +83,17 @@ namespace Features.Interaction
             return arrangementStart + arrangementDirection * slot;
         }
 
-        private void ReplaceWithResults(Pickup.Ingredient ingredient, IngredientProcess process)
+        private void ReplaceWithResults(int slotIndex, Pickup.Ingredient ingredient, IngredientProcess process)
         {
-            int slot = _cooking.IndexOf(ingredient);
-            _cooking.Remove(ingredient);
+            _cooking[slotIndex] = null;
             Destroy(ingredient.gameObject);
 
             for (int i = 0; i < process.Result.Length; i++)
             {
+                int slot = i == 0 ? slotIndex : AcquireSlot();
                 Pickup.Ingredient result = Instantiate(process.Result[i], transform);
-                result.transform.SetLocalPositionAndRotation(ArrangementPosition(slot + i), Quaternion.Euler(defaultRotation));
-                _cooking.Add(result);
+                _cooking[slot] = result;
+                result.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(defaultRotation));
             }
         }
     }
