@@ -9,12 +9,13 @@ namespace Features.Interaction
         [SerializeField] private Vector3 defaultRotation = new Vector3(-90f, 0f, 0f);
         [SerializeField] private Vector3 arrangementStart;
         [SerializeField] private Vector3 arrangementDirection = Vector3.right;
+        [SerializeField] private int maxSlots = 8;
 
         private readonly List<Pickup.Ingredient> _cooking = new();
 
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable is Pickup.Ingredient;
+            return context.HeldPickable is Pickup.Ingredient && FindFreeSlot() >= 0;
         }
 
         public void Interact(in InteractionContext context)
@@ -66,7 +67,7 @@ namespace Features.Interaction
             }
         }
 
-        private int AcquireSlot()
+        private int FindFreeSlot()
         {
             int vacant = _cooking.FindIndex(x => x == null);
             if (vacant >= 0)
@@ -74,8 +75,18 @@ namespace Features.Interaction
                 return vacant;
             }
 
-            _cooking.Add(null);
-            return _cooking.Count - 1;
+            return _cooking.Count < maxSlots ? _cooking.Count : -1;
+        }
+
+        private int AcquireSlot()
+        {
+            int slot = FindFreeSlot();
+            if (slot == _cooking.Count)
+            {
+                _cooking.Add(null);
+            }
+
+            return slot;
         }
 
         private Vector3 ArrangementPosition(int slot)
@@ -88,9 +99,15 @@ namespace Features.Interaction
             _cooking[slotIndex] = null;
             Destroy(ingredient.gameObject);
 
-            for (int i = 0; i < process.Result.Length; i++)
+            for (var i = 0; i < process.Result.Length; i++)
             {
-                int slot = i == 0 ? slotIndex : AcquireSlot();
+                var slot = i == 0 ? slotIndex : AcquireSlot();
+                if (slot < 0)
+                {
+                    slot = _cooking.Count;
+                    _cooking.Add(null);
+                }
+
                 Pickup.Ingredient result = Instantiate(process.Result[i], transform);
                 _cooking[slot] = result;
                 result.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(defaultRotation));
