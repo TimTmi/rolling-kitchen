@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4373314389851791245}
   - component: {fileID: 8390491368857500060}
+  - component: {fileID: 8262938012752116393}
   m_Layer: 0
   m_Name: BurntSlicedOnion
   m_TagString: Untagged
@@ -54,6 +55,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08, y: 0.01, z: 0.08}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8262938012752116393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926362284556185432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14f79b9037a4653b029e7b21ed62631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickup.Ingredient
+  <Data>k__BackingField: {fileID: 11400000, guid: 5862bbd6c2e51c9de8c5d7093d3657d5, type: 2}
 --- !u!1001 &1102472959257145986
 PrefabInstance:
   m_ObjectHideFlags: 0
