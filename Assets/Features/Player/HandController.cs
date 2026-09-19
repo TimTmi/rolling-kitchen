@@ -1,19 +1,19 @@
-using Features.Pickables;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Player
 {
     public class HandController : MonoBehaviour
     {
-        private PickableData _heldPickableData;
-        public PickableData HeldPickableData => _heldPickableData;
+        public Pickable HeldPickable { get; private set; }
 
-        public void PickUp(PickableData pickableData)
+        public void PickUp(Pickable pickable)
         {
             Remove();
             
-            _heldPickableData = pickableData;
-            GameObject instance = Instantiate(_heldPickableData.Prefab, gameObject.transform);
+            HeldPickable = pickable;
+            HeldPickable.transform.parent = transform;
+            HeldPickable.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
 
         public void Remove()
@@ -23,7 +23,7 @@ namespace Features.Player
                 Destroy(child.gameObject);
             }
             
-            _heldPickableData = null;
+            HeldPickable = null;
         }
     }
 }

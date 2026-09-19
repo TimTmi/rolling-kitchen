@@ -1,4 +1,3 @@
-using Features.Pickables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

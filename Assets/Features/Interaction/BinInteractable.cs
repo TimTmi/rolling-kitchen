@@ -19,7 +19,7 @@ namespace Features.Interaction
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return $"Throw {context.HeldPickable.DisplayName} Away";
+            return $"Throw {context.HeldPickable.Data.DisplayName} Away";
         }
     }
 }

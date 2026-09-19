@@ -31,7 +31,7 @@ namespace Features.UI.HUD
 
         private void OnFocusGained(IInteractable interactable)
         {
-            InteractionContext context = new(handController.HeldPickableData);
+            InteractionContext context = new(handController.HeldPickable, handController.PickUp, handController.Remove);
 
             if (!interactable.CanInteract(context))
             {

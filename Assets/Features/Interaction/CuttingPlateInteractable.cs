@@ -1,5 +1,4 @@
 using Features.Ingredient;
-using Features.Pickables;
 using UnityEngine;
 
 namespace Features.Interaction
@@ -9,9 +8,14 @@ namespace Features.Interaction
         public bool CanInteract(in InteractionContext context)
         {
             var pickable = context.HeldPickable;
+            
+            if (context.HeldPickable is not Pickup.Ingredient)
+            {
+                return false;
+            }
 
-            return pickable is IngredientData ingredientData &&
-                ingredientData.HasProcess(ProcessType.Slice);
+            var data = (IngredientData)pickable.Data;
+            return data.HasProcess(ProcessType.Slice);
         }
         
         public void Interact(in  InteractionContext context)

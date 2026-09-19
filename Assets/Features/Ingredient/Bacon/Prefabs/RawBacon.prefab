@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4373314389851791245}
   - component: {fileID: 8390491368857500060}
+  - component: {fileID: -5809270580729021498}
   m_Layer: 0
   m_Name: RawBacon
   m_TagString: Untagged
@@ -54,6 +55,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05, y: 0.02, z: 0.13}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5809270580729021498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926362284556185432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14f79b9037a4653b029e7b21ed62631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickup.Ingredient
+  <Data>k__BackingField: {fileID: 11400000, guid: 14e00ea7b34e31447a9e2b85d28af07e, type: 2}
 --- !u!1001 &2679570302396426898
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Features.Pickables;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Ingredient

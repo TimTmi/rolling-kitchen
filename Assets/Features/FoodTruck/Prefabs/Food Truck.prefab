@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c261f450671056a59f96ff54a949f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickable.PickableInteractable
-  pickableData: {fileID: 11400000, guid: bd8d8dc1a17c742f8ac4e681e468c1a9, type: 2}
+  pickable: {fileID: 7048872226742397842, guid: 1090a37bea33bd13893fa0d39ee74750, type: 3}
 --- !u!1 &3569864858608528778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,7 +1575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c261f450671056a59f96ff54a949f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickable.PickableInteractable
-  pickableData: {fileID: 11400000, guid: eccadb3618415affbbd2d79a23decb2a, type: 2}
+  pickable: {fileID: 4342554375030323582, guid: f23fb729a1c21a575b724e1db42907ee, type: 3}
 --- !u!1 &3701748303004139925
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Features.Interaction;
-using Features.Pickable;
-using Features.Pickables;
+using Features.Pickup;
 using Features.Player;
 using Features.UI;
 using Features.UI.PickableSelection;
@@ -23,7 +22,7 @@ namespace Features.Service
         [SerializeField] private BinInteractable binInteractable;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
 
-        private Action<PickableData> _selectionHandler;
+        private Action<Pickable> _selectionHandler;
         
         void Start()
         {
@@ -33,34 +32,15 @@ namespace Features.Service
         private void OnEnable()
         {
             fridgeInteractable.Opened += OnFridgeOpened;
-            fridgeInteractable.PutBackRequested += OnPickableDiscardRequested;
             
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
-            
-            burgerBoxStackInteractable.PickUpRequested += OnPickablePickUpRequested;
-            burgerBoxStackInteractable.PutBackRequested += OnPickableDiscardRequested;
-            
-            friesBoxStackInteractable.PickUpRequested += OnPickablePickUpRequested;
-            friesBoxStackInteractable.PutBackRequested += OnPickableDiscardRequested;
-
-            binInteractable.ThrowAwayRequeted += OnPickableDiscardRequested;
         }
 
         private void OnDisable()
         {
             fridgeInteractable.Opened -= OnFridgeOpened;
-            fridgeInteractable.PutBackRequested -= OnPickableDiscardRequested;
-            
             pickableSelectionController.CloseRequested -= HideUIComponent;
-            
-            burgerBoxStackInteractable.PickUpRequested -= OnPickablePickUpRequested;
-            burgerBoxStackInteractable.PutBackRequested -= OnPickableDiscardRequested;
-            
-            friesBoxStackInteractable.PickUpRequested -= OnPickablePickUpRequested;
-            friesBoxStackInteractable.PutBackRequested -= OnPickableDiscardRequested;
-            
-            binInteractable.ThrowAwayRequeted -= OnPickableDiscardRequested;
         }
         
         public void OnCancel(InputAction.CallbackContext context)
@@ -73,12 +53,12 @@ namespace Features.Service
             HideUIComponent();
         }
 
-        private void OnFridgeOpened(IReadOnlyList<PickableData> pickables)
+        private void OnFridgeOpened(IReadOnlyList<Pickable> pickables)
         {
-            ShowPickableSelection(pickables, (data => handController.PickUp(data)));
+            ShowPickableSelection(pickables, (pickable => handController.PickUp(Instantiate(pickable).GetComponent<Pickable>())));
         }
 
-        private void ShowPickableSelection(IReadOnlyList<PickableData> pickables, Action<PickableData> selectionHandler)
+        private void ShowPickableSelection(IReadOnlyList<Pickable> pickables, Action<Pickable> selectionHandler)
         {
             _selectionHandler = selectionHandler;
             
@@ -86,7 +66,7 @@ namespace Features.Service
             ShowUIComponent(pickableSelectionController);
         }
 
-        private void OnPickableSelected(PickableData pickable)
+        private void OnPickableSelected(Pickable pickable)
         {
             HideUIComponent();
             
@@ -108,16 +88,6 @@ namespace Features.Service
             Core.CursorController.Lock();
             uiController.HideComponent();
             interactionController.enabled = true;
-        }
-
-        private void OnPickablePickUpRequested(PickableData pickableData)
-        {
-            handController.PickUp(pickableData);
-        }
-
-        private void OnPickableDiscardRequested()
-        {
-            handController.Remove();
         }
     }
 }
