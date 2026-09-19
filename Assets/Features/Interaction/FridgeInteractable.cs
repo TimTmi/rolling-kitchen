@@ -10,7 +10,6 @@ namespace Features.Interaction
         [SerializeField] private Pickup.Ingredient[] ingredients;
 
         public event Action<IReadOnlyList<Pickup.Ingredient>> Opened;
-        public event Action PutBackRequested;
         
         public bool CanInteract(in InteractionContext context)
         {
@@ -25,7 +24,7 @@ namespace Features.Interaction
             }
             else if  (context.HeldPickable is Pickup.Ingredient)
             {
-                PutBackRequested?.Invoke();
+                context.Remove();
             }
         }
 

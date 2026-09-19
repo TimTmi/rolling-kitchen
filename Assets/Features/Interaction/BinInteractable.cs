@@ -5,8 +5,6 @@ namespace Features.Interaction
 {
     public class BinInteractable : MonoBehaviour, IInteractable
     {
-        public event Action ThrowAwayRequeted;
-        
         public bool CanInteract(in InteractionContext context)
         {
             return context.HeldPickable != null;
@@ -14,7 +12,7 @@ namespace Features.Interaction
 
         public void Interact(in InteractionContext context)
         {
-            ThrowAwayRequeted?.Invoke();
+            context.Remove();
         }
 
         public string GetInteractionPrompt(in InteractionContext context)
