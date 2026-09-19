@@ -21,7 +21,7 @@ namespace Features.Interaction
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            InteractionContext interactionContext = new(handController.HeldPickable, handController.PickUp, handController.Remove);
+            InteractionContext interactionContext = new(handController.HeldPickable, handController.PickUp, handController.Remove, handController.Release);
 
             if (!context.performed || _focusedInteractable == null || !_focusedInteractable.CanInteract(interactionContext))
             {

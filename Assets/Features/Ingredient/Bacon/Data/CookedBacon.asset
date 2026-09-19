@@ -15,8 +15,8 @@ MonoBehaviour:
   id: cooked_bacon
   displayName: Bacon
   icon: {fileID: -4396206974578190670, guid: d3e0aa57d53b2c4c7bf7ed67e8783041, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: d38be90a17131d9c09db80a425fc3dc7, type: 3}
   processes:
   - type: 1
     duration: 6
-    result: {fileID: 11400000, guid: 7b7d0156089efc9eb8648dfb07c46ad8, type: 2}
+    result:
+    - {fileID: -1409142733887461634, guid: 59380f2b7edcc319d91c0f7570db445d, type: 3}

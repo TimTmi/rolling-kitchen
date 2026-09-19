@@ -15,8 +15,8 @@ MonoBehaviour:
   id: cooked_fries
   displayName: Fries
   icon: {fileID: -7961367073847216062, guid: a317e48b2a05940c0bbda4bf44dcc025, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 73f52f1ce0f42a164be888f0a9750099, type: 3}
   processes:
   - type: 2
     duration: 6
-    result: {fileID: 11400000, guid: 12e49ac2bf33870a7bf3707470bec8fc, type: 2}
+    result:
+    - {fileID: -5936313857056106639, guid: dc3e3035f0349a12b9fbaf7112510d9d, type: 3}

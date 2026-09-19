@@ -15,11 +15,12 @@ MonoBehaviour:
   id: raw_sliced_onion
   displayName: Onion
   icon: {fileID: -8481521276803907915, guid: 2e0df490706be91498e87fd850a2dc0c, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: ccf35299266132d4e9106ea193d54bdc, type: 3}
   processes:
   - type: 1
     duration: 5
-    result: {fileID: 11400000, guid: 572ebaab9b63db7f19fea24a0282bbe6, type: 2}
+    result:
+    - {fileID: -3877323508237948883, guid: 9160e4b7423d8d5eeba000b252ac926e, type: 3}
   - type: 2
     duration: 7
-    result: {fileID: 11400000, guid: b686b853c358b649eadd18d108f28c3b, type: 2}
+    result:
+    - {fileID: -6711935558241111177, guid: 59723b214674a7e53aa2018edfd52175, type: 3}

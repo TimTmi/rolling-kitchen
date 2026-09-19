@@ -15,9 +15,4 @@ MonoBehaviour:
   id: lettuce
   displayName: Lettuce
   icon: {fileID: 65217185051169063, guid: 4cb3a6dca8f078131a19c8f236fd513b, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: f9f5fcbb11fc54cd09fe6fdeb1dd9313, type: 3}
-  processes:
-  - type: 0
-    results:
-    - {fileID: 11400000, guid: f7f33f2c5970ebdde8fa3191b311734d, type: 2}
-    - {fileID: 11400000, guid: f7f33f2c5970ebdde8fa3191b311734d, type: 2}
+  processes: []

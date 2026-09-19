@@ -7,7 +7,12 @@ namespace Features.Pickup
     {
         public IngredientData IngredientData => (IngredientData)Data;
         public float CookingProgress { get; private set; }
-        
+
+        public void AddCookingProgress(float seconds)
+        {
+            CookingProgress += seconds;
+        }
+
         public bool CanInteract(in InteractionContext context)
         {
             return context.HeldPickable == null;

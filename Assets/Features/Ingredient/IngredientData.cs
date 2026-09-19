@@ -17,11 +17,11 @@ namespace Features.Ingredient
     {
         [SerializeField] private ProcessType type;
         [SerializeField] private float duration;
-        [SerializeField] private IngredientData result;
+        [SerializeField] private Pickup.Ingredient[] result;
 
         public ProcessType Type => type;
         public float Duration => duration;
-        public IngredientData Result => result;
+        public Pickup.Ingredient[] Result => result;
     }
     
     [CreateAssetMenu(fileName = "IngredientData", menuName = "Scriptable Objects/IngredientData")]

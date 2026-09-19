@@ -22,7 +22,12 @@ namespace Features.Player
             {
                 Destroy(child.gameObject);
             }
-            
+
+            HeldPickable = null;
+        }
+
+        public void Release()
+        {
             HeldPickable = null;
         }
     }

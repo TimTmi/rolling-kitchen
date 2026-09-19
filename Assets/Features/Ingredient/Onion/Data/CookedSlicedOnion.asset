@@ -15,8 +15,8 @@ MonoBehaviour:
   id: cooked_sliced_onion
   displayName: Onion
   icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 9160e4b7423d8d5eeba000b252ac926e, type: 3}
   processes:
   - type: 1
     duration: 6
-    result: {fileID: 11400000, guid: 5862bbd6c2e51c9de8c5d7093d3657d5, type: 2}
+    result:
+    - {fileID: 8262938012752116393, guid: ec96d646b727243f4a0f21ff0a1d05d8, type: 3}
