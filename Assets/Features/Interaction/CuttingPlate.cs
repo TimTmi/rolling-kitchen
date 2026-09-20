@@ -1,3 +1,4 @@
+using Core;
 using Features.Ingredient;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ namespace Features.Interaction
 {
     public class CuttingPlate : MonoBehaviour, IInteractable
     {
+        [SerializeField] private Transform cameraPoint;
+        [SerializeField] private POICameraController camera;
+        
         public bool CanInteract(in InteractionContext context)
         {
             var pickable = context.HeldPickable;
