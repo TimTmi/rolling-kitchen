@@ -918,6 +918,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.Deepfryer
   defaultRotation: {x: 0, y: 0, z: 0}
   fryPosition: {x: -0.67, y: 1.4, z: 0.51}
+  submergedOffset: {x: 0, y: 0, z: 0}
+  raisedOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &1680275728368991079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Interaction.Deepfryer
   defaultRotation: {x: 0, y: 0, z: 0}
   fryPosition: {x: -0.67, y: 1.4, z: 0.51}
+  submergedOffset: {x: 0, y: 0, z: 0}
+  raisedOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &1837361699334861653
 GameObject:
   m_ObjectHideFlags: 0
