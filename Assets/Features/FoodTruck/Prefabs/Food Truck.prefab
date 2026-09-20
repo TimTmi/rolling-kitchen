@@ -3811,11 +3811,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CuttingPlateInteractable
   cameraPoint: {fileID: 8234659578850057680}
   camera: {fileID: 0}
-  cutPosition: {x: 0, y: 0.05, z: 0}
   defaultRotation: {x: 0, y: 0, z: 0}
   arrangementStart: {x: 0, y: 0.03, z: 0.05}
-  arrangementDirection: {x: 0, y: 0, z: -0.05}
-  sliceDelay: 1
+  arrangementDirection: {x: 0, y: 0, z: -0.1}
+  maxSlots: 2
 --- !u!4 &4111302250340617044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1868028560240669385, guid: 2f5b5d5c74133eb4da94c020922031a3, type: 3}
