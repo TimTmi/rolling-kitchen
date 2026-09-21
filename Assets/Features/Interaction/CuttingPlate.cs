@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Features.Ingredient;
 using Features.Minigame;
 using Features.Service;
@@ -15,8 +14,13 @@ namespace Features.Interaction
         [SerializeField] private Vector3 arrangementDirection = Vector3.right;
         [SerializeField] private int maxSlots = 8;
 
-        private readonly List<Pickup.Ingredient> _slicing = new();
+        private IngredientSlots _slots;
         private CuttingMinigame _minigame;
+
+        private void Awake()
+        {
+            _slots = new IngredientSlots(transform, defaultRotation, arrangementStart, arrangementDirection, maxSlots);
+        }
 
         private void OnEnable()
         {
@@ -32,18 +36,7 @@ namespace Features.Interaction
 
         public bool CanInteract(in InteractionContext context)
         {
-            for (int i = _slicing.Count - 1; i >= 0; i--)
-            {
-                if (_slicing[i] == null)
-                {
-                    continue;
-                }
-
-                if (!_slicing[i].transform.IsChildOf(transform))
-                {
-                    _slicing[i] = null;
-                }
-            }
+            _slots.ClearDetached();
 
             if (context.HeldPickable is not Pickup.Ingredient ingredient
                 || !ingredient.IngredientData.HasProcess(ProcessType.Slice))
@@ -52,17 +45,13 @@ namespace Features.Interaction
             }
 
             ingredient.IngredientData.TryGetProcess(ProcessType.Slice, out IngredientProcess process);
-            return process.Result.Length <= maxSlots && FindFreeSlot() >= 0;
+            return process.Result.Length <= _slots.Capacity && _slots.HasFreeSlot;
         }
 
         public void Interact(in InteractionContext context)
         {
             var ingredient = (Pickup.Ingredient)context.HeldPickable;
-
-            int slot = AcquireSlot();
-            _slicing[slot] = ingredient;
-            ingredient.transform.SetParent(transform);
-            ingredient.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(defaultRotation));
+            _slots.Place(ingredient);
 
             context.Release();
 
@@ -110,55 +99,14 @@ namespace Features.Interaction
 
         private void Cut(Pickup.Ingredient ingredient)
         {
-            int slotIndex = _slicing.IndexOf(ingredient);
+            int slotIndex = _slots.IndexOf(ingredient);
             if (slotIndex < 0
                 || !ingredient.IngredientData.TryGetProcess(ProcessType.Slice, out IngredientProcess process))
             {
                 return;
             }
 
-            _slicing[slotIndex] = null;
-            Destroy(ingredient.gameObject);
-
-            for (var i = 0; i < process.Result.Length; i++)
-            {
-                int slot = AcquireSlot();
-                if (slot < 0)
-                {
-                    break;
-                }
-
-                Pickup.Ingredient result = Instantiate(process.Result[i], transform);
-                _slicing[slot] = result;
-                result.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(defaultRotation));
-            }
-        }
-
-        private int FindFreeSlot()
-        {
-            int vacant = _slicing.FindIndex(x => x == null);
-            if (vacant >= 0)
-            {
-                return vacant;
-            }
-
-            return _slicing.Count < maxSlots ? _slicing.Count : -1;
-        }
-
-        private int AcquireSlot()
-        {
-            int slot = FindFreeSlot();
-            if (slot == _slicing.Count)
-            {
-                _slicing.Add(null);
-            }
-
-            return slot;
-        }
-
-        private Vector3 ArrangementPosition(int slot)
-        {
-            return arrangementStart + arrangementDirection * slot;
+            _slots.ReplaceWithResults(slotIndex, process);
         }
     }
 }
