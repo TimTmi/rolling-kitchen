@@ -17,7 +17,7 @@ namespace Features.Interaction
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
-            return $"Throw Away";
+            return "Throw Away";
         }
     }
 }

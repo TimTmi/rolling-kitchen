@@ -30,7 +30,8 @@ namespace Features.Ingredient
     [CreateAssetMenu(fileName = "IngredientData", menuName = "Scriptable Objects/IngredientData")]
     public class IngredientData : PickableData
     {
-        public IngredientProcess[] processes;
+        [SerializeField] private IngredientProcess[] processes;
+        public IngredientProcess[] Processes => processes;
         
         public bool HasProcess(ProcessType type) => processes.Any(x => x.Type == type);
 

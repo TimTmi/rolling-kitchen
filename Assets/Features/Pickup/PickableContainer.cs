@@ -16,7 +16,7 @@ namespace Features.Pickup
         {
             if (context.HeldPickable == null)
             {
-                context.PickUp(Instantiate(pickable).GetComponent<Pickable>());
+                context.PickUp(Instantiate(pickable));
             }
             else if (context.HeldPickable.Data == pickable.Data)
             {
@@ -28,7 +28,7 @@ namespace Features.Pickup
         {
             if (context.HeldPickable != null && context.HeldPickable.Data == pickable.Data)
             {
-                return $"Put Back";
+                return "Put Back";
             }
 
             return pickable.Data.DisplayName;

@@ -41,6 +41,11 @@ namespace Features.UI.HUD
 
         private void OnFocusGained(IInteractable interactable)
         {
+            if (_interactionPrompt == null)
+            {
+                return;
+            }
+
             InteractionContext context = new(handController.HeldPickable, handController.PickUp, handController.Remove, handController.Release);
 
             if (!interactable.CanInteract(context))
@@ -54,6 +59,11 @@ namespace Features.UI.HUD
 
         private void OnFocusLost(IInteractable interactable)
         {
+            if (_interactionPrompt == null)
+            {
+                return;
+            }
+
             _interactionPrompt.visible = false;
         }
     }

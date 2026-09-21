@@ -4,169 +4,172 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public static class MiscellaneousImageGenerator
+namespace Features.Container.Editor
 {
-    const string PrefabFolder = "Assets/ThirdParty/Unity/Toony Kitchen Ingredients Free/Prefabs/Miscellaneous";
-    const string OutputFolder = "Assets/Features/Container/Art";
-    const int Resolution = 512;
-    const float Margin = 0.08f;    // extra space around the fitted bounds, fraction of size
-    const float PitchDegrees = 30f; // camera pitch, like Unity's prefab preview
-    const float YawDegrees = 30f;
-    const float FieldOfView = 30f;
-
-    [MenuItem("Tools/Generate Miscellaneous Images")]
-    public static void GenerateAll()
+    public static class MiscellaneousImageGenerator
     {
-        Directory.CreateDirectory(OutputFolder);
+        const string PrefabFolder = "Assets/ThirdParty/Unity/Toony Kitchen Ingredients Free/Prefabs/Miscellaneous";
+        const string OutputFolder = "Assets/Features/Container/Art";
+        const int Resolution = 512;
+        const float Margin = 0.08f;    // extra space around the fitted bounds, fraction of size
+        const float PitchDegrees = 30f; // camera pitch, like Unity's prefab preview
+        const float YawDegrees = 30f;
+        const float FieldOfView = 30f;
 
-        var guids = AssetDatabase.FindAssets("t:Prefab", new[] { PrefabFolder });
-        if (guids.Length == 0)
+        [MenuItem("Tools/Generate Miscellaneous Images")]
+        public static void GenerateAll()
         {
-            Debug.LogWarning($"No prefabs found in {PrefabFolder}");
-            return;
-        }
+            Directory.CreateDirectory(OutputFolder);
 
-        // Fog and scene lighting would bleed into the transparent render;
-        // save and restore the bits we change.
-        bool fogWasEnabled = RenderSettings.fog;
-        RenderSettings.fog = false;
-
-        try
-        {
-            for (var i = 0; i < guids.Length; i++)
+            var guids = AssetDatabase.FindAssets("t:Prefab", new[] { PrefabFolder });
+            if (guids.Length == 0)
             {
-                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                if (prefab == null)
-                    continue;
-
-                EditorUtility.DisplayProgressBar("Miscellaneous Images", prefab.name, (float)i / guids.Length);
-                RenderPrefab(prefab, Path.Combine(OutputFolder, prefab.name + ".png"));
+                Debug.LogWarning($"No prefabs found in {PrefabFolder}");
+                return;
             }
-        }
-        finally
-        {
-            RenderSettings.fog = fogWasEnabled;
-            EditorUtility.ClearProgressBar();
-        }
 
-        AssetDatabase.Refresh();
-        Debug.Log($"Generated {guids.Length} miscellaneous images into {OutputFolder}");
-    }
+            // Fog and scene lighting would bleed into the transparent render;
+            // save and restore the bits we change.
+            bool fogWasEnabled = RenderSettings.fog;
+            RenderSettings.fog = false;
 
-    static void RenderPrefab(GameObject prefab, string outputPath)
-    {
-        // Park the instance far from the scene content so the isolated
-        // camera only sees the prefab.
-        const float parkingDistance = -1000f;
-        var instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
-        instance.transform.position = new Vector3(0f, parkingDistance, 0f);
-
-        var cameraGo = new GameObject("MiscellaneousCamera");
-        var camera = cameraGo.AddComponent<Camera>();
-        cameraGo.AddComponent<MiscellaneousLightRig>();
-
-        try
-        {
-            var bounds = ComputeBounds(instance);
-            var center = bounds.center;
-
-            camera.fieldOfView = FieldOfView;
-            camera.nearClipPlane = 0.01f;
-            camera.farClipPlane = 1000f;
-            camera.clearFlags = CameraClearFlags.SolidColor;
-            camera.backgroundColor = Color.clear;
-            camera.useOcclusionCulling = false;
-
-            var rotation = Quaternion.Euler(PitchDegrees, YawDegrees, 0f);
-            cameraGo.transform.rotation = rotation;
-            // Fit the bounding sphere: distance so the whole object fits the FOV.
-            var distance = bounds.extents.magnitude / Mathf.Tan(FieldOfView * 0.5f * Mathf.Deg2Rad) * (1f + Margin);
-            cameraGo.transform.position = center + rotation * Vector3.back * distance;
-
-            var rt = new RenderTexture(Resolution, Resolution, 24, RenderTextureFormat.ARGB32) { antiAliasing = 8 };
-            var tex = new Texture2D(Resolution, Resolution, TextureFormat.RGBA32, false);
             try
             {
-                // URP does not support Camera.Render(); SubmitRenderRequest is
-                // the supported way to capture a camera outside the frame loop.
-                var request = new UniversalRenderPipeline.SingleCameraRequest { destination = rt };
-                RenderPipeline.SubmitRenderRequest(camera, request);
+                for (var i = 0; i < guids.Length; i++)
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                    var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                    if (prefab == null)
+                        continue;
 
-                RenderTexture.active = rt;
-                tex.ReadPixels(new Rect(0, 0, Resolution, Resolution), 0, 0);
-                tex.Apply();
-                File.WriteAllBytes(outputPath, tex.EncodeToPNG());
+                    EditorUtility.DisplayProgressBar("Miscellaneous Images", prefab.name, (float)i / guids.Length);
+                    RenderPrefab(prefab, Path.Combine(OutputFolder, prefab.name + ".png"));
+                }
             }
             finally
             {
-                RenderTexture.active = null;
-                Object.DestroyImmediate(rt);
-                Object.DestroyImmediate(tex);
+                RenderSettings.fog = fogWasEnabled;
+                EditorUtility.ClearProgressBar();
             }
-        }
-        finally
-        {
-            Object.DestroyImmediate(instance);
-            Object.DestroyImmediate(cameraGo);
+
+            AssetDatabase.Refresh();
+            Debug.Log($"Generated {guids.Length} miscellaneous images into {OutputFolder}");
         }
 
-        ImportAsUiTexture(outputPath);
-    }
-
-    static Bounds ComputeBounds(GameObject root)
-    {
-        var bounds = new Bounds();
-        var hasBounds = false;
-        foreach (var renderer in root.GetComponentsInChildren<Renderer>())
+        static void RenderPrefab(GameObject prefab, string outputPath)
         {
+            // Park the instance far from the scene content so the isolated
+            // camera only sees the prefab.
+            const float parkingDistance = -1000f;
+            var instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+            instance.transform.position = new Vector3(0f, parkingDistance, 0f);
+
+            var cameraGo = new GameObject("MiscellaneousCamera");
+            var camera = cameraGo.AddComponent<Camera>();
+            cameraGo.AddComponent<MiscellaneousLightRig>();
+
+            try
+            {
+                var bounds = ComputeBounds(instance);
+                var center = bounds.center;
+
+                camera.fieldOfView = FieldOfView;
+                camera.nearClipPlane = 0.01f;
+                camera.farClipPlane = 1000f;
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = Color.clear;
+                camera.useOcclusionCulling = false;
+
+                var rotation = Quaternion.Euler(PitchDegrees, YawDegrees, 0f);
+                cameraGo.transform.rotation = rotation;
+                // Fit the bounding sphere: distance so the whole object fits the FOV.
+                var distance = bounds.extents.magnitude / Mathf.Tan(FieldOfView * 0.5f * Mathf.Deg2Rad) * (1f + Margin);
+                cameraGo.transform.position = center + rotation * Vector3.back * distance;
+
+                var rt = new RenderTexture(Resolution, Resolution, 24, RenderTextureFormat.ARGB32) { antiAliasing = 8 };
+                var tex = new Texture2D(Resolution, Resolution, TextureFormat.RGBA32, false);
+                try
+                {
+                    // URP does not support Camera.Render(); SubmitRenderRequest is
+                    // the supported way to capture a camera outside the frame loop.
+                    var request = new UniversalRenderPipeline.SingleCameraRequest { destination = rt };
+                    RenderPipeline.SubmitRenderRequest(camera, request);
+
+                    RenderTexture.active = rt;
+                    tex.ReadPixels(new Rect(0, 0, Resolution, Resolution), 0, 0);
+                    tex.Apply();
+                    File.WriteAllBytes(outputPath, tex.EncodeToPNG());
+                }
+                finally
+                {
+                    RenderTexture.active = null;
+                    Object.DestroyImmediate(rt);
+                    Object.DestroyImmediate(tex);
+                }
+            }
+            finally
+            {
+                Object.DestroyImmediate(instance);
+                Object.DestroyImmediate(cameraGo);
+            }
+
+            ImportAsUiTexture(outputPath);
+        }
+
+        static Bounds ComputeBounds(GameObject root)
+        {
+            var bounds = new Bounds();
+            var hasBounds = false;
+            foreach (var renderer in root.GetComponentsInChildren<Renderer>())
+            {
+                if (!hasBounds)
+                {
+                    bounds = renderer.bounds;
+                    hasBounds = true;
+                }
+                else
+                {
+                    bounds.Encapsulate(renderer.bounds);
+                }
+            }
+
             if (!hasBounds)
-            {
-                bounds = renderer.bounds;
-                hasBounds = true;
-            }
-            else
-            {
-                bounds.Encapsulate(renderer.bounds);
-            }
+                throw new System.InvalidOperationException($"{root.name} has no renderers to capture.");
+            return bounds;
         }
 
-        if (!hasBounds)
-            throw new System.InvalidOperationException($"{root.name} has no renderers to capture.");
-        return bounds;
+        static void ImportAsUiTexture(string assetPath)
+        {
+            AssetDatabase.ImportAsset(assetPath);
+            var importer = (TextureImporter)AssetImporter.GetAtPath(assetPath);
+            importer.alphaIsTransparency = true;
+            importer.mipmapEnabled = false;
+            importer.textureType = TextureImporterType.Default;
+            importer.SaveAndReimport();
+        }
     }
 
-    static void ImportAsUiTexture(string assetPath)
+    /// Adds a standalone directional light so the render does not depend on
+    /// whatever lights the open scene happens to have.
+    class MiscellaneousLightRig : MonoBehaviour
     {
-        AssetDatabase.ImportAsset(assetPath);
-        var importer = (TextureImporter)AssetImporter.GetAtPath(assetPath);
-        importer.alphaIsTransparency = true;
-        importer.mipmapEnabled = false;
-        importer.textureType = TextureImporterType.Default;
-        importer.SaveAndReimport();
-    }
-}
+        Light _light;
 
-/// Adds a standalone directional light so the render does not depend on
-/// whatever lights the open scene happens to have.
-class MiscellaneousLightRig : MonoBehaviour
-{
-    Light _light;
+        void OnEnable()
+        {
+            var lightGo = new GameObject("MiscellaneousLight");
+            lightGo.transform.SetParent(transform, false);
+            lightGo.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
+            _light = lightGo.AddComponent<Light>();
+            _light.type = LightType.Directional;
+            _light.intensity = 1f;
+            _light.shadows = LightShadows.None;
+        }
 
-    void OnEnable()
-    {
-        var lightGo = new GameObject("MiscellaneousLight");
-        lightGo.transform.SetParent(transform, false);
-        lightGo.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
-        _light = lightGo.AddComponent<Light>();
-        _light.type = LightType.Directional;
-        _light.intensity = 1f;
-        _light.shadows = LightShadows.None;
-    }
-
-    void OnDisable()
-    {
-        if (_light != null)
-            Object.DestroyImmediate(_light.gameObject);
+        void OnDisable()
+        {
+            if (_light != null)
+                Object.DestroyImmediate(_light.gameObject);
+        }
     }
 }

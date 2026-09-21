@@ -20,11 +20,6 @@ namespace Features.Player
         private float _pitch;
         private float _verticalVelocity;
 
-        private void Awake()
-        {
-            characterController = GetComponent<CharacterController>();
-        }
-
         public void OnMove(InputAction.CallbackContext context)
         {
             _moveInput = context.ReadValue<Vector2>();

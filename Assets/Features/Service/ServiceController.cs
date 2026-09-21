@@ -18,7 +18,7 @@ namespace Features.Service
         [SerializeField] private UIController uiController;
         [SerializeField] private UI.HUD.HUDController hud;
         [SerializeField] private Fridge fridge;
-        [SerializeField] private PickableSelectionController  pickableSelectionController;
+        [SerializeField] private PickableSelectionController pickableSelectionController;
         [SerializeField] private Core.PoiCameraController poiCameraController;
         [SerializeField] private Camera playerCamera;
         [SerializeField] private Camera poiCamera;
