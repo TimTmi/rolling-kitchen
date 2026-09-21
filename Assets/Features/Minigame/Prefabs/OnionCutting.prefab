@@ -47,12 +47,12 @@ MonoBehaviour:
   ingredientRotation: {x: 0, y: 0, z: -90}
   firstLinePosition: {x: 0.06, y: 0, z: 0}
   lastLinePosition: {x: 0.02, y: 0, z: 0}
-  cutDistance: 1
+  cutDistance: 0.6
   lineCount: 3
   knifePrefab: {fileID: 919132149155446097, guid: ba514a6b61666cf4ea240772e76020d3, type: 3}
-  knifeCuttingOffset: {x: 0, y: 0.05, z: 0}
-  knifeLiftedOffset: {x: 0, y: 0.1, z: 0}
+  knifeCuttingOffset: {x: 0, y: 0.05, z: -0.17}
+  knifeLiftedOffset: {x: 0, y: 0.1, z: -0.17}
   knifeCuttingRotationOffset: {x: 0, y: 0, z: -90}
   knifeLiftedRotationOffset: {x: 0, y: 0, z: -90}
-  knifeLeftLimit: 0.1
-  knifeRightLimit: 0.2
+  knifeLeftLimit: -0.05
+  knifeRightLimit: 0.05
