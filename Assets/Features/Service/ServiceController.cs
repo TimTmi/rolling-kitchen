@@ -16,6 +16,7 @@ namespace Features.Service
         [SerializeField] private InteractionController interactionController;
         [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
+        [SerializeField] private UI.HUD.HUDController hud;
         [SerializeField] private Fridge fridge;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
         [SerializeField] private Core.PoiCameraController poiCameraController;
@@ -58,6 +59,7 @@ namespace Features.Service
             DisablePlayerControl();
             poiCamera.enabled = true;
             playerCamera.enabled = false;
+            hud.SetCrosshairVisible(false);
         }
 
         private void OnPlayerFocusEnded()
@@ -65,6 +67,7 @@ namespace Features.Service
             poiCamera.enabled = false;
             playerCamera.enabled = true;
             EnablePlayerControl();
+            hud.SetCrosshairVisible(true);
             PoiFocusEnded?.Invoke();
         }
         

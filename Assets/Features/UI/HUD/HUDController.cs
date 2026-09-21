@@ -11,6 +11,7 @@ namespace Features.UI.HUD
         [SerializeField] private HandController handController;
         
         private Label _interactionPrompt;
+        private VisualElement _crosshair;
 
         protected override void OnEnabled()
         {
@@ -27,6 +28,15 @@ namespace Features.UI.HUD
         protected override void BindElements(VisualElement root)
         {
             _interactionPrompt = root.Q<Label>("InteractionPrompt");
+            _crosshair = root.Q("Crosshair");
+        }
+
+        public void SetCrosshairVisible(bool visible)
+        {
+            if (_crosshair != null)
+            {
+                _crosshair.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+            }
         }
 
         private void OnFocusGained(IInteractable interactable)

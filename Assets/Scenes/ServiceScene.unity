@@ -10054,6 +10054,7 @@ MonoBehaviour:
   interactionController: {fileID: 88830869}
   handController: {fileID: 3193077325376431242}
   uiController: {fileID: 478365383}
+  hud: {fileID: 1349066857}
   fridge: {fileID: 2101523324}
   pickableSelectionController: {fileID: 280953997}
   poiCameraController: {fileID: 1795451861}
