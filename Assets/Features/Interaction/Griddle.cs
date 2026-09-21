@@ -15,7 +15,9 @@ namespace Features.Interaction
 
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable is Pickup.Ingredient && FindFreeSlot() >= 0;
+            return context.HeldPickable is Pickup.Ingredient ingredient
+                && ingredient.IngredientData.HasProcess(ProcessType.Grill)
+                && FindFreeSlot() >= 0;
         }
 
         public void Interact(in InteractionContext context)
@@ -101,11 +103,10 @@ namespace Features.Interaction
 
             for (var i = 0; i < process.Result.Length; i++)
             {
-                var slot = i == 0 ? slotIndex : AcquireSlot();
+                var slot = AcquireSlot();
                 if (slot < 0)
                 {
-                    slot = _cooking.Count;
-                    _cooking.Add(null);
+                    break;
                 }
 
                 Pickup.Ingredient result = Instantiate(process.Result[i], transform);

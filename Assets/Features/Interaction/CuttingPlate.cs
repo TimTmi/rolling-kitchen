@@ -122,11 +122,10 @@ namespace Features.Interaction
 
             for (var i = 0; i < process.Result.Length; i++)
             {
-                var slot = i == 0 ? slotIndex : AcquireSlot();
+                int slot = AcquireSlot();
                 if (slot < 0)
                 {
-                    slot = _slicing.Count;
-                    _slicing.Add(null);
+                    break;
                 }
 
                 Pickup.Ingredient result = Instantiate(process.Result[i], transform);

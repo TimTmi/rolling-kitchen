@@ -50,6 +50,7 @@ namespace Features.Service
         {
             fridge.Opened -= OnFridgeOpened;
             pickableSelectionController.CloseRequested -= HideUIComponent;
+            pickableSelectionController.PickableSelected -= OnPickableSelected;
             poiCameraController.PoiFocusStarted -= OnPoiFocusStarted;
             poiCameraController.PlayerFocusEnded -= OnPlayerFocusEnded;
         }
