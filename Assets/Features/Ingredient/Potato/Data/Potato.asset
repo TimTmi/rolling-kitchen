@@ -20,3 +20,4 @@ MonoBehaviour:
     duration: 0
     result:
     - {fileID: -6879749259611847851, guid: fa10fa2c3ded3eae4a999db8d317fe95, type: 3}
+    minigame: {fileID: 1586690570387193887, guid: 8b008d08f2b269fa79aac1bd42be009f, type: 3}
