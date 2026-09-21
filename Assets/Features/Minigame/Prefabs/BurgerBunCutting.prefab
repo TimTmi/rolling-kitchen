@@ -46,8 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Minigame.CircleCuttingMinigame
   knifePrefab: {fileID: 7020125767345049779, guid: 7faf413ddded778418c6fe63a2586002, type: 3}
   knifeRotationOffset: {x: 0, y: 0, z: 0}
+  knifeHoverRotationOffset: {x: 0, y: 0, z: 0}
   knifeRaise: 0.02
   knifeFollowSpeed: 720
-  hintArrowCount: 3
-  hintSpinSpeed: 60
-  hintColor: {r: 1, g: 0.8, b: 0.2, a: 1}
