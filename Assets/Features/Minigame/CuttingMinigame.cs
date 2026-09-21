@@ -20,13 +20,11 @@ namespace Features.Minigame
             _completed = completed;
             _running = true;
 
-            Cursor.visible = false;
             OnStarted();
         }
 
         public void End()
         {
-            Cursor.visible = true;
             Destroy(gameObject);
         }
 
