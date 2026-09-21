@@ -3810,7 +3810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CuttingPlateInteractable
   cameraPoint: {fileID: 8234659578850057680}
-  camera: {fileID: 0}
+  serviceController: {fileID: 0}
   defaultRotation: {x: 0, y: 0, z: 0}
   arrangementStart: {x: 0, y: 0.03, z: 0.05}
   arrangementDirection: {x: 0, y: 0, z: -0.1}
