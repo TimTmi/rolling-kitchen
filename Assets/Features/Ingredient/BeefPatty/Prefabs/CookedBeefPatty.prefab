@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4373314389851791245}
   - component: {fileID: 8390491368857500060}
+  - component: {fileID: 6665150913982500476}
   m_Layer: 0
   m_Name: CookedBeefPatty
   m_TagString: Untagged
@@ -53,7 +54,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.02, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.007, z: 0}
+--- !u!114 &6665150913982500476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926362284556185432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14f79b9037a4653b029e7b21ed62631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickup.Ingredient
+  <Data>k__BackingField: {fileID: 11400000, guid: 12fa918c3067c778d99aa3fb64d6aeae, type: 2}
 --- !u!1001 &7781589786329962479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2391100494907441532, guid: 1cadb7e9b63d1484db6a657066fdcd48, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.007
       objectReference: {fileID: 0}
     - target: {fileID: 2391100494907441532, guid: 1cadb7e9b63d1484db6a657066fdcd48, type: 3}
       propertyPath: m_LocalPosition.z

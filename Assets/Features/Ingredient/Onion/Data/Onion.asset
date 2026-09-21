@@ -15,9 +15,9 @@ MonoBehaviour:
   id: onion
   displayName: Onion
   icon: {fileID: 138702223785225510, guid: 81ad4b0fe28c593d9b8abb8d69764a05, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 92253f20989b26a92a348609bade6a2d, type: 3}
   processes:
   - type: 0
-    results:
-    - {fileID: 11400000, guid: 8b2b1b57c9773ad83a44e485a367bd7a, type: 2}
-    - {fileID: 11400000, guid: 8b2b1b57c9773ad83a44e485a367bd7a, type: 2}
+    duration: 0
+    result:
+    - {fileID: -1447714402778540967, guid: ccf35299266132d4e9106ea193d54bdc, type: 3}
+    minigame: {fileID: 1586690570387193887, guid: 3686a758f1f6ed934ba246dfd7d95dd1, type: 3}

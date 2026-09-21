@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4373314389851791245}
   - component: {fileID: 8390491368857500060}
+  - component: {fileID: 4342554375030323582}
   m_Layer: 0
   m_Name: BurgerBox
   m_TagString: Untagged
@@ -54,6 +55,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.12, y: 0.03, z: 0.12}
   m_Center: {x: 0, y: 0.015, z: 0}
+--- !u!114 &4342554375030323582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926362284556185432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf93a53d70e400f8ba4d2de34a6f68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickup.Pickable
+  <Data>k__BackingField: {fileID: 11400000, guid: eccadb3618415affbbd2d79a23decb2a, type: 2}
 --- !u!1001 &9054991296451765254
 PrefabInstance:
   m_ObjectHideFlags: 0

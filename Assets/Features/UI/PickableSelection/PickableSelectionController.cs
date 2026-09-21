@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Features.Pickables;
+using Features.Pickup;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,7 +13,7 @@ namespace Features.UI.PickableSelection
         private ScrollView _list;
         private Button _closeButton;
 
-        public event Action<PickableData> PickableSelected;
+        public event Action<Pickable> PickableSelected;
         public event Action CloseRequested;
 
         protected override void BindElements(VisualElement root)
@@ -29,7 +29,7 @@ namespace Features.UI.PickableSelection
             Hide();
         }
 
-        public void SetPickables(IReadOnlyList<PickableData> pickables)
+        public void SetPickables(IReadOnlyList<Pickable> pickables)
         {
             _list.Clear();
             
@@ -40,8 +40,8 @@ namespace Features.UI.PickableSelection
                 var icon = slot.Q<Image>("Icon");
                 var label = slot.Q<Label>("Label");
 
-                icon.sprite = pickable.Icon;
-                label.text = pickable.DisplayName;
+                icon.sprite = pickable.Data.Icon;
+                label.text = pickable.Data.DisplayName;
 
                 button.clicked += () => PickableSelected?.Invoke(pickable);
 

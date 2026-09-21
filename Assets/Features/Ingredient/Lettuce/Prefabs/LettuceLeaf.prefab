@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4373314389851791245}
   - component: {fileID: 8390491368857500060}
+  - component: {fileID: -5761278092052448540}
   m_Layer: 0
-  m_Name: SlicedLettuce
+  m_Name: LettuceLeaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +54,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.01, z: 0.04}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.004, z: 0}
+--- !u!114 &-5761278092052448540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926362284556185432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14f79b9037a4653b029e7b21ed62631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Pickup.Ingredient
+  <Data>k__BackingField: {fileID: 11400000, guid: f7f33f2c5970ebdde8fa3191b311734d, type: 2}
 --- !u!1001 &8456133653506649814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121761954284519845, guid: 0b0e09c45f8c10f4c88deff94e2f2d57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 9121761954284519845, guid: 0b0e09c45f8c10f4c88deff94e2f2d57, type: 3}
       propertyPath: m_LocalPosition.z

@@ -15,9 +15,10 @@ MonoBehaviour:
   id: burger_bun
   displayName: Burger Bun
   icon: {fileID: 5248698440384363030, guid: 66a31519eda33aacba10834cf1ea5787, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 5517e40bd5b94c10dac561193056c3d1, type: 3}
   processes:
   - type: 0
-    results:
-    - {fileID: 11400000, guid: 02f9bc8d07050f48ab1ca4b343ce3e01, type: 2}
-    - {fileID: 11400000, guid: 3f7040f98f202ff20b325c4c2b7e5e76, type: 2}
+    duration: 0
+    result:
+    - {fileID: -5314269862806406758, guid: 086af9b772226d93a88597c73b6e6f63, type: 3}
+    - {fileID: -4146372655871194224, guid: a7c12cadf79b4dbc19728fb5d1b4aeba, type: 3}
+    minigame: {fileID: 529806953273596772, guid: 49bfea79d4354e6cb38ed421bcc09c3e, type: 3}

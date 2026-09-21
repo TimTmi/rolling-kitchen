@@ -21,7 +21,7 @@ namespace Features.Interaction
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            InteractionContext interactionContext = new(handController.HeldPickableData);
+            InteractionContext interactionContext = new(handController.HeldPickable, handController.PickUp, handController.Remove, handController.Release);
 
             if (!context.performed || _focusedInteractable == null || !_focusedInteractable.CanInteract(interactionContext))
             {
@@ -30,7 +30,7 @@ namespace Features.Interaction
             
             var interactable = _focusedInteractable;
             interactable.Interact(interactionContext);
-            _focusedInteractable = null;
+            LoseFocus();
 
             Interacted?.Invoke(interactable);
         }

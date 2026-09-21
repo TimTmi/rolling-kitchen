@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7566298504254030790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9206786651153032705}
+  - component: {fileID: 1586690570387193887}
+  m_Layer: 0
+  m_Name: OnionCutting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9206786651153032705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566298504254030790}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1586690570387193887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566298504254030790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc82196b9ca872179c86b7fa113d189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Minigame.LineCuttingMinigame
+  ingredientRotation: {x: 0, y: 0, z: -90}
+  firstLinePosition: {x: 0.06, y: 0, z: 0}
+  lastLinePosition: {x: 0.02, y: 0, z: 0}
+  cutDistance: 0.6
+  lineCount: 3
+  knifePrefab: {fileID: 919132149155446097, guid: ba514a6b61666cf4ea240772e76020d3, type: 3}
+  knifeCuttingOffset: {x: 0, y: 0.05, z: -0.17}
+  knifeLiftedOffset: {x: 0, y: 0.1, z: -0.17}
+  knifeCuttingRotationOffset: {x: 0, y: 0, z: -90}
+  knifeLiftedRotationOffset: {x: 0, y: 0, z: -90}
+  knifeLeftLimit: -0.05
+  knifeRightLimit: 0.05

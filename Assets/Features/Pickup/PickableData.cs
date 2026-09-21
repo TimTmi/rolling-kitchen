@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Features.Pickables
+namespace Features.Pickup
 {
     [CreateAssetMenu(fileName = "PickableData", menuName = "Scriptable Objects/PickableData")]
     public class PickableData : ScriptableObject
@@ -13,9 +13,5 @@ namespace Features.Pickables
         
         [SerializeField] private Sprite icon;
         public Sprite Icon => icon;
-        
-        [SerializeField] private GameObject prefab;
-        public GameObject Prefab => prefab;
-        
     }
 }

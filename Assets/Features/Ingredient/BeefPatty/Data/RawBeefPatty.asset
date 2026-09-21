@@ -15,8 +15,8 @@ MonoBehaviour:
   id: raw_beef_patty
   displayName: Beef Patty
   icon: {fileID: -8360093787744726278, guid: d1b7e55977134f4d2babcc74250d83f9, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: c52e6be2c966920fba34a2dd06385e14, type: 3}
   processes:
   - type: 1
-    results:
-    - {fileID: 11400000, guid: 12fa918c3067c778d99aa3fb64d6aeae, type: 2}
+    duration: 8
+    result:
+    - {fileID: 6665150913982500476, guid: c71bf7257859cd5bb8b8be8c2147f1d8, type: 3}
