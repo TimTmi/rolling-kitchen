@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Core;
 using Features.Ingredient;
+using Features.Service;
 using UnityEngine;
 
 namespace Features.Interaction
@@ -8,7 +8,7 @@ namespace Features.Interaction
     public class CuttingPlate : MonoBehaviour, IInteractable
     {
         [SerializeField] private Transform cameraPoint;
-        [SerializeField] private POICameraController camera;
+        [SerializeField] private ServiceController serviceController;
         [SerializeField] private Vector3 defaultRotation = new Vector3(-90f, 0f, 0f);
         [SerializeField] private Vector3 arrangementStart;
         [SerializeField] private Vector3 arrangementDirection = Vector3.right;
@@ -51,6 +51,8 @@ namespace Features.Interaction
             ingredient.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(defaultRotation));
 
             context.Release();
+
+            serviceController.FocusPoi(cameraPoint, true);
         }
 
         public string GetInteractionPrompt(in InteractionContext context)

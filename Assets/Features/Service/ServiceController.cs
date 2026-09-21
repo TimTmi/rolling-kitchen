@@ -18,9 +18,13 @@ namespace Features.Service
         [SerializeField] private UIController uiController;
         [SerializeField] private Fridge fridge;
         [SerializeField] private PickableSelectionController  pickableSelectionController;
+        [SerializeField] private Core.PoiCameraController poiCameraController;
+        [SerializeField] private Camera playerCamera;
+        [SerializeField] private Camera poiCamera;
 
         private Action<Pickable> _selectionHandler;
-        
+        private bool _poiFocusCancellable;
+
         void Start()
         {
             Core.CursorController.Lock();
@@ -29,15 +33,34 @@ namespace Features.Service
         private void OnEnable()
         {
             fridge.Opened += OnFridgeOpened;
-            
+
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
+
+            poiCameraController.PoiFocusStarted += OnPoiFocusStarted;
+            poiCameraController.PlayerFocusEnded += OnPlayerFocusEnded;
         }
 
         private void OnDisable()
         {
             fridge.Opened -= OnFridgeOpened;
             pickableSelectionController.CloseRequested -= HideUIComponent;
+            poiCameraController.PoiFocusStarted -= OnPoiFocusStarted;
+            poiCameraController.PlayerFocusEnded -= OnPlayerFocusEnded;
+        }
+
+        private void OnPoiFocusStarted()
+        {
+            DisablePlayerControl();
+            poiCamera.enabled = true;
+            playerCamera.enabled = false;
+        }
+
+        private void OnPlayerFocusEnded()
+        {
+            poiCamera.enabled = false;
+            playerCamera.enabled = true;
+            EnablePlayerControl();
         }
         
         public void OnCancel(InputAction.CallbackContext context)
@@ -47,7 +70,25 @@ namespace Features.Service
                 return;
             }
 
+            if (_poiFocusCancellable)
+            {
+                ReturnToPlayer();
+                return;
+            }
+
             HideUIComponent();
+        }
+
+        public void FocusPoi(Transform poi, bool cancellable)
+        {
+            _poiFocusCancellable = cancellable;
+            poiCameraController.FocusPoi(poi);
+        }
+
+        public void ReturnToPlayer()
+        {
+            _poiFocusCancellable = false;
+            poiCameraController.ReturnToPlayer();
         }
 
         private void OnFridgeOpened(IReadOnlyList<Pickable> pickables)
@@ -73,17 +114,27 @@ namespace Features.Service
 
         private void ShowUIComponent(UIComponent component)
         {
-            interactionController.enabled = false;
-            playerInput.SwitchCurrentActionMap("UI");
-            Core.CursorController.Unlock();
+            DisablePlayerControl();
             uiController.ShowComponent(component);
         }
 
         private void HideUIComponent()
         {
+            uiController.HideComponent();
+            EnablePlayerControl();
+        }
+
+        private void DisablePlayerControl()
+        {
+            interactionController.enabled = false;
+            playerInput.SwitchCurrentActionMap("UI");
+            Core.CursorController.Unlock();
+        }
+
+        private void EnablePlayerControl()
+        {
             playerInput.SwitchCurrentActionMap("Player");
             Core.CursorController.Lock();
-            uiController.HideComponent();
             interactionController.enabled = true;
         }
     }

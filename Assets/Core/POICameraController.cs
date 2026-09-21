@@ -4,26 +4,41 @@ using UnityEngine;
 
 namespace Core
 {
-    public class POICameraController : MonoBehaviour
+    public class PoiCameraController : MonoBehaviour
     {
         [SerializeField] private Camera playerCamera;
         [SerializeField] private Camera poiCamera;
         [SerializeField] private float transitionDuration = 0.5f;
 
         private Coroutine _transition;
+        private bool _focused;
 
-        public void FocusPOI(Transform poi)
+        public event Action PoiFocusStarted;
+        public event Action PlayerFocusEnded;
+
+        public void FocusPoi(Transform poi)
         {
-            StartTransition(() => (poi.position, poi.rotation), ActivatePOICamera);
+            bool wasFocused = _focused;
+            _focused = true;
+
+            if (!wasFocused)
+            {
+                poiCamera.transform.SetPositionAndRotation(playerCamera.transform.position, playerCamera.transform.rotation);
+                PoiFocusStarted?.Invoke();
+            }
+
+            StartTransition(() => (poi.position, poi.rotation));
         }
 
         public void ReturnToPlayer()
         {
-            if (!poiCamera.enabled) return;
-            StartTransition(() => (playerCamera.transform.position, playerCamera.transform.rotation), ActivatePlayerCamera);
+            if (!_focused) return;
+            _focused = false;
+
+            StartTransition(() => (playerCamera.transform.position, playerCamera.transform.rotation), PlayerFocusEnded);
         }
 
-        private void StartTransition(Func<(Vector3 position, Quaternion rotation)> target, Action onComplete)
+        private void StartTransition(Func<(Vector3 position, Quaternion rotation)> target, Action onComplete = null)
         {
             if (_transition != null) StopCoroutine(_transition);
             _transition = StartCoroutine(Transition(target, onComplete));
@@ -31,13 +46,6 @@ namespace Core
 
         private IEnumerator Transition(Func<(Vector3 position, Quaternion rotation)> target, Action onComplete)
         {
-            if (!poiCamera.enabled)
-            {
-                poiCamera.transform.SetPositionAndRotation(playerCamera.transform.position, playerCamera.transform.rotation);
-                poiCamera.enabled = true;
-                playerCamera.enabled = false;
-            }
-
             Vector3 fromPosition = poiCamera.transform.position;
             Quaternion fromRotation = poiCamera.transform.rotation;
             float elapsed = 0f;
@@ -56,18 +64,6 @@ namespace Core
             poiCamera.transform.SetPositionAndRotation(endPosition, endRotation);
             onComplete?.Invoke();
             _transition = null;
-        }
-
-        private void ActivatePOICamera()
-        {
-            poiCamera.enabled = true;
-            playerCamera.enabled = false;
-        }
-
-        private void ActivatePlayerCamera()
-        {
-            poiCamera.enabled = false;
-            playerCamera.enabled = true;
         }
     }
 }
