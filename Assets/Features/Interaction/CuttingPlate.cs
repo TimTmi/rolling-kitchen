@@ -20,6 +20,11 @@ namespace Features.Interaction
         {
             for (int i = _slicing.Count - 1; i >= 0; i--)
             {
+                if (_slicing[i] == null)
+                {
+                    continue;
+                }
+
                 if (!_slicing[i].transform.IsChildOf(transform))
                 {
                     _slicing[i] = null;

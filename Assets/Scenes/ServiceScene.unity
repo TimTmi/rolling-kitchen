@@ -6135,11 +6135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8485083196503468612, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
       propertyPath: cutPosition.y
-      value: 0.005
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8485083196503468612, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
       propertyPath: arrangementStart.y
-      value: 0.005
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
