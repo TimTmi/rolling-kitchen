@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Features.Minigame;
 using Features.Pickup;
 using UnityEngine;
 
@@ -18,10 +19,12 @@ namespace Features.Ingredient
         [SerializeField] private ProcessType type;
         [SerializeField] private float duration;
         [SerializeField] private Pickup.Ingredient[] result;
+        [SerializeField] private CuttingMinigame minigame;
 
         public ProcessType Type => type;
         public float Duration => duration;
         public Pickup.Ingredient[] Result => result;
+        public CuttingMinigame Minigame => minigame;
     }
     
     [CreateAssetMenu(fileName = "IngredientData", menuName = "Scriptable Objects/IngredientData")]

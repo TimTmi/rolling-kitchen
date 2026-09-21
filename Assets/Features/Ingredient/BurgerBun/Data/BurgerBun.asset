@@ -21,3 +21,4 @@ MonoBehaviour:
     result:
     - {fileID: -5314269862806406758, guid: 086af9b772226d93a88597c73b6e6f63, type: 3}
     - {fileID: -4146372655871194224, guid: a7c12cadf79b4dbc19728fb5d1b4aeba, type: 3}
+    minigame: {fileID: 529806953273596772, guid: 49bfea79d4354e6cb38ed421bcc09c3e, type: 3}

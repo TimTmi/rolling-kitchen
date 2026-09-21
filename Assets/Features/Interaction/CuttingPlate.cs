@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Features.Ingredient;
+using Features.Minigame;
 using Features.Service;
 using UnityEngine;
 
@@ -15,6 +16,19 @@ namespace Features.Interaction
         [SerializeField] private int maxSlots = 8;
 
         private readonly List<Pickup.Ingredient> _slicing = new();
+        private CuttingMinigame _minigame;
+
+        private void OnEnable()
+        {
+            if (serviceController == null) return;
+            serviceController.PoiFocusEnded += OnPoiFocusEnded;
+        }
+
+        private void OnDisable()
+        {
+            if (serviceController == null) return;
+            serviceController.PoiFocusEnded -= OnPoiFocusEnded;
+        }
 
         public bool CanInteract(in InteractionContext context)
         {
@@ -53,11 +67,45 @@ namespace Features.Interaction
             context.Release();
 
             serviceController.FocusPoi(cameraPoint, true);
+            StartCutting(ingredient);
         }
 
         public string GetInteractionPrompt(in InteractionContext context)
         {
             return "Slice";
+        }
+
+        private void StartCutting(Pickup.Ingredient ingredient)
+        {
+            if (!ingredient.IngredientData.TryGetProcess(ProcessType.Slice, out IngredientProcess process))
+            {
+                return;
+            }
+
+            if (process.Minigame == null)
+            {
+                Cut(ingredient);
+                return;
+            }
+
+            _minigame = Instantiate(process.Minigame, transform);
+            _minigame.Begin(ingredient, serviceController.PoiCamera, () =>
+            {
+                _minigame = null;
+                Cut(ingredient);
+                serviceController.ReturnToPlayer();
+            });
+        }
+
+        private void OnPoiFocusEnded()
+        {
+            if (_minigame == null)
+            {
+                return;
+            }
+
+            _minigame.End();
+            _minigame = null;
         }
 
         private void Cut(Pickup.Ingredient ingredient)

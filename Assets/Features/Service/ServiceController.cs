@@ -25,6 +25,10 @@ namespace Features.Service
         private Action<Pickable> _selectionHandler;
         private bool _poiFocusCancellable;
 
+        public event Action PoiFocusEnded;
+
+        public Camera PoiCamera => poiCamera;
+
         void Start()
         {
             Core.CursorController.Lock();
@@ -61,6 +65,7 @@ namespace Features.Service
             poiCamera.enabled = false;
             playerCamera.enabled = true;
             EnablePlayerControl();
+            PoiFocusEnded?.Invoke();
         }
         
         public void OnCancel(InputAction.CallbackContext context)
