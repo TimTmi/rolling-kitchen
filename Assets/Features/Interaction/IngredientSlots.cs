@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Features.Ingredient;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Interaction
@@ -12,7 +13,7 @@ namespace Features.Interaction
         private readonly Vector3 _arrangementDirection;
         private readonly int _maxSlots;
 
-        private readonly List<Pickup.Ingredient> _slots = new();
+        private readonly List<Pickable> _slots = new();
 
         public IngredientSlots(Transform owner, Vector3 defaultRotation, Vector3 arrangementStart,
             Vector3 arrangementDirection, int maxSlots)
@@ -27,7 +28,7 @@ namespace Features.Interaction
         public int Capacity => _maxSlots;
         public int Count => _slots.Count;
         public bool HasFreeSlot => FindFreeSlot() >= 0;
-        public Pickup.Ingredient this[int index] => _slots[index];
+        public Pickable this[int index] => _slots[index];
 
         public void ClearDetached()
         {
@@ -40,22 +41,27 @@ namespace Features.Interaction
             }
         }
 
-        public int IndexOf(Pickup.Ingredient ingredient)
+        public int IndexOf(Pickable content)
         {
-            return _slots.IndexOf(ingredient);
+            return _slots.IndexOf(content);
         }
 
-        public void Place(Pickup.Ingredient ingredient)
+        public void Place(Pickable content)
         {
             int slot = AcquireSlot();
-            _slots[slot] = ingredient;
-            ingredient.transform.SetParent(_owner);
-            ingredient.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(_defaultRotation));
+            _slots[slot] = content;
+            content.transform.SetParent(_owner);
+            content.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(_defaultRotation));
         }
 
         public void ReplaceWithResults(int slotIndex, IngredientProcess process)
         {
-            Object.Destroy(_slots[slotIndex].gameObject);
+            if (_slots[slotIndex] is not Pickup.Ingredient ingredient)
+            {
+                return;
+            }
+
+            Object.Destroy(ingredient.gameObject);
             _slots[slotIndex] = null;
 
             for (var i = 0; i < process.Result.Length; i++)
@@ -70,6 +76,17 @@ namespace Features.Interaction
                 _slots[slot] = result;
                 result.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(_defaultRotation));
             }
+        }
+
+        public void ReplaceRoot(int slotIndex, Pickup.Ingredient[] results)
+        {
+            Pickable content = _slots[slotIndex];
+            if (content == null || content.Stack == null)
+            {
+                return;
+            }
+
+            _slots[slotIndex] = content.Stack.ReplaceRoot(results);
         }
 
         private int FindFreeSlot()

@@ -1,4 +1,6 @@
+using System.Linq;
 using Features.Ingredient;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Interaction
@@ -12,7 +14,7 @@ namespace Features.Interaction
 
         private const float BasketSpeed = 0.5f;
 
-        private Pickup.Ingredient _frying;
+        private Pickable _frying;
         private Vector3 _initialLocalPosition;
 
         public bool CanInteract(in InteractionContext context)
@@ -22,8 +24,9 @@ namespace Features.Interaction
                 return context.HeldPickable == null;
             }
 
-            return context.HeldPickable is Pickup.Ingredient ingredient
-                && ingredient.IngredientData.HasProcess(ProcessType.DeepFry);
+            return context.HeldPickable is IngredientStack stack
+                ? stack.Contents.Any(HasDeepFryProcess)
+                : HasDeepFryProcess(context.HeldPickable);
         }
 
         public void Interact(in InteractionContext context)
@@ -35,7 +38,7 @@ namespace Features.Interaction
                 return;
             }
 
-            _frying = (Pickup.Ingredient)context.HeldPickable;
+            _frying = context.HeldPickable is IngredientStack stack ? stack.Root : context.HeldPickable;
             _frying.transform.SetParent(transform);
             _frying.transform.SetLocalPositionAndRotation(fryPosition, Quaternion.Euler(defaultRotation));
 
@@ -63,17 +66,57 @@ namespace Features.Interaction
                 return;
             }
 
-            if (!_frying.IngredientData.TryGetProcess(ProcessType.DeepFry, out IngredientProcess process)
-                || _frying.CookingProgress >= process.Duration)
+            if (_frying.Stack == null)
+            {
+                Fry(_frying);
+                return;
+            }
+
+            IngredientStack stack = _frying.Stack;
+
+            foreach (Pickable member in stack.Contents.ToList())
+            {
+                if (member == null
+                    || member.Stack != stack
+                    || member is not Pickup.Ingredient ingredient
+                    || !ingredient.HasUnfinishedProcess(ProcessType.DeepFry, out IngredientProcess process))
+                {
+                    continue;
+                }
+
+                ingredient.AddCookingProgress(Time.deltaTime);
+
+                if (ingredient.CookingProgress < process.Duration)
+                {
+                    continue;
+                }
+
+                if (member == stack.Root)
+                {
+                    _frying = stack.ReplaceRoot(process.Result);
+                }
+                else
+                {
+                    stack.Replace(member, process.Result);
+                }
+
+                break;
+            }
+        }
+
+        private void Fry(Pickable content)
+        {
+            if (content is not Pickup.Ingredient ingredient
+                || !ingredient.HasUnfinishedProcess(ProcessType.DeepFry, out IngredientProcess process))
             {
                 return;
             }
 
-            _frying.AddCookingProgress(Time.deltaTime);
+            ingredient.AddCookingProgress(Time.deltaTime);
 
-            if (_frying.CookingProgress >= process.Duration)
+            if (ingredient.CookingProgress >= process.Duration)
             {
-                ReplaceWithResult(_frying, process);
+                ReplaceWithResult(ingredient, process);
             }
         }
 
@@ -89,6 +132,11 @@ namespace Features.Interaction
 
             _frying = Instantiate(process.Result[0], transform);
             _frying.transform.SetLocalPositionAndRotation(fryPosition, Quaternion.Euler(defaultRotation));
+        }
+
+        private static bool HasDeepFryProcess(Pickable content)
+        {
+            return content is Pickup.Ingredient ingredient && ingredient.IngredientData.HasProcess(ProcessType.DeepFry);
         }
     }
 }

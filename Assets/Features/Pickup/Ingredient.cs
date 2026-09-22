@@ -11,5 +11,10 @@ namespace Features.Pickup
         {
             CookingProgress += seconds;
         }
+
+        public bool HasUnfinishedProcess(ProcessType type, out IngredientProcess process)
+        {
+            return IngredientData.TryGetProcess(type, out process) && CookingProgress < process.Duration;
+        }
     }
 }

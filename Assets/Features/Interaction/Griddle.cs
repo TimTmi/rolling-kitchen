@@ -1,4 +1,6 @@
+using System.Linq;
 using Features.Ingredient;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Interaction
@@ -14,15 +16,17 @@ namespace Features.Interaction
 
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable is Pickup.Ingredient ingredient
-                && ingredient.IngredientData.HasProcess(ProcessType.Grill)
-                && _slots.HasFreeSlot;
+            bool grillable = context.HeldPickable is IngredientStack stack
+                ? stack.Contents.Any(HasGrillProcess)
+                : HasGrillProcess(context.HeldPickable);
+
+            return grillable && _slots.HasFreeSlot;
         }
 
         public void Interact(in InteractionContext context)
         {
-            var ingredient = (Pickup.Ingredient)context.HeldPickable;
-            _slots.Place(ingredient);
+            Pickable content = context.HeldPickable is IngredientStack stack ? stack.Root : context.HeldPickable;
+            _slots.Place(content);
 
             context.Release();
         }
@@ -43,22 +47,74 @@ namespace Features.Interaction
 
             for (int i = 0; i < _slots.Count; i++)
             {
-                Pickup.Ingredient ingredient = _slots[i];
+                Pickable content = _slots[i];
 
-                if (ingredient == null
-                    || !ingredient.IngredientData.TryGetProcess(ProcessType.Grill, out IngredientProcess process)
-                    || ingredient.CookingProgress >= process.Duration)
+                if (content != null)
+                {
+                    Grill(i, content);
+                }
+            }
+        }
+
+        private void Grill(int slotIndex, Pickable content)
+        {
+            IngredientStack stack = content.Stack;
+
+            if (stack == null)
+            {
+                GrillBare(slotIndex, content);
+                return;
+            }
+
+            foreach (Pickable member in stack.Contents.ToList())
+            {
+                if (member == null
+                    || member.Stack != stack
+                    || member is not Pickup.Ingredient ingredient
+                    || !ingredient.HasUnfinishedProcess(ProcessType.Grill, out IngredientProcess process))
                 {
                     continue;
                 }
 
                 ingredient.AddCookingProgress(Time.deltaTime);
 
-                if (ingredient.CookingProgress >= process.Duration)
+                if (ingredient.CookingProgress < process.Duration)
                 {
-                    _slots.ReplaceWithResults(i, process);
+                    continue;
                 }
+
+                if (member == stack.Root)
+                {
+                    _slots.ReplaceRoot(slotIndex, process.Result);
+                }
+                else
+                {
+                    stack.Replace(member, process.Result);
+                }
+
+                break;
             }
+        }
+
+        private void GrillBare(int slotIndex, Pickable content)
+        {
+            if (content is not Pickup.Ingredient ingredient
+                || !ingredient.HasUnfinishedProcess(ProcessType.Grill, out IngredientProcess process))
+            {
+                return;
+            }
+
+            ingredient.AddCookingProgress(Time.deltaTime);
+
+            if (ingredient.CookingProgress >= process.Duration)
+            {
+                _slots.ReplaceWithResults(slotIndex, process);
+            }
+        }
+
+        private static bool HasGrillProcess(Pickable content)
+        {
+            return content is Pickup.Ingredient ingredient && ingredient.IngredientData.HasProcess(ProcessType.Grill);
         }
     }
 }
