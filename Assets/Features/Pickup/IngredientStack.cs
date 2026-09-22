@@ -112,6 +112,20 @@ namespace Features.Pickup
             context.Release();
         }
 
+        public static bool CanMergeInto(Pickable contents, Pickable host)
+        {
+            Group contentsGroup = GroupOf(contents);
+            Group hostGroup = GroupOf(host);
+
+            return !HasRoleConflict(contentsGroup, hostGroup)
+                && FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents) >= 0;
+        }
+
+        public static void MergeInto(Pickable contents, Pickable host)
+        {
+            TryInsert(GroupOf(contents), GroupOf(host));
+        }
+
         private static bool TryInsert(Group contentsGroup, Group hostGroup)
         {
             int index = FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents);

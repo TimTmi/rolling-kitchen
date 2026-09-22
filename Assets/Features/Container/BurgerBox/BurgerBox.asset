@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BurgerBox
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.PickableData
   id: burger_box
-  displayName: Burger Box
+  displayName: Box
   icon: {fileID: 6654338168004580522, guid: 9e22cad59444bb12987f9f1ec0dbf318, type: 3}
   stackingRole: 0
   stackHeight: 0.01
