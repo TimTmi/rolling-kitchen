@@ -28,6 +28,7 @@ namespace Features.Pickup
             newRoot.transform.SetPositionAndRotation(oldRoot.transform.position, oldRoot.transform.rotation);
 
             IngredientStack stack = FormOn(newRoot);
+            stack._contents.Clear();
             stack._contents.AddRange(_contents);
             stack._contents[rootIndex] = newRoot;
 
