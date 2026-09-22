@@ -15,4 +15,5 @@ MonoBehaviour:
   id: fries_box
   displayName: Fries Box
   icon: {fileID: 8829120739632933587, guid: 3d685b59576ca1e7bbf631351ccc8e72, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 1090a37bea33bd13893fa0d39ee74750, type: 3}
+  stackingRole: 0
+  stackHeight: 0.1

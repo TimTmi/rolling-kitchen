@@ -15,8 +15,11 @@ MonoBehaviour:
   id: raw_bacon
   displayName: Bacon
   icon: {fileID: -7976991477107485572, guid: 8a9a129c3720a6017841bd16198cfac0, type: 3}
+  stackingRole: 2
+  stackHeight: 0.02400077
   processes:
   - type: 1
     duration: 6
     result:
     - {fileID: -5630186769153357904, guid: d38be90a17131d9c09db80a425fc3dc7, type: 3}
+    minigame: {fileID: 0}

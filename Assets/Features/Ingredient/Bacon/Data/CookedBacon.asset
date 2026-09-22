@@ -15,8 +15,11 @@ MonoBehaviour:
   id: cooked_bacon
   displayName: Bacon
   icon: {fileID: -4396206974578190670, guid: d3e0aa57d53b2c4c7bf7ed67e8783041, type: 3}
+  stackingRole: 2
+  stackHeight: 0.02400077
   processes:
   - type: 1
     duration: 6
     result:
     - {fileID: -1409142733887461634, guid: 59380f2b7edcc319d91c0f7570db445d, type: 3}
+    minigame: {fileID: 0}

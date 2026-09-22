@@ -15,5 +15,6 @@ MonoBehaviour:
   id: burnt_beef_patty
   displayName: Beef Patty
   icon: {fileID: 7033557283401362363, guid: 49af15e74b8af476bb29dcc7c2090d3b, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 728c36c600e92e697b351f0c69933bb1, type: 3}
+  stackingRole: 2
+  stackHeight: 0.014000049
   processes: []

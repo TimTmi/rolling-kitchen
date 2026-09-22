@@ -9,7 +9,12 @@ namespace Features.Pickup
         
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable == null || context.HeldPickable.Data == pickable.Data;
+            if (context.HeldPickable == null || context.HeldPickable.Data == pickable.Data)
+            {
+                return true;
+            }
+
+            return IngredientStack.CanMergeInto(pickable, context.HeldPickable);
         }
 
         public void Interact(in InteractionContext context)
@@ -17,11 +22,16 @@ namespace Features.Pickup
             if (context.HeldPickable == null)
             {
                 context.PickUp(Instantiate(pickable));
+                return;
             }
-            else if (context.HeldPickable.Data == pickable.Data)
+
+            if (context.HeldPickable.Data == pickable.Data)
             {
                 context.Remove();
+                return;
             }
+
+            IngredientStack.MergeInto(Instantiate(pickable), context.HeldPickable);
         }
 
         public string GetInteractionPrompt(in InteractionContext context)

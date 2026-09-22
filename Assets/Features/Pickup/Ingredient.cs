@@ -1,9 +1,8 @@
 using Features.Ingredient;
-using Features.Interaction;
 
 namespace Features.Pickup
 {
-    public class Ingredient : Pickable, IInteractable
+    public class Ingredient : Pickable
     {
         public IngredientData IngredientData => (IngredientData)Data;
         public float CookingProgress { get; private set; }
@@ -13,19 +12,9 @@ namespace Features.Pickup
             CookingProgress += seconds;
         }
 
-        public bool CanInteract(in InteractionContext context)
+        public bool HasUnfinishedProcess(ProcessType type, out IngredientProcess process)
         {
-            return context.HeldPickable == null;
-        }
-
-        public void Interact(in InteractionContext context)
-        {
-            context.PickUp(this);
-        }
-
-        public string GetInteractionPrompt(in InteractionContext context)
-        {
-            return Data.DisplayName;
+            return IngredientData.TryGetProcess(type, out process) && CookingProgress < process.Duration;
         }
     }
 }
