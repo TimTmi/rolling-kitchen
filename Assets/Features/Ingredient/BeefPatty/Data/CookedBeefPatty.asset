@@ -15,8 +15,11 @@ MonoBehaviour:
   id: cooked_beef_patty
   displayName: Beef Patty
   icon: {fileID: -366265374277833554, guid: 25ee15b001b41c3f19bf6a4483a79589, type: 3}
+  stackingRole: 2
+  stackHeight: 0.2000007
   processes:
   - type: 1
     duration: 7
     result:
     - {fileID: -7482104029211047160, guid: 728c36c600e92e697b351f0c69933bb1, type: 3}
+    minigame: {fileID: 0}

@@ -15,5 +15,6 @@ MonoBehaviour:
   id: sliced_tomato
   displayName: Tomato
   icon: {fileID: 7934239682363468368, guid: 387a7e0edd67b6e6fb393ce0904302ee, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 245592333cb6e1361969f2c76ed1698a, type: 3}
+  stackingRole: 2
+  stackHeight: 0.05302145
   processes: []
