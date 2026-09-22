@@ -15,8 +15,11 @@ MonoBehaviour:
   id: raw_fries
   displayName: Fries
   icon: {fileID: -8294466014649415594, guid: bfe0ef9affbd6080396652b7b4ff5017, type: 3}
+  stackingRole: 2
+  stackHeight: 0.01
   processes:
   - type: 2
     duration: 7
     result:
     - {fileID: 7893648094086281446, guid: 73f52f1ce0f42a164be888f0a9750099, type: 3}
+    minigame: {fileID: 0}

@@ -15,5 +15,6 @@ MonoBehaviour:
   id: burnt_sliced_onion
   displayName: Onion
   icon: {fileID: 5461640353098145479, guid: ce5d39d28718ca86e92d460e582be5b2, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: ec96d646b727243f4a0f21ff0a1d05d8, type: 3}
+  stackingRole: 2
+  stackHeight: 0.01
   processes: []

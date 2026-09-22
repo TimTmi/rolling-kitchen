@@ -16,5 +16,5 @@ MonoBehaviour:
   displayName: Bottom Burger Bun
   icon: {fileID: -3649519605363859031, guid: 9f7610a9a5cc669f986bdc0aa64f7a69, type: 3}
   stackingRole: 1
-  stackHeight: 0.1484698
+  stackHeight: 0.010392886
   processes: []

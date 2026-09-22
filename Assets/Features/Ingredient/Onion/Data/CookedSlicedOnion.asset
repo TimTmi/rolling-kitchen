@@ -15,8 +15,11 @@ MonoBehaviour:
   id: cooked_sliced_onion
   displayName: Onion
   icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
+  stackingRole: 2
+  stackHeight: 0.01
   processes:
   - type: 1
     duration: 6
     result:
     - {fileID: 8262938012752116393, guid: ec96d646b727243f4a0f21ff0a1d05d8, type: 3}
+    minigame: {fileID: 0}

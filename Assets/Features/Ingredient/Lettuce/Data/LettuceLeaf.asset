@@ -15,5 +15,6 @@ MonoBehaviour:
   id: sliced_lettuce
   displayName: Lettuce
   icon: {fileID: 3847864973036105750, guid: 45ba80656d072ccb5ac7e0ee74b6ba26, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: f5ba31fc802cfb640a010bcf34f91b04, type: 3}
+  stackingRole: 2
+  stackHeight: 0.01
   processes: []

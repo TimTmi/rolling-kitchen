@@ -8,14 +8,27 @@ namespace Features.Pickup
         [field: SerializeField]
         public PickableData Data { get; private set; }
 
+        public IngredientStack Stack { get; internal set; }
+
         public virtual bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable == null;
+            if (context.HeldPickable == null)
+            {
+                return true;
+            }
+
+            return IngredientStack.CanMerge(context.HeldPickable, this);
         }
 
         public virtual void Interact(in InteractionContext context)
         {
-            context.PickUp(this);
+            if (context.HeldPickable == null)
+            {
+                context.PickUp(Stack == null ? this : Stack);
+                return;
+            }
+
+            IngredientStack.Merge(context.HeldPickable, this, context);
         }
 
         public virtual string GetInteractionPrompt(in InteractionContext context)

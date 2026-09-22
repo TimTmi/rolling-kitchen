@@ -16,5 +16,5 @@ MonoBehaviour:
   displayName: Beef Patty
   icon: {fileID: 7033557283401362363, guid: 49af15e74b8af476bb29dcc7c2090d3b, type: 3}
   stackingRole: 2
-  stackHeight: 0.2000007
+  stackHeight: 0.014000049
   processes: []

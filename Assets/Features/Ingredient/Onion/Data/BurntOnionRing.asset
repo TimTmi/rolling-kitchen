@@ -15,5 +15,6 @@ MonoBehaviour:
   id: burnt_onion_ring
   displayName: Onion Ring
   icon: {fileID: 5461640353098145479, guid: ce5d39d28718ca86e92d460e582be5b2, type: 3}
-  prefab: {fileID: 6926362284556185432, guid: 8d6d9795003f255a38abc47eed9acf53, type: 3}
+  stackingRole: 2
+  stackHeight: 0.01
   processes: []

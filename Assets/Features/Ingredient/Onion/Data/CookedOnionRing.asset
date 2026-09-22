@@ -15,8 +15,11 @@ MonoBehaviour:
   id: cooked_onion_ring
   displayName: Onion Ring
   icon: {fileID: -2750669496410944554, guid: ff8964d3429369d5191940577a0ed657, type: 3}
+  stackingRole: 2
+  stackHeight: 0.01
   processes:
   - type: 2
     duration: 6
     result:
     - {fileID: 6441443290750942198, guid: 8d6d9795003f255a38abc47eed9acf53, type: 3}
+    minigame: {fileID: 0}
