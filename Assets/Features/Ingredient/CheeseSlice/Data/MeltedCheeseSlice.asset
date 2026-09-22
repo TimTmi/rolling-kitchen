@@ -16,5 +16,5 @@ MonoBehaviour:
   displayName: Cheese Slice
   icon: {fileID: -4415907369559253599, guid: dc96591ee14a0b6e3ba94f829dcd8724, type: 3}
   stackingRole: 2
-  stackHeight: 0.0022400175
+  stackHeight: 0.003200024
   processes: []
