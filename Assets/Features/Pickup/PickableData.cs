@@ -6,7 +6,8 @@ namespace Features.Pickup
     {
         Container = 0,
         Base = 1,
-        Topping = 2
+        Topping = 2,
+        Top = 3
     }
 
     [CreateAssetMenu(fileName = "PickableData", menuName = "Scriptable Objects/PickableData")]
