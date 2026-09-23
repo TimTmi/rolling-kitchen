@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ff8964d3429369d5191940577a0ed657
+guid: a34f7ea5c973f60aa9c4581273390e8d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2750669496410944554
-    second: onion_Ring_Fried_0
+      213: 1772486790397841208
+    second: RawSlicedOnion_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: onion_Ring_Fried_0
+      name: RawSlicedOnion_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6db4cebaaa8a3d9d0800000000000000
-      internalID: -2750669496410944554
+      spriteID: 83f4cb64853299810800000000000000
+      internalID: 1772486790397841208
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      onion_Ring_Fried_0: -2750669496410944554
+      RawSlicedOnion_0: 1772486790397841208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

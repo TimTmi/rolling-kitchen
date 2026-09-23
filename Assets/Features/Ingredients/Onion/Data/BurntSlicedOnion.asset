@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   id: burnt_sliced_onion
   displayName: Onion
-  icon: {fileID: 5461640353098145479, guid: ce5d39d28718ca86e92d460e582be5b2, type: 3}
+  icon: {fileID: -6487281407947412321, guid: 174766ec79e4fdb8fbe52d8e3180e7e4, type: 3}
   stackingRole: 2
   stackHeight: 0.01
   processes: []

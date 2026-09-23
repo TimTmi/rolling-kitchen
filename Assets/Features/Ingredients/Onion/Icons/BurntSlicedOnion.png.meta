@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bfe0ef9affbd6080396652b7b4ff5017
+guid: 174766ec79e4fdb8fbe52d8e3180e7e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8294466014649415594
-    second: potato_Chip_3_Raw_0
+      213: -6487281407947412321
+    second: BurntSlicedOnion_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: potato_Chip_3_Raw_0
+      name: BurntSlicedOnion_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 658854b0b1324ec80800000000000000
-      internalID: -8294466014649415594
+      spriteID: f9c6c493eeb88f5a0800000000000000
+      internalID: -6487281407947412321
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      potato_Chip_3_Raw_0: -8294466014649415594
+      BurntSlicedOnion_0: -6487281407947412321
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
