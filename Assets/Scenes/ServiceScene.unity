@@ -9588,6 +9588,7 @@ GameObject:
   - component: {fileID: 1349066856}
   - component: {fileID: 1349066855}
   - component: {fileID: 1349066857}
+  - component: {fileID: 1349066858}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -9683,6 +9684,21 @@ MonoBehaviour:
   panelRenderer: {fileID: 1349066855}
   interactionController: {fileID: 88830869}
   handController: {fileID: 3193077325376431242}
+--- !u!114 &1349066858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349066854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665cb03dd909b76ee9a827b69793560c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.UI.OrderTickets.OrderTicketsController
+  panelRenderer: {fileID: 1349066855}
+  orderManager: {fileID: 1882668564}
+  ticketTemplate: {fileID: 9197481963319205126, guid: df7c0fb6398b4377c91cc8e68e654d4a, type: 3}
 --- !u!1 &1365547971
 GameObject:
   m_ObjectHideFlags: 0

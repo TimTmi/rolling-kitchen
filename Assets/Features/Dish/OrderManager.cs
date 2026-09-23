@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Features.Interaction;
 using Features.Pickup;
 using UnityEngine;
@@ -66,6 +67,25 @@ namespace Features.Dish
             return MatchesAnyTrayItem(trays[slotIndex], order.Dishes[dishIndex]);
         }
 
+        public bool IsIngredientComplete(int slotIndex, int dishIndex, int ingredientIndex)
+        {
+            EnsureInitialized();
+            Order order = _orders[slotIndex];
+            if (order == null || dishIndex < 0 || dishIndex >= order.Dishes.Count)
+            {
+                return false;
+            }
+
+            List<Pickable> required = order.Dishes[dishIndex].RequiredPickables.ToList();
+            if (ingredientIndex < 0 || ingredientIndex >= required.Count)
+            {
+                return false;
+            }
+
+            PickableData data = required[ingredientIndex].Data;
+            return CountOnTray(trays[slotIndex], data) >= required.Count(r => r.Data == data);
+        }
+
         public bool TryServe(int slotIndex)
         {
             EnsureInitialized();
@@ -109,19 +129,34 @@ namespace Features.Dish
             return false;
         }
 
+        private static IEnumerable<Pickable> Expand(Pickable item)
+        {
+            return item.Stack != null ? item.Stack.Contents : new[] { item };
+        }
+
+        private static int CountOnTray(Tray tray, PickableData data)
+        {
+            int count = 0;
+            foreach (Pickable item in tray.Contents)
+            {
+                foreach (Pickable content in Expand(item))
+                {
+                    if (content.Data == data)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
         private static bool MatchesDish(Pickable item, DishData dish)
         {
             List<PickableData> present = new();
-            if (item.Stack != null)
+            foreach (Pickable content in Expand(item))
             {
-                foreach (Pickable content in item.Stack.Contents)
-                {
-                    present.Add(content.Data);
-                }
-            }
-            else
-            {
-                present.Add(item.Data);
+                present.Add(content.Data);
             }
 
             List<PickableData> required = new();
