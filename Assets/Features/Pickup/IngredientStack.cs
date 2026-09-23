@@ -84,6 +84,11 @@ namespace Features.Pickup
                 return false;
             }
 
+            if (heldGroup.Role == StackingRole.None || targetGroup.Role == StackingRole.None)
+            {
+                return false;
+            }
+
             return !HasRoleConflict(heldGroup, targetGroup)
                 && (FindInsertionIndex(heldGroup.Contents, targetGroup.Contents) >= 0
                     || FindInsertionIndex(targetGroup.Contents, heldGroup.Contents) >= 0);
@@ -119,7 +124,9 @@ namespace Features.Pickup
             Group contentsGroup = GroupOf(contents);
             Group hostGroup = GroupOf(host);
 
-            return !HasRoleConflict(contentsGroup, hostGroup)
+            return contentsGroup.Role != StackingRole.None
+                && hostGroup.Role != StackingRole.None
+                && !HasRoleConflict(contentsGroup, hostGroup)
                 && FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents) >= 0;
         }
 

@@ -15,6 +15,8 @@ MonoBehaviour:
   id: potato
   displayName: Potato
   icon: {fileID: -3982510667573690041, guid: 5427da612b0ba5535a41ccff6abbb128, type: 3}
+  stackingRole: 4
+  stackHeight: 0.1
   processes:
   - type: 0
     duration: 0
