@@ -7,10 +7,9 @@ namespace Features.Pickup
 {
     public class IngredientStack : Pickable
     {
-        private Pickable _root;
         private readonly List<Pickable> _contents = new();
 
-        public Pickable Root => _root;
+        public Pickable Root { get; private set; }
 
         public IEnumerable<Pickable> Contents => _contents;
 
@@ -21,7 +20,7 @@ namespace Features.Pickup
 
         public Pickable ReplaceRoot(Ingredient[] results)
         {
-            Pickable oldRoot = _root;
+            Pickable oldRoot = Root;
             int rootIndex = _contents.IndexOf(oldRoot);
 
             Pickable newRoot = Instantiate(results[0], oldRoot.transform.parent);
@@ -225,7 +224,7 @@ namespace Features.Pickup
         private static IngredientStack FormOn(Pickable root)
         {
             IngredientStack stack = root.gameObject.AddComponent<IngredientStack>();
-            stack._root = root;
+            stack.Root = root;
             stack._contents.Add(root);
             root.Stack = stack;
             return stack;
@@ -242,14 +241,14 @@ namespace Features.Pickup
         {
             float height = 0f;
 
-            for (int i = 0; i < _contents.Count && _contents[i] != _root; i++)
+            for (int i = 0; i < _contents.Count && _contents[i] != Root; i++)
             {
                 height -= _contents[i].Data.StackHeight;
             }
 
             foreach (Pickable content in _contents)
             {
-                if (content != _root)
+                if (content != Root)
                 {
                     content.transform.localPosition = new Vector3(0f, height, 0f);
                     content.transform.localRotation = Quaternion.identity;

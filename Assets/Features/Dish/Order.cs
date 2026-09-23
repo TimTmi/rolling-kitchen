@@ -6,15 +6,13 @@ namespace Features.Dish
 {
     public class Order
     {
-        private readonly DishData[] _dishes;
-
-        public IReadOnlyList<DishData> Dishes => _dishes;
+        public IReadOnlyList<DishData> Dishes { get; }
         public float ExpectedDuration { get; }
 
         public Order(params DishData[] dishes)
         {
-            _dishes = (DishData[])dishes.Clone();
-            ExpectedDuration = _dishes.Sum(dish => dish.ExpectedDuration);
+            Dishes = (DishData[])dishes.Clone();
+            ExpectedDuration = Dishes.Sum(dish => dish.ExpectedDuration);
         }
     }
 }
