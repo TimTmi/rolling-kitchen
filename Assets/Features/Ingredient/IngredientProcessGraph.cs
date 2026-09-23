@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Features.Pickup;
 using UnityEngine;
 
@@ -57,9 +56,51 @@ namespace Features.Ingredient
 
         public static float ExpectedDuration(IngredientData ingredient)
         {
-            return TryGetProcessPath(ingredient, out IReadOnlyList<IngredientProcess> path)
-                ? path.Sum(step => step.ExpectedDuration)
-                : 0f;
+            return ExpectedDuration(new[] { ingredient });
+        }
+
+        public static float ExpectedDuration(IReadOnlyList<IngredientData> ingredients)
+        {
+            EnsureBuilt();
+
+            Dictionary<IngredientData, int> demand = new();
+            foreach (IngredientData ingredient in ingredients)
+            {
+                demand[ingredient] = demand.GetValueOrDefault(ingredient) + 1;
+            }
+
+            HashSet<IngredientData> propagated = new();
+            HashSet<IngredientProcess> counted = new();
+            float total = 0f;
+            foreach (IngredientData ingredient in ingredients)
+            {
+                IngredientData current = ingredient;
+                while (propagated.Add(current)
+                       && ProducersByResult.TryGetValue(current, out List<Producer> producers))
+                {
+                    IngredientProcess process = producers[0].Process;
+                    if (!counted.Add(process))
+                    {
+                        break;
+                    }
+
+                    int executions = 0;
+                    foreach (Pickup.Ingredient result in process.Result)
+                    {
+                        if (result != null)
+                        {
+                            executions = Mathf.Max(executions, demand.GetValueOrDefault(result.IngredientData));
+                        }
+                    }
+
+                    IngredientData source = producers[0].Source;
+                    demand[source] = demand.GetValueOrDefault(source) + executions;
+                    total += executions * process.ExpectedDuration;
+                    current = source;
+                }
+            }
+
+            return total;
         }
 
         static void EnsureBuilt()
