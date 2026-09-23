@@ -6079,7 +6079,7 @@ PrefabInstance:
       objectReference: {fileID: 1476286822}
     - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
       propertyPath: ingredients.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6733556472574578463, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
       propertyPath: 'ingredients.Array.data[0]'
