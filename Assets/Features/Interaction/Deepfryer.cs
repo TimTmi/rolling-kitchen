@@ -21,7 +21,8 @@ namespace Features.Interaction
         {
             if (_frying != null)
             {
-                return context.HeldPickable == null;
+                return context.HeldPickable == null
+                    || IngredientStack.CanMergeInto(_frying, context.HeldPickable);
             }
 
             return context.HeldPickable is IngredientStack stack
@@ -33,7 +34,15 @@ namespace Features.Interaction
         {
             if (_frying != null)
             {
-                context.PickUp(_frying);
+                if (context.HeldPickable == null)
+                {
+                    context.PickUp(_frying);
+                }
+                else
+                {
+                    IngredientStack.MergeInto(_frying, context.HeldPickable);
+                }
+
                 _frying = null;
                 return;
             }
