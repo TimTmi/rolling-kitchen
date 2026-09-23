@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Features.Ingredient;
+using Features.Ingredients;
 using Features.Pickup;
 using UnityEngine;
 
