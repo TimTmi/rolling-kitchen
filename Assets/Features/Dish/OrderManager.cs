@@ -10,8 +10,13 @@ namespace Features.Dish
     public class OrderManager : MonoBehaviour
     {
         [SerializeField] private Tray[] trays = Array.Empty<Tray>();
+        [SerializeField] private DishData[] dishes = Array.Empty<DishData>();
+        [SerializeField] private float minFreeTime = 5f;
+        [SerializeField] private float maxFreeTime = 10f;
+        [SerializeField] private int maxOrderSize = 1;
 
         private Order[] _orders;
+        private float[] _spawnTimers;
 
         public event Action<int, Order> Served;
 
@@ -108,11 +113,86 @@ namespace Features.Dish
             return true;
         }
 
+        private void Update()
+        {
+            EnsureInitialized();
+            for (int i = 0; i < _orders.Length; i++)
+            {
+                if (_orders[i] != null)
+                {
+                    continue;
+                }
+
+                _spawnTimers[i] -= Time.deltaTime;
+                if (_spawnTimers[i] > 0f)
+                {
+                    continue;
+                }
+
+                Order order = GenerateRandomOrder();
+                if (order != null)
+                {
+                    TryPlaceOrder(i, order);
+                }
+
+                _spawnTimers[i] = RandomSpawnDelay();
+            }
+        }
+
+        private Order GenerateRandomOrder()
+        {
+            if (dishes.Length == 0)
+            {
+                return null;
+            }
+
+            int dishCount = UnityEngine.Random.Range(1, maxOrderSize + 1);
+            DishData[] orderDishes = new DishData[dishCount];
+            for (int i = 0; i < dishCount; i++)
+            {
+                orderDishes[i] = GenerateRandomDish();
+            }
+
+            return new Order(orderDishes);
+        }
+
+        private DishData GenerateRandomDish()
+        {
+            if (dishes.Length == 0)
+            {
+                return null;
+            }
+
+            DishData dish = dishes[UnityEngine.Random.Range(0, dishes.Length)];
+            if (dish.Toppings.Length == 0)
+            {
+                return dish;
+            }
+
+            DishData randomized = Instantiate(dish);
+            randomized.name = dish.name;
+            randomized.SetToppings(dish.Toppings
+                .OrderBy(_ => UnityEngine.Random.value)
+                .Take(UnityEngine.Random.Range(1, dish.Toppings.Length + 1))
+                .ToArray());
+            return randomized;
+        }
+
+        private float RandomSpawnDelay()
+        {
+            return UnityEngine.Random.Range(minFreeTime, maxFreeTime);
+        }
+
         private void EnsureInitialized()
         {
             if (_orders == null || _orders.Length != trays.Length)
             {
                 _orders = new Order[trays.Length];
+                _spawnTimers = new float[trays.Length];
+                for (int i = 0; i < _spawnTimers.Length; i++)
+                {
+                    _spawnTimers[i] = RandomSpawnDelay();
+                }
             }
         }
 

@@ -20,6 +20,11 @@ namespace Features.Dish
         public Pickup.Ingredient TopIngredient => topIngredient;
         public Pickup.Ingredient[] Toppings => toppings;
 
+        public void SetToppings(Pickup.Ingredient[] value)
+        {
+            toppings = value;
+        }
+
         public IEnumerable<Pickable> RequiredPickables
         {
             get
