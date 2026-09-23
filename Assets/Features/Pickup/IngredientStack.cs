@@ -7,6 +7,9 @@ namespace Features.Pickup
 {
     public class IngredientStack : Pickable
     {
+        private const float MinAdjacentRotation = 45f;
+        private const int MaxYawAttempts = 8;
+
         private readonly List<Pickable> _contents = new();
 
         public Pickable Root { get; private set; }
@@ -142,6 +145,7 @@ namespace Features.Pickup
             }
 
             stack._contents.InsertRange(index, contentsGroup.Contents);
+            stack.RandomizeRotations(index, contentsGroup.Contents.Count);
             stack.Arrange();
 
             contentsGroup.Stack?.Dissolve();
@@ -235,6 +239,51 @@ namespace Features.Pickup
             _contents.Insert(index, content);
             content.Stack = this;
             content.transform.SetParent(transform);
+            RandomizeRotations(index, 1);
+        }
+
+        private void RandomizeRotations(int index, int count)
+        {
+            int last = index + count - 1;
+
+            for (int i = index; i <= last; i++)
+            {
+                if (_contents[i].Data.StackingRole == StackingRole.Container)
+                {
+                    _contents[i].transform.localRotation = Quaternion.identity;
+                    continue;
+                }
+
+                float? below = i > 0 ? Yaw(_contents[i - 1]) : null;
+                float? above = i == last && last + 1 < _contents.Count ? Yaw(_contents[last + 1]) : null;
+
+                _contents[i].transform.localRotation = Quaternion.Euler(0f, RandomYaw(below, above), 0f);
+            }
+        }
+
+        private float Yaw(Pickable content)
+        {
+            return (content == Root ? transform : content.transform).localEulerAngles.y;
+        }
+
+        private static float RandomYaw(float? below, float? above)
+        {
+            for (int attempt = 0; attempt < MaxYawAttempts; attempt++)
+            {
+                float angle = Random.Range(0f, 360f);
+
+                if (MeetsDelta(angle, below) && MeetsDelta(angle, above))
+                {
+                    return angle;
+                }
+            }
+
+            return Random.Range(0f, 360f);
+        }
+
+        private static bool MeetsDelta(float angle, float? other)
+        {
+            return !other.HasValue || Mathf.Abs(Mathf.DeltaAngle(angle, other.Value)) >= MinAdjacentRotation;
         }
 
         private void Arrange()
@@ -251,7 +300,6 @@ namespace Features.Pickup
                 if (content != Root)
                 {
                     content.transform.localPosition = new Vector3(0f, height, 0f);
-                    content.transform.localRotation = Quaternion.identity;
                 }
 
                 height += content.Data.StackHeight;
