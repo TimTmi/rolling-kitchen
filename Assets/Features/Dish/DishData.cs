@@ -11,16 +11,16 @@ namespace Features.Dish
     public class DishData : ScriptableObject
     {
         [SerializeField] private Pickable box;
-        [SerializeField] private Pickup.Ingredient baseIngredient;
-        [SerializeField] private Pickup.Ingredient topIngredient;
-        [SerializeField] private Pickup.Ingredient[] toppings = Array.Empty<Pickup.Ingredient>();
+        [SerializeField] private Ingredient baseIngredient;
+        [SerializeField] private Ingredient topIngredient;
+        [SerializeField] private Ingredient[] toppings = Array.Empty<Ingredient>();
 
         public Pickable Box => box;
-        public Pickup.Ingredient BaseIngredient => baseIngredient;
-        public Pickup.Ingredient TopIngredient => topIngredient;
-        public Pickup.Ingredient[] Toppings => toppings;
+        public Ingredient BaseIngredient => baseIngredient;
+        public Ingredient TopIngredient => topIngredient;
+        public Ingredient[] Toppings => toppings;
 
-        public void SetToppings(Pickup.Ingredient[] value)
+        public void SetToppings(Ingredient[] value)
         {
             toppings = value;
         }
@@ -34,14 +34,14 @@ namespace Features.Dish
                     yield return box;
                 }
 
-                foreach (Pickup.Ingredient ingredient in RequiredIngredients)
+                foreach (Ingredient ingredient in RequiredIngredients)
                 {
                     yield return ingredient;
                 }
             }
         }
 
-        public IEnumerable<Pickup.Ingredient> RequiredIngredients
+        public IEnumerable<Ingredient> RequiredIngredients
         {
             get
             {
@@ -55,7 +55,7 @@ namespace Features.Dish
                     yield return topIngredient;
                 }
 
-                foreach (Pickup.Ingredient topping in toppings)
+                foreach (Ingredient topping in toppings)
                 {
                     if (topping != null)
                     {

@@ -86,7 +86,7 @@ namespace Features.UI.OrderTickets
                 var icons = new VisualElement();
                 icons.AddToClassList("ticket-ingredients");
                 var ingredients = new List<VisualElement>();
-                foreach (Pickup.Ingredient ingredient in dish.RequiredIngredients)
+                foreach (Ingredient ingredient in dish.RequiredIngredients)
                 {
                     var icon = new Image { sprite = ingredient.IngredientData.Icon, scaleMode = ScaleMode.ScaleToFit };
                     icon.AddToClassList("ticket-ingredient");

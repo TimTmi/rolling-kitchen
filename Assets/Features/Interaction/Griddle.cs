@@ -70,7 +70,7 @@ namespace Features.Interaction
             {
                 if (member == null
                     || member.Stack != stack
-                    || member is not Pickup.Ingredient ingredient
+                    || member is not Ingredient ingredient
                     || !ingredient.HasUnfinishedProcess(ProcessType.Grill, out IngredientProcess process))
                 {
                     continue;
@@ -98,7 +98,7 @@ namespace Features.Interaction
 
         private void GrillBare(int slotIndex, Pickable content)
         {
-            if (content is not Pickup.Ingredient ingredient
+            if (content is not Ingredient ingredient
                 || !ingredient.HasUnfinishedProcess(ProcessType.Grill, out IngredientProcess process))
             {
                 return;
@@ -114,7 +114,7 @@ namespace Features.Interaction
 
         private static bool HasGrillProcess(Pickable content)
         {
-            return content is Pickup.Ingredient ingredient && ingredient.IngredientData.HasProcess(ProcessType.Grill);
+            return content is Ingredient ingredient && ingredient.IngredientData.HasProcess(ProcessType.Grill);
         }
     }
 }

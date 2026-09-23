@@ -10,10 +10,10 @@ namespace Features.Minigame
         private Action _completed;
         private bool _running;
 
-        protected Pickup.Ingredient Ingredient { get; private set; }
+        protected Ingredient Ingredient { get; private set; }
         protected Camera ViewCamera { get; private set; }
 
-        public void Begin(Pickup.Ingredient ingredient, Camera viewCamera, Action completed)
+        public void Begin(Ingredient ingredient, Camera viewCamera, Action completed)
         {
             Ingredient = ingredient;
             ViewCamera = viewCamera;

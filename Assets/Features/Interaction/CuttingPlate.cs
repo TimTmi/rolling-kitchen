@@ -1,5 +1,6 @@
 using Features.Ingredients;
 using Features.Minigame;
+using Features.Pickup;
 using Features.Service;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace Features.Interaction
         {
             _slots.ClearDetached();
 
-            if (context.HeldPickable is not Pickup.Ingredient ingredient
+            if (context.HeldPickable is not Ingredient ingredient
                 || !ingredient.IngredientData.HasProcess(ProcessType.Slice))
             {
                 return false;
@@ -50,7 +51,7 @@ namespace Features.Interaction
 
         public void Interact(in InteractionContext context)
         {
-            var ingredient = (Pickup.Ingredient)context.HeldPickable;
+            var ingredient = (Ingredient)context.HeldPickable;
             _slots.Place(ingredient);
 
             context.Release();
@@ -64,7 +65,7 @@ namespace Features.Interaction
             return "Slice";
         }
 
-        private void StartCutting(Pickup.Ingredient ingredient)
+        private void StartCutting(Ingredient ingredient)
         {
             if (!ingredient.IngredientData.TryGetProcess(ProcessType.Slice, out IngredientProcess process))
             {
@@ -97,7 +98,7 @@ namespace Features.Interaction
             _minigame = null;
         }
 
-        private void Cut(Pickup.Ingredient ingredient)
+        private void Cut(Ingredient ingredient)
         {
             int slotIndex = _slots.IndexOf(ingredient);
             if (slotIndex < 0

@@ -55,7 +55,7 @@ namespace Features.Interaction
 
         public void ReplaceWithResults(int slotIndex, IngredientProcess process)
         {
-            if (_slots[slotIndex] is not Pickup.Ingredient ingredient)
+            if (_slots[slotIndex] is not Ingredient ingredient)
             {
                 return;
             }
@@ -71,13 +71,13 @@ namespace Features.Interaction
                     break;
                 }
 
-                Pickup.Ingredient result = Object.Instantiate(process.Result[i], _owner);
+                Ingredient result = Object.Instantiate(process.Result[i], _owner);
                 _slots[slot] = result;
                 result.transform.SetLocalPositionAndRotation(ArrangementPosition(slot), Quaternion.Euler(_defaultRotation));
             }
         }
 
-        public void ReplaceRoot(int slotIndex, Pickup.Ingredient[] results)
+        public void ReplaceRoot(int slotIndex, Ingredient[] results)
         {
             Pickable content = _slots[slotIndex];
             if (content == null || content.Stack == null)

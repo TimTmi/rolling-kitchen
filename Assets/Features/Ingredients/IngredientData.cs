@@ -18,12 +18,12 @@ namespace Features.Ingredients
     {
         [SerializeField] private ProcessType type;
         [SerializeField] private float duration;
-        [SerializeField] private Pickup.Ingredient[] result;
+        [SerializeField] private Ingredient[] result;
         [SerializeField] private CuttingMinigame minigame;
 
         public ProcessType Type => type;
         public float Duration => duration;
-        public Pickup.Ingredient[] Result => result;
+        public Ingredient[] Result => result;
         public CuttingMinigame Minigame => minigame;
         public float ExpectedDuration => minigame != null ? minigame.ExpectedDuration : duration;
     }
