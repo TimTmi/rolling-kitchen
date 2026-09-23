@@ -1,0 +1,62 @@
+.order-tickets-root {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    bottom: 16px;
+    width: 240px;
+}
+
+.order-tickets {
+    flex-grow: 1;
+}
+
+.order-tickets .unity-scroller--horizontal {
+    display: none;
+}
+
+.ticket {
+    background-color: rgba(20, 22, 28, 0.75);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.ticket-tray {
+    color: rgb(235, 235, 235);
+    -unity-font-style: bold;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.ticket-dish {
+    margin-bottom: 6px;
+}
+
+.ticket-dish-name {
+    color: rgb(235, 235, 235);
+    font-size: 12px;
+    -unity-font-style: bold;
+    margin-bottom: 4px;
+}
+
+.ticket-dish-complete .ticket-dish-name {
+    color: rgb(130, 215, 120);
+}
+
+.ticket-ingredients {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.ticket-ingredient {
+    width: 28px;
+    height: 28px;
+    margin-right: 4px;
+    opacity: 0.25;
+}
+
+.ticket-ingredient-present {
+    opacity: 1;
+}

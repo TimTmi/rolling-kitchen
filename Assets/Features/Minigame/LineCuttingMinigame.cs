@@ -17,6 +17,9 @@ namespace Features.Minigame
         [SerializeField] private Vector3 knifeLiftedRotationOffset;
         [SerializeField] private float knifeLeftLimit;
         [SerializeField] private float knifeRightLimit;
+        [SerializeField] private float expectedInputSpeed = 1f;
+
+        public override float ExpectedDuration => lineCount * cutDistance / Mathf.Max(expectedInputSpeed, 0.01f);
 
         private Transform _knife;
         private Vector3 _lineCenter;

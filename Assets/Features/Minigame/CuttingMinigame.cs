@@ -28,6 +28,8 @@ namespace Features.Minigame
             Destroy(gameObject);
         }
 
+        public abstract float ExpectedDuration { get; }
+
         protected abstract void OnStarted();
 
         protected abstract void Tick();

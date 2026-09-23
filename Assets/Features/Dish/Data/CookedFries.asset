@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff058d1b87daf87da57ebd4e9110757, type: 3}
+  m_Name: CookedFries
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Dish.DishData
+  box: {fileID: 7048872226742397842, guid: 1090a37bea33bd13893fa0d39ee74750, type: 3}
+  baseIngredient: {fileID: 0}
+  topIngredient: {fileID: 0}
+  toppings:
+  - {fileID: 7893648094086281446, guid: 73f52f1ce0f42a164be888f0a9750099, type: 3}

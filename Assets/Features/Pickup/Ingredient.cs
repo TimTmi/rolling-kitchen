@@ -1,4 +1,4 @@
-using Features.Ingredient;
+using Features.Ingredients;
 
 namespace Features.Pickup
 {

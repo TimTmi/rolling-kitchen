@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Features.Ingredient;
+using Features.Ingredients;
 using Features.Pickup;
 using UnityEngine;
 
@@ -11,9 +11,10 @@ namespace Features.Interaction
         private readonly Vector3 _defaultRotation;
         private readonly Vector3 _arrangementStart;
         private readonly Vector3 _arrangementDirection;
-        private readonly int _maxSlots;
 
         private readonly List<Pickable> _slots = new();
+
+        public int Capacity { get; }
 
         public IngredientSlots(Transform owner, Vector3 defaultRotation, Vector3 arrangementStart,
             Vector3 arrangementDirection, int maxSlots)
@@ -22,10 +23,8 @@ namespace Features.Interaction
             _defaultRotation = defaultRotation;
             _arrangementStart = arrangementStart;
             _arrangementDirection = arrangementDirection;
-            _maxSlots = maxSlots;
+            Capacity = maxSlots;
         }
-
-        public int Capacity => _maxSlots;
         public int Count => _slots.Count;
         public bool HasFreeSlot => FindFreeSlot() >= 0;
         public Pickable this[int index] => _slots[index];
@@ -97,7 +96,7 @@ namespace Features.Interaction
                 return vacant;
             }
 
-            return _slots.Count < _maxSlots ? _slots.Count : -1;
+            return _slots.Count < Capacity ? _slots.Count : -1;
         }
 
         private int AcquireSlot()

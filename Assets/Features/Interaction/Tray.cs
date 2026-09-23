@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Features.Pickup;
 using UnityEngine;
 
@@ -12,8 +13,28 @@ namespace Features.Interaction
 
         private IngredientSlots _slots;
 
+        private IngredientSlots Slots =>
+            _slots ??= new IngredientSlots(transform, defaultRotation, arrangementStart, arrangementDirection, maxSlots);
+
+        public IEnumerable<Pickable> Contents
+        {
+            get
+            {
+                _slots = Slots;
+                _slots.ClearDetached();
+                for (int i = 0; i < _slots.Count; i++)
+                {
+                    if (_slots[i] != null)
+                    {
+                        yield return _slots[i];
+                    }
+                }
+            }
+        }
+
         public bool CanInteract(in InteractionContext context)
         {
+            _slots = Slots;
             _slots.ClearDetached();
 
             return context.HeldPickable != null && _slots.HasFreeSlot;
@@ -22,6 +43,7 @@ namespace Features.Interaction
         public void Interact(in InteractionContext context)
         {
             Pickable content = context.HeldPickable is IngredientStack stack ? stack.Root : context.HeldPickable;
+            _slots = Slots;
             _slots.Place(content);
 
             context.Release();
@@ -30,11 +52,6 @@ namespace Features.Interaction
         public string GetInteractionPrompt(in InteractionContext context)
         {
             return "Place";
-        }
-
-        private void Awake()
-        {
-            _slots = new IngredientSlots(transform, defaultRotation, arrangementStart, arrangementDirection, maxSlots);
         }
     }
 }

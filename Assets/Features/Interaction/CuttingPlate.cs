@@ -1,4 +1,4 @@
-using Features.Ingredient;
+using Features.Ingredients;
 using Features.Minigame;
 using Features.Service;
 using UnityEngine;
