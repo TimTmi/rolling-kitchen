@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d3e0aa57d53b2c4c7bf7ed67e8783041
+guid: a0bf630c0a41b2276a6f16e1508c334a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4396206974578190670
-    second: bacon_Cooked_0
+      213: 701683287746537559
+    second: BurntBacon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bacon_Cooked_0
+      name: BurntBacon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b61c297c098df2c0800000000000000
-      internalID: -4396206974578190670
+      spriteID: 758e5f68b31ecb900800000000000000
+      internalID: 701683287746537559
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bacon_Cooked_0: -4396206974578190670
+      BurntBacon_0: 701683287746537559
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
