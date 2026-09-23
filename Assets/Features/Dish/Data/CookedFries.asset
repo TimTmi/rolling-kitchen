@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff058d1b87daf87da57ebd4e9110757, type: 3}
   m_Name: CookedFries
   m_EditorClassIdentifier: Assembly-CSharp::Features.Dish.DishData
+  box: {fileID: 7048872226742397842, guid: 1090a37bea33bd13893fa0d39ee74750, type: 3}
   baseIngredient: {fileID: 0}
   topIngredient: {fileID: 0}
   toppings:
