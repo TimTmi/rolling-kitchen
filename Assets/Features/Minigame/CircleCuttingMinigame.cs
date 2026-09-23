@@ -10,6 +10,10 @@ namespace Features.Minigame
         [SerializeField] private Vector3 knifeHoverRotationOffset = new(0f, 0f, 0f);
         [SerializeField] private float knifeRaise = 0.02f;
         [SerializeField] private float knifeFollowSpeed = 720f;
+        [SerializeField] private float expectedSweepSpeed = 360f;
+
+        public override float ExpectedDuration =>
+            Mathf.Max(360f / Mathf.Max(expectedSweepSpeed, 1f), 360f / knifeFollowSpeed);
 
         private Transform _knife;
         private Vector3 _center;

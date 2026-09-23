@@ -25,6 +25,7 @@ namespace Features.Ingredient
         public float Duration => duration;
         public Pickup.Ingredient[] Result => result;
         public CuttingMinigame Minigame => minigame;
+        public float ExpectedDuration => minigame != null ? minigame.ExpectedDuration : duration;
     }
     
     [CreateAssetMenu(fileName = "IngredientData", menuName = "Scriptable Objects/IngredientData")]
