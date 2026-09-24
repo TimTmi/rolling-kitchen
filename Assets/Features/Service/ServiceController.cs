@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Features.Customer;
 using Features.Dish;
 using Features.Interaction;
 using Features.Pickup;
@@ -30,10 +31,13 @@ namespace Features.Service
         [SerializeField] private float maxFreeTime = 10f;
         [SerializeField] private int maxOrderSize = 1;
         [SerializeField] private OrderSlotPath[] orderSlotPaths = Array.Empty<OrderSlotPath>();
+        [SerializeField] private CustomerController customerPrefab;
 
         private Action<Pickable> _selectionHandler;
         private bool _poiFocusCancellable;
         private float[] _spawnTimers;
+        private CustomerController[] _customers;
+        private bool[] _incoming;
 
         public event Action PoiFocusEnded;
 
@@ -59,7 +63,7 @@ namespace Features.Service
             EnsureSpawnTimersInitialized();
             for (int i = 0; i < _spawnTimers.Length; i++)
             {
-                if (orderManager.GetOrder(i) != null)
+                if (orderManager.GetOrder(i) != null || _incoming[i])
                 {
                     continue;
                 }
@@ -70,14 +74,30 @@ namespace Features.Service
                     continue;
                 }
 
-                Order order = GenerateRandomOrder();
-                if (order != null)
-                {
-                    orderManager.TryPlaceOrder(i, order);
-                }
-
-                _spawnTimers[i] = RandomSpawnDelay();
+                SendCustomerToCounter(i);
             }
+        }
+
+        private void SendCustomerToCounter(int slotIndex)
+        {
+            _incoming[slotIndex] = true;
+            OrderSlotPath path = orderSlotPaths[slotIndex];
+            CustomerController customer = _customers[slotIndex];
+            customer.transform.position = path.PathStart.position;
+            customer.WalkTo(path.PathEnd);
+        }
+
+        private void OnCustomerArrived(int slotIndex)
+        {
+            _incoming[slotIndex] = false;
+
+            Order order = GenerateRandomOrder();
+            if (order != null)
+            {
+                orderManager.TryPlaceOrder(slotIndex, order);
+            }
+
+            _spawnTimers[slotIndex] = RandomSpawnDelay();
         }
 
         private void EnsureSpawnTimersInitialized()
@@ -139,6 +159,23 @@ namespace Features.Service
         void Start()
         {
             Core.CursorController.Lock();
+            SpawnCustomers();
+        }
+
+        private void SpawnCustomers()
+        {
+            _customers = new CustomerController[orderManager.SlotCount];
+            _incoming = new bool[orderManager.SlotCount];
+            for (int i = 0; i < _customers.Length; i++)
+            {
+                OrderSlotPath path = orderSlotPaths[i];
+                CustomerController customer = Instantiate(customerPrefab, transform);
+                customer.Init(orderManager, i);
+                customer.transform.position = path.PathStart.position;
+                int slotIndex = i;
+                customer.Arrived += () => OnCustomerArrived(slotIndex);
+                _customers[i] = customer;
+            }
         }
 
         private void OnEnable()
