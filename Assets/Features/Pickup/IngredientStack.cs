@@ -96,27 +96,32 @@ namespace Features.Pickup
 
         public static void Merge(Pickable held, Pickable target, in InteractionContext context)
         {
+            Pickable heldPickable = context.HeldPickable;
             Group heldGroup = GroupOf(held);
             Group targetGroup = GroupOf(target);
 
             if (heldGroup.Role < targetGroup.Role)
             {
-                if (!TryInsert(targetGroup, heldGroup))
+                if (!TryInsert(targetGroup, heldGroup, context)
+                    && TryInsert(heldGroup, targetGroup, context)
+                    && context.HeldPickable == heldPickable)
                 {
-                    TryInsert(heldGroup, targetGroup);
                     context.Release();
                 }
 
                 return;
             }
 
-            if (!TryInsert(heldGroup, targetGroup))
+            if (!TryInsert(heldGroup, targetGroup, context))
             {
-                TryInsert(targetGroup, heldGroup);
+                TryInsert(targetGroup, heldGroup, context);
                 return;
             }
 
-            context.Release();
+            if (context.HeldPickable == heldPickable)
+            {
+                context.Release();
+            }
         }
 
         public static bool CanMergeInto(Pickable contents, Pickable host)
@@ -130,12 +135,12 @@ namespace Features.Pickup
                 && FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents) >= 0;
         }
 
-        public static void MergeInto(Pickable contents, Pickable host)
+        public static void MergeInto(Pickable contents, Pickable host, in InteractionContext context)
         {
-            TryInsert(GroupOf(contents), GroupOf(host));
+            TryInsert(GroupOf(contents), GroupOf(host), context);
         }
 
-        private static bool TryInsert(Group contentsGroup, Group hostGroup)
+        private static bool TryInsert(Group contentsGroup, Group hostGroup, in InteractionContext context)
         {
             int index = FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents);
             if (index < 0)
@@ -144,19 +149,63 @@ namespace Features.Pickup
             }
 
             IngredientStack stack = hostGroup.Stack ?? FormOn(hostGroup.Contents[0]);
+            stack._contents.InsertRange(index, contentsGroup.Contents);
+
+            if (index == 0)
+            {
+                stack = stack.ReRoot(context);
+            }
 
             foreach (Pickable content in contentsGroup.Contents)
             {
                 content.Stack = stack;
-                content.transform.SetParent(stack.transform);
+
+                if (content != stack.Root)
+                {
+                    content.transform.SetParent(stack.transform);
+                }
             }
 
-            stack._contents.InsertRange(index, contentsGroup.Contents);
             stack.RandomizeRotations(index, contentsGroup.Contents.Count);
             stack.Arrange();
 
             contentsGroup.Stack?.Dissolve();
             return true;
+        }
+
+        private IngredientStack ReRoot(in InteractionContext context)
+        {
+            Pickable bottom = _contents[0];
+            if (bottom == Root)
+            {
+                return this;
+            }
+
+            bottom.transform.SetParent(null, true);
+
+            IngredientStack stack = FormOn(bottom);
+            stack._contents.Clear();
+            stack._contents.AddRange(_contents);
+
+            foreach (Pickable content in stack._contents)
+            {
+                content.Stack = stack;
+
+                if (content != bottom)
+                {
+                    content.transform.SetParent(stack.transform, true);
+                }
+            }
+
+            Dissolve();
+
+            Pickable held = context.HeldPickable;
+            if (held != null && stack._contents.Any(content => content.gameObject == held.gameObject))
+            {
+                context.PickUp(stack);
+            }
+
+            return stack;
         }
 
         private static int FindInsertionIndex(List<Pickable> contents, List<Pickable> host)
@@ -296,11 +345,6 @@ namespace Features.Pickup
         private void Arrange()
         {
             float height = 0f;
-
-            for (int i = 0; i < _contents.Count && _contents[i] != Root; i++)
-            {
-                height -= _contents[i].Data.StackHeight;
-            }
 
             foreach (Pickable content in _contents)
             {

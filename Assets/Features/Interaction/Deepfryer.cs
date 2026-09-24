@@ -40,7 +40,7 @@ namespace Features.Interaction
                 }
                 else
                 {
-                    IngredientStack.MergeInto(_frying, context.HeldPickable);
+                    IngredientStack.MergeInto(_frying, context.HeldPickable, context);
                 }
 
                 _frying = null;
