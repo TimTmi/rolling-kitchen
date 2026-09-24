@@ -3,7 +3,7 @@
     left: 16px;
     top: 16px;
     bottom: 16px;
-    width: 240px;
+    width: 25%;
 }
 
 .order-tickets {
@@ -42,14 +42,18 @@
     border-color: rgb(130, 215, 120);
 }
 
+.ticket-complete {
+    border-color: rgb(130, 215, 120);
+}
+
 .ticket-ingredients {
     flex-direction: row;
     flex-wrap: wrap;
 }
 
 .ticket-ingredient {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     margin-right: 4px;
     opacity: 0.25;
 }

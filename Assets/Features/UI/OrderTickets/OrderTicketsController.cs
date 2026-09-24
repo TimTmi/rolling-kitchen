@@ -109,16 +109,21 @@ namespace Features.UI.OrderTickets
             var trayLabel = view.Root.Q<Label>("TrayLabel");
             trayLabel.text = $"Tray {slotIndex + 1}";
 
+            var allDishesComplete = view.Dishes.Count > 0;
             for (int d = 0; d < view.Dishes.Count; d++)
             {
                 DishView dishView = view.Dishes[d];
-                dishView.Root.EnableInClassList("ticket-dish-complete", orderManager.IsDishComplete(slotIndex, d));
+                bool dishComplete = orderManager.IsDishComplete(slotIndex, d);
+                dishView.Root.EnableInClassList("ticket-dish-complete", dishComplete);
+                allDishesComplete &= dishComplete;
                 for (int k = 0; k < dishView.Ingredients.Count; k++)
                 {
                     dishView.Ingredients[k].EnableInClassList("ticket-ingredient-present",
                         orderManager.IsIngredientComplete(slotIndex, d, k));
                 }
             }
+
+            view.Root.EnableInClassList("ticket-complete", allDishesComplete);
         }
 
         private sealed class DishView
