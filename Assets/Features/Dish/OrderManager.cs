@@ -69,26 +69,18 @@ namespace Features.Dish
                 return false;
             }
 
-            return MatchesAnyTrayItem(trays[slotIndex], order.Dishes[dishIndex]);
-        }
+            DishData dish = order.Dishes[dishIndex];
 
-        public bool IsIngredientComplete(int slotIndex, int dishIndex, int ingredientIndex)
-        {
-            EnsureInitialized();
-            Order order = _orders[slotIndex];
-            if (order == null || dishIndex < 0 || dishIndex >= order.Dishes.Count)
+            int earlierDuplicates = 0;
+            for (int i = 0; i < dishIndex; i++)
             {
-                return false;
+                if (IsSameDish(order.Dishes[i], dish))
+                {
+                    earlierDuplicates++;
+                }
             }
 
-            List<Pickable> required = order.Dishes[dishIndex].RequiredPickables.ToList();
-            if (ingredientIndex < 0 || ingredientIndex >= required.Count)
-            {
-                return false;
-            }
-
-            PickableData data = required[ingredientIndex].Data;
-            return CountOnTray(trays[slotIndex], data) >= required.Count(r => r.Data == data);
+            return CountMatches(trays[slotIndex], dish) > earlierDuplicates;
         }
 
         public bool TryServe(int slotIndex)
@@ -100,9 +92,9 @@ namespace Features.Dish
                 return false;
             }
 
-            foreach (DishData dish in order.Dishes)
+            for (int i = 0; i < order.Dishes.Count; i++)
             {
-                if (!MatchesAnyTrayItem(trays[slotIndex], dish))
+                if (!IsDishComplete(slotIndex, i))
                 {
                     return false;
                 }
@@ -196,39 +188,42 @@ namespace Features.Dish
             }
         }
 
-        private static bool MatchesAnyTrayItem(Tray tray, DishData dish)
-        {
-            foreach (Pickable item in tray.Contents)
-            {
-                if (MatchesDish(item, dish))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         private static IEnumerable<Pickable> Expand(Pickable item)
         {
             return item.Stack != null ? item.Stack.Contents : new[] { item };
         }
 
-        private static int CountOnTray(Tray tray, PickableData data)
+        private static int CountMatches(Tray tray, DishData dish)
         {
             int count = 0;
             foreach (Pickable item in tray.Contents)
             {
-                foreach (Pickable content in Expand(item))
+                if (MatchesDish(item, dish))
                 {
-                    if (content.Data == data)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
             }
 
             return count;
+        }
+
+        private static bool IsSameDish(DishData a, DishData b)
+        {
+            List<PickableData> required = new();
+            foreach (Pickable pickable in a.RequiredPickables)
+            {
+                required.Add(pickable.Data);
+            }
+
+            foreach (Pickable pickable in b.RequiredPickables)
+            {
+                if (!required.Remove(pickable.Data))
+                {
+                    return false;
+                }
+            }
+
+            return required.Count == 0;
         }
 
         private static bool MatchesDish(Pickable item, DishData dish)
