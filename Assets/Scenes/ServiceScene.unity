@@ -10193,6 +10193,14 @@ MonoBehaviour:
   poiCameraController: {fileID: 1795451861}
   playerCamera: {fileID: 985315592}
   poiCamera: {fileID: 1795451863}
+  orderManager: {fileID: 1882668564}
+  dishes:
+  - {fileID: 11400000, guid: a44e071647b2ceded96b777ec18bea69, type: 2}
+  - {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
+  - {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
+  minFreeTime: 2
+  maxFreeTime: 5
+  maxOrderSize: 3
 --- !u!4 &1476286823
 Transform:
   m_ObjectHideFlags: 0
@@ -13266,13 +13274,6 @@ MonoBehaviour:
   trays:
   - {fileID: 780631189}
   - {fileID: 780631188}
-  dishes:
-  - {fileID: 11400000, guid: a44e071647b2ceded96b777ec18bea69, type: 2}
-  - {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
-  - {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
-  minFreeTime: 2
-  maxFreeTime: 5
-  maxOrderSize: 3
 --- !u!4 &1882668565
 Transform:
   m_ObjectHideFlags: 0
