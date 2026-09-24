@@ -5,8 +5,11 @@ namespace Features.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera camera;
+        [SerializeField] private Animator animator;
     
         [SerializeField] private float minPitch = -60f;
         [SerializeField] private float maxPitch = 60f;
@@ -38,6 +41,8 @@ namespace Features.Player
         
             Vector3 move = transform.right * _moveInput.x + transform.up * _verticalVelocity + transform.forward * _moveInput.y;
             characterController.Move(Time.deltaTime * moveSpeed * move);
+            
+            animator.SetFloat(Speed, _moveInput.magnitude);
             
             Vector2 normalizedLookInput = new Vector2(_lookInput.x / Screen.width, _lookInput.y / Screen.height);
         
