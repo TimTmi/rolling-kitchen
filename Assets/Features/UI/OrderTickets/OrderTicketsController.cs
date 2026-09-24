@@ -81,19 +81,16 @@ namespace Features.UI.OrderTickets
 
                 var icons = new VisualElement();
                 icons.AddToClassList("ticket-ingredients");
-                var ingredients = new List<VisualElement>();
                 foreach (Ingredient ingredient in dish.RequiredIngredients)
                 {
                     var icon = new Image { sprite = ingredient.IngredientData.Icon, scaleMode = ScaleMode.ScaleToFit };
                     icon.AddToClassList("ticket-ingredient");
                     icons.Add(icon);
-                    ingredients.Add(icon);
                 }
 
                 dishRow.Add(icons);
                 dishes.Add(dishRow);
                 var dishView = new DishView { Root = dishRow };
-                dishView.Ingredients.AddRange(ingredients);
                 view.Dishes.Add(dishView);
             }
         }
@@ -116,11 +113,6 @@ namespace Features.UI.OrderTickets
                 bool dishComplete = orderManager.IsDishComplete(slotIndex, d);
                 dishView.Root.EnableInClassList("ticket-dish-complete", dishComplete);
                 allDishesComplete &= dishComplete;
-                for (int k = 0; k < dishView.Ingredients.Count; k++)
-                {
-                    dishView.Ingredients[k].EnableInClassList("ticket-ingredient-present",
-                        orderManager.IsIngredientComplete(slotIndex, d, k));
-                }
             }
 
             view.Root.EnableInClassList("ticket-complete", allDishesComplete);
@@ -129,7 +121,6 @@ namespace Features.UI.OrderTickets
         private sealed class DishView
         {
             public VisualElement Root;
-            public readonly List<VisualElement> Ingredients = new();
         }
 
         private sealed class TicketView
