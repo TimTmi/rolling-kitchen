@@ -79,10 +79,6 @@ namespace Features.UI.OrderTickets
                 var dishRow = new VisualElement();
                 dishRow.AddToClassList("ticket-dish");
 
-                var name = new Label(dish.name);
-                name.AddToClassList("ticket-dish-name");
-                dishRow.Add(name);
-
                 var icons = new VisualElement();
                 icons.AddToClassList("ticket-ingredients");
                 var ingredients = new List<VisualElement>();
