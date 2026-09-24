@@ -15145,6 +15145,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1380899563304524212, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
+      propertyPath: rotationSpeed
+      value: 9600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380899563304524212, guid: f4ddae92e8827493c9db3c1f6e7d233e, type: 3}
       propertyPath: characterController
       value: 
       objectReference: {fileID: 907233538}
