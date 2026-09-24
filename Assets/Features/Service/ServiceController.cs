@@ -29,6 +29,7 @@ namespace Features.Service
         [SerializeField] private float minFreeTime = 5f;
         [SerializeField] private float maxFreeTime = 10f;
         [SerializeField] private int maxOrderSize = 1;
+        [SerializeField] private OrderSlotPath[] orderSlotPaths = Array.Empty<OrderSlotPath>();
 
         private Action<Pickable> _selectionHandler;
         private bool _poiFocusCancellable;
@@ -37,6 +38,21 @@ namespace Features.Service
         public event Action PoiFocusEnded;
 
         public Camera PoiCamera => poiCamera;
+
+        public OrderSlotPath GetSlotPath(int slotIndex)
+        {
+            return orderSlotPaths[slotIndex];
+        }
+
+        [Serializable]
+        public class OrderSlotPath
+        {
+            [SerializeField] private Transform pathStart;
+            [SerializeField] private Transform pathEnd;
+
+            public Transform PathStart => pathStart;
+            public Transform PathEnd => pathEnd;
+        }
 
         private void Update()
         {
