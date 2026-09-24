@@ -37,7 +37,14 @@ namespace Features.Service
         private bool _poiFocusCancellable;
         private float[] _spawnTimers;
         private CustomerController[] _customers;
-        private bool[] _incoming;
+        private SlotState[] _slotStates;
+
+        private enum SlotState
+        {
+            Free,
+            Incoming,
+            Returning
+        }
 
         public event Action PoiFocusEnded;
 
@@ -63,7 +70,7 @@ namespace Features.Service
             EnsureSpawnTimersInitialized();
             for (int i = 0; i < _spawnTimers.Length; i++)
             {
-                if (orderManager.GetOrder(i) != null || _incoming[i])
+                if (orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free)
                 {
                     continue;
                 }
@@ -80,7 +87,7 @@ namespace Features.Service
 
         private void SendCustomerToCounter(int slotIndex)
         {
-            _incoming[slotIndex] = true;
+            _slotStates[slotIndex] = SlotState.Incoming;
             OrderSlotPath path = orderSlotPaths[slotIndex];
             CustomerController customer = _customers[slotIndex];
             customer.transform.position = path.PathStart.position;
@@ -89,15 +96,24 @@ namespace Features.Service
 
         private void OnCustomerArrived(int slotIndex)
         {
-            _incoming[slotIndex] = false;
-
-            Order order = GenerateRandomOrder();
-            if (order != null)
+            if (_slotStates[slotIndex] == SlotState.Incoming)
             {
-                orderManager.TryPlaceOrder(slotIndex, order);
+                Order order = GenerateRandomOrder();
+                if (order != null)
+                {
+                    orderManager.TryPlaceOrder(slotIndex, order);
+                }
             }
 
+            _slotStates[slotIndex] = SlotState.Free;
             _spawnTimers[slotIndex] = RandomSpawnDelay();
+        }
+
+        private void OnOrderServed(int slotIndex, Order order)
+        {
+            _slotStates[slotIndex] = SlotState.Returning;
+            OrderSlotPath path = orderSlotPaths[slotIndex];
+            _customers[slotIndex].WalkTo(path.PathStart);
         }
 
         private void EnsureSpawnTimersInitialized()
@@ -165,7 +181,7 @@ namespace Features.Service
         private void SpawnCustomers()
         {
             _customers = new CustomerController[orderManager.SlotCount];
-            _incoming = new bool[orderManager.SlotCount];
+            _slotStates = new SlotState[orderManager.SlotCount];
             for (int i = 0; i < _customers.Length; i++)
             {
                 OrderSlotPath path = orderSlotPaths[i];
@@ -181,6 +197,7 @@ namespace Features.Service
         private void OnEnable()
         {
             fridge.Opened += OnFridgeOpened;
+            orderManager.Served += OnOrderServed;
 
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
@@ -192,6 +209,7 @@ namespace Features.Service
         private void OnDisable()
         {
             fridge.Opened -= OnFridgeOpened;
+            orderManager.Served -= OnOrderServed;
             pickableSelectionController.CloseRequested -= HideUIComponent;
             pickableSelectionController.PickableSelected -= OnPickableSelected;
             poiCameraController.PoiFocusStarted -= OnPoiFocusStarted;

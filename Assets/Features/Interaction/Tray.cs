@@ -53,5 +53,11 @@ namespace Features.Interaction
         {
             return "Place";
         }
+
+        public void Clear()
+        {
+            _slots = Slots;
+            _slots.ClearAll();
+        }
     }
 }

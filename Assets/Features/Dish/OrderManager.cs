@@ -95,6 +95,7 @@ namespace Features.Dish
             }
 
             _orders[slotIndex] = null;
+            trays[slotIndex].Clear();
             Served?.Invoke(slotIndex, order);
             return true;
         }

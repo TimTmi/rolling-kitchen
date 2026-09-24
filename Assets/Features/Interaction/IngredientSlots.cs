@@ -40,6 +40,19 @@ namespace Features.Interaction
             }
         }
 
+        public void ClearAll()
+        {
+            for (int i = 0; i < _slots.Count; i++)
+            {
+                if (_slots[i] != null)
+                {
+                    Object.Destroy(_slots[i].gameObject);
+                }
+            }
+
+            _slots.Clear();
+        }
+
         public int IndexOf(Pickable content)
         {
             return _slots.IndexOf(content);
