@@ -10276,6 +10276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1476286823}
   - component: {fileID: 1476286822}
+  - component: {fileID: 1476286824}
   m_Layer: 0
   m_Name: ServiceController
   m_TagString: Untagged
@@ -10305,15 +10306,6 @@ MonoBehaviour:
   poiCameraController: {fileID: 1795451861}
   playerCamera: {fileID: 985315592}
   poiCamera: {fileID: 1795451863}
-  orderManager: {fileID: 1882668564}
-  dishes:
-  - {fileID: 11400000, guid: a44e071647b2ceded96b777ec18bea69, type: 2}
-  - {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
-  - {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
-  minFreeTime: 2
-  maxFreeTime: 5
-  maxOrderSize: 3
-  customerPrefab: {fileID: 2274650938124765031, guid: 6f484d4ec233ce1dfa4b90444dec2f50, type: 3}
 --- !u!4 &1476286823
 Transform:
   m_ObjectHideFlags: 0
@@ -10329,6 +10321,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1476286824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476286821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fb20daa7dd865019274dc007c1e05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Customer.CustomerScheduler
+  orderManager: {fileID: 1882668564}
+  customerPrefab: {fileID: 2274650938124765031, guid: 6f484d4ec233ce1dfa4b90444dec2f50, type: 3}
+  dishes:
+  - {fileID: 11400000, guid: a44e071647b2ceded96b777ec18bea69, type: 2}
+  - {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
+  - {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
+  maxOrderSize: 3
+  minFreeTime: 2
+  maxFreeTime: 5
 --- !u!1 &1484982538
 GameObject:
   m_ObjectHideFlags: 0
