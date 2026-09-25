@@ -1,12 +1,15 @@
 using System.Linq;
+using Features.Audio;
 using Features.Ingredients;
 using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class Deepfryer : MonoBehaviour, IInteractable
+    public class Deepfryer : MonoBehaviour, IInteractable, IFryingStation
     {
+        public int FryingItemCount => _frying != null ? 1 : 0;
+
         [SerializeField] private Vector3 defaultRotation = new Vector3(-90f, 0f, 0f);
         [SerializeField] private Vector3 fryPosition;
         [SerializeField] private Vector3 submergedOffset = Vector3.zero;
@@ -109,6 +112,7 @@ namespace Features.Interaction
                     stack.Replace(member, process.Result);
                 }
 
+                AudioController.PlayDing();
                 break;
             }
         }
@@ -131,6 +135,7 @@ namespace Features.Interaction
 
         private void ReplaceWithResult(Ingredient ingredient, IngredientProcess process)
         {
+            AudioController.PlayDing();
             Destroy(ingredient.gameObject);
 
             if (process.Result.Length == 0)

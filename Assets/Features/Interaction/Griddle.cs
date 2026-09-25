@@ -1,12 +1,30 @@
 using System.Linq;
+using Features.Audio;
 using Features.Ingredients;
 using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Interaction
 {
-    public class Griddle : MonoBehaviour, IInteractable
+    public class Griddle : MonoBehaviour, IInteractable, IFryingStation
     {
+        public int FryingItemCount
+        {
+            get
+            {
+                int count = 0;
+                for (int i = 0; i < _slots.Count; i++)
+                {
+                    if (_slots[i] != null)
+                    {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+        }
+
         [SerializeField] private Vector3 defaultRotation = new Vector3(-90f, 0f, 0f);
         [SerializeField] private Vector3 arrangementStart;
         [SerializeField] private Vector3 arrangementDirection = Vector3.right;
@@ -92,6 +110,7 @@ namespace Features.Interaction
                     stack.Replace(member, process.Result);
                 }
 
+                AudioController.PlayDing();
                 break;
             }
         }
@@ -109,6 +128,7 @@ namespace Features.Interaction
             if (ingredient.CookingProgress >= process.Duration)
             {
                 _slots.ReplaceWithResults(slotIndex, process);
+                AudioController.PlayDing();
             }
         }
 
