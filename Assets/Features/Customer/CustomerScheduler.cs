@@ -12,9 +12,11 @@ namespace Features.Customer
         [SerializeField] private int maxOrderSize = 1;
         [SerializeField] private float minFreeTime = 5f;
         [SerializeField] private float maxFreeTime = 10f;
+        [SerializeField] private float waitTimeMultiplier = 1f;
 
         private OrderFactory _orderFactory;
         private float[] _spawnTimers;
+        private float[] _waitRemaining;
         private CustomerController[] _customers;
         private SlotState[] _slotStates;
 
@@ -23,6 +25,14 @@ namespace Features.Customer
             Free,
             Incoming,
             Returning
+        }
+
+        public event Action<int, Order> OrderTimedOut;
+
+        public float WaitTimeMultiplier
+        {
+            get => waitTimeMultiplier;
+            set => waitTimeMultiplier = value;
         }
 
         private void Awake()
@@ -42,6 +52,7 @@ namespace Features.Customer
 
         private void Start()
         {
+            EnsureSpawnTimersInitialized();
             SpawnCustomers();
         }
 
@@ -63,12 +74,19 @@ namespace Features.Customer
 
                 SendCustomerToCounter(i);
             }
+
+            TickWaitTimes();
         }
 
         public void SetFreeTimeRange(float min, float max)
         {
             minFreeTime = min;
             maxFreeTime = max;
+        }
+
+        public float GetRemainingWaitTime(int slotIndex)
+        {
+            return Mathf.Max(0f, _waitRemaining[slotIndex]);
         }
 
         private void SendCustomerToCounter(int slotIndex)
@@ -85,9 +103,9 @@ namespace Features.Customer
             if (_slotStates[slotIndex] == SlotState.Incoming)
             {
                 Order order = _orderFactory.Create();
-                if (order != null)
+                if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
-                    orderManager.TryPlaceOrder(slotIndex, order);
+                    _waitRemaining[slotIndex] = order.ExpectedDuration * waitTimeMultiplier;
                 }
             }
 
@@ -96,6 +114,38 @@ namespace Features.Customer
         }
 
         private void OnOrderServed(int slotIndex, Order order)
+        {
+            SendCustomerHome(slotIndex);
+        }
+
+        private void TickWaitTimes()
+        {
+            for (int i = 0; i < _waitRemaining.Length; i++)
+            {
+                if (orderManager.GetOrder(i) == null || _slotStates[i] != SlotState.Free)
+                {
+                    continue;
+                }
+
+                _waitRemaining[i] -= Time.deltaTime;
+                if (_waitRemaining[i] > 0f)
+                {
+                    continue;
+                }
+
+                TimeOut(i);
+            }
+        }
+
+        private void TimeOut(int slotIndex)
+        {
+            Order order = orderManager.GetOrder(slotIndex);
+            OrderTimedOut?.Invoke(slotIndex, order);
+            orderManager.ClearOrder(slotIndex);
+            SendCustomerHome(slotIndex);
+        }
+
+        private void SendCustomerHome(int slotIndex)
         {
             _slotStates[slotIndex] = SlotState.Returning;
             OrderSlot slot = orderManager.GetSlot(slotIndex);
@@ -107,6 +157,7 @@ namespace Features.Customer
             if (_spawnTimers == null || _spawnTimers.Length != orderManager.SlotCount)
             {
                 _spawnTimers = new float[orderManager.SlotCount];
+                _waitRemaining = new float[orderManager.SlotCount];
                 for (int i = 0; i < _spawnTimers.Length; i++)
                 {
                     _spawnTimers[i] = RandomSpawnDelay();

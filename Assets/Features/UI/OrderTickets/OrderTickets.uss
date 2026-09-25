@@ -30,6 +30,12 @@
     margin-bottom: 6px;
 }
 
+.ticket-time {
+    color: rgb(180, 180, 180);
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
 .ticket-dish {
     border-color: rgba(255, 255, 255, 0.2);
     border-width: 1px;

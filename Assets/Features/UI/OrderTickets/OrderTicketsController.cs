@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Features.Customer;
 using Features.Dish;
 using Features.Pickup;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Features.UI.OrderTickets
     public class OrderTicketsController : UIComponent
     {
         [SerializeField] private OrderManager orderManager;
+        [SerializeField] private CustomerScheduler customerScheduler;
         [SerializeField] private VisualTreeAsset ticketTemplate;
 
         private ScrollView _list;
@@ -105,6 +107,10 @@ namespace Features.UI.OrderTickets
 
             var trayLabel = view.Root.Q<Label>("TrayLabel");
             trayLabel.text = $"Tray {slotIndex + 1}";
+
+            var timeLabel = view.Root.Q<Label>("TimeLeft");
+            float remaining = customerScheduler != null ? customerScheduler.GetRemainingWaitTime(slotIndex) : 0f;
+            timeLabel.text = $"{Mathf.CeilToInt(remaining)}s";
 
             var allDishesComplete = view.Dishes.Count > 0;
             for (int d = 0; d < view.Dishes.Count; d++)
