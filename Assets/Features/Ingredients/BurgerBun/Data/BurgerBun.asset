@@ -15,7 +15,7 @@ MonoBehaviour:
   id: burger_bun
   displayName: Burger Bun
   icon: {fileID: 5248698440384363030, guid: 66a31519eda33aacba10834cf1ea5787, type: 3}
-  stackingRole: 2
+  stackingRole: 4
   stackHeight: 0.1
   processes:
   - type: 0

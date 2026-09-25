@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   id: burnt_fries
   displayName: Fries
-  icon: {fileID: 7195688629189616214, guid: 54cb64675fd2ecfdebf5ca6f8e90cfb0, type: 3}
+  icon: {fileID: 7332933856830969202, guid: 089abe8b9617e135eb43024d3c44cf78, type: 3}
   stackingRole: 2
   stackHeight: 0.01
   processes: []

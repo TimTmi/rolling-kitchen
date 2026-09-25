@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Interaction
 {
     public class Fridge : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Pickup.Ingredient[] ingredients;
+        [SerializeField] private Ingredient[] ingredients;
 
-        public event Action<IReadOnlyList<Pickup.Ingredient>> Opened;
+        public event Action<IReadOnlyList<Ingredient>> Opened;
         
         public bool CanInteract(in InteractionContext context)
         {
-            return context.HeldPickable == null || context.HeldPickable is Pickup.Ingredient;
+            return context.HeldPickable == null || context.HeldPickable is Ingredient;
         }
 
         public void Interact(in InteractionContext context)
@@ -21,7 +22,7 @@ namespace Features.Interaction
             {
                 Opened?.Invoke(ingredients);
             }
-            else if (context.HeldPickable is Pickup.Ingredient)
+            else if (context.HeldPickable is Ingredient)
             {
                 context.Remove();
             }
@@ -33,7 +34,7 @@ namespace Features.Interaction
             {
                 return "Open Fridge";
             }
-            if (context.HeldPickable is Pickup.Ingredient)
+            if (context.HeldPickable is Ingredient)
             {
                 return "Put Back";
             }

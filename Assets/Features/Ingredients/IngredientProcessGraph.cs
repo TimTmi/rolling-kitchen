@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Ingredients
@@ -84,7 +85,7 @@ namespace Features.Ingredients
                     }
 
                     int executions = 0;
-                    foreach (Pickup.Ingredient result in process.Result)
+                    foreach (Ingredient result in process.Result)
                     {
                         if (result != null)
                         {
@@ -128,7 +129,7 @@ namespace Features.Ingredients
 
                 foreach (IngredientProcess process in data.Processes)
                 {
-                    foreach (Pickup.Ingredient result in process.Result)
+                    foreach (Ingredient result in process.Result)
                     {
                         if (result == null || result.IngredientData == null)
                         {

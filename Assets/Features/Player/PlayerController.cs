@@ -5,13 +5,16 @@ namespace Features.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera camera;
+        [SerializeField] private Animator animator;
     
         [SerializeField] private float minPitch = -60f;
         [SerializeField] private float maxPitch = 60f;
         [SerializeField] private float moveSpeed = 2f;
-        [SerializeField] private float rotationSpeed = 32f;
+        [SerializeField] private float rotationSpeed = 320f;
         [SerializeField] private float gravity = -2f;
     
         private Vector2 _moveInput;
@@ -38,10 +41,14 @@ namespace Features.Player
         
             Vector3 move = transform.right * _moveInput.x + transform.up * _verticalVelocity + transform.forward * _moveInput.y;
             characterController.Move(Time.deltaTime * moveSpeed * move);
+            
+            animator.SetFloat(Speed, _moveInput.magnitude);
+            
+            Vector2 normalizedLookInput = new Vector2(_lookInput.x / Screen.width, _lookInput.y / Screen.height);
         
-            transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed *  _lookInput.x);
+            transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed * normalizedLookInput.x);
 
-            _pitch -= Time.deltaTime * rotationSpeed * _lookInput.y;
+            _pitch -= Time.deltaTime * rotationSpeed * normalizedLookInput.y;
             _pitch = Mathf.Clamp(_pitch, minPitch, maxPitch);
             camera.transform.localRotation = Quaternion.Euler(_pitch, 0, 0);
         }

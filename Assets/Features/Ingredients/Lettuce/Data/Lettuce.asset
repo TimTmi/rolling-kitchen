@@ -15,4 +15,6 @@ MonoBehaviour:
   id: lettuce
   displayName: Lettuce
   icon: {fileID: 65217185051169063, guid: 4cb3a6dca8f078131a19c8f236fd513b, type: 3}
+  stackingRole: 4
+  stackHeight: 0.1
   processes: []

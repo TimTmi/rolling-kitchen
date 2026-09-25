@@ -30,7 +30,7 @@ namespace Features.Service
 
         public Camera PoiCamera => poiCamera;
 
-        void Start()
+        private void Start()
         {
             Core.CursorController.Lock();
         }
@@ -71,7 +71,7 @@ namespace Features.Service
             hud.SetCrosshairVisible(true);
             PoiFocusEnded?.Invoke();
         }
-        
+
         public void OnCancel(InputAction.CallbackContext context)
         {
             if (!context.performed)
@@ -108,7 +108,7 @@ namespace Features.Service
         private void ShowPickableSelection(IReadOnlyList<Pickable> pickables, Action<Pickable> selectionHandler)
         {
             _selectionHandler = selectionHandler;
-            
+
             pickableSelectionController.SetPickables(pickables);
             ShowUIComponent(pickableSelectionController);
         }
@@ -116,7 +116,7 @@ namespace Features.Service
         private void OnPickableSelected(Pickable pickable)
         {
             HideUIComponent();
-            
+
             _selectionHandler?.Invoke(pickable);
             _selectionHandler = null;
         }

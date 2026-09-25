@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Features.Customer;
 using Features.Dish;
 using Features.Pickup;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Features.UI.OrderTickets
     public class OrderTicketsController : UIComponent
     {
         [SerializeField] private OrderManager orderManager;
+        [SerializeField] private CustomerScheduler customerScheduler;
         [SerializeField] private VisualTreeAsset ticketTemplate;
 
         private ScrollView _list;
@@ -79,25 +81,18 @@ namespace Features.UI.OrderTickets
                 var dishRow = new VisualElement();
                 dishRow.AddToClassList("ticket-dish");
 
-                var name = new Label(dish.name);
-                name.AddToClassList("ticket-dish-name");
-                dishRow.Add(name);
-
                 var icons = new VisualElement();
                 icons.AddToClassList("ticket-ingredients");
-                var ingredients = new List<VisualElement>();
-                foreach (Pickable pickable in dish.RequiredPickables)
+                foreach (Ingredient ingredient in dish.RequiredIngredients)
                 {
-                    var icon = new Image { sprite = pickable.Data.Icon, scaleMode = ScaleMode.ScaleToFit };
+                    var icon = new Image { sprite = ingredient.IngredientData.Icon, scaleMode = ScaleMode.ScaleToFit };
                     icon.AddToClassList("ticket-ingredient");
                     icons.Add(icon);
-                    ingredients.Add(icon);
                 }
 
                 dishRow.Add(icons);
                 dishes.Add(dishRow);
                 var dishView = new DishView { Root = dishRow };
-                dishView.Ingredients.AddRange(ingredients);
                 view.Dishes.Add(dishView);
             }
         }
@@ -113,22 +108,25 @@ namespace Features.UI.OrderTickets
             var trayLabel = view.Root.Q<Label>("TrayLabel");
             trayLabel.text = $"Tray {slotIndex + 1}";
 
+            var timeLabel = view.Root.Q<Label>("TimeLeft");
+            float remaining = customerScheduler != null ? customerScheduler.GetRemainingWaitTime(slotIndex) : 0f;
+            timeLabel.text = $"{Mathf.CeilToInt(remaining)}s";
+
+            var allDishesComplete = view.Dishes.Count > 0;
             for (int d = 0; d < view.Dishes.Count; d++)
             {
                 DishView dishView = view.Dishes[d];
-                dishView.Root.EnableInClassList("ticket-dish-complete", orderManager.IsDishComplete(slotIndex, d));
-                for (int k = 0; k < dishView.Ingredients.Count; k++)
-                {
-                    dishView.Ingredients[k].EnableInClassList("ticket-ingredient-present",
-                        orderManager.IsIngredientComplete(slotIndex, d, k));
-                }
+                bool dishComplete = orderManager.IsDishComplete(slotIndex, d);
+                dishView.Root.EnableInClassList("ticket-dish-complete", dishComplete);
+                allDishesComplete &= dishComplete;
             }
+
+            view.Root.EnableInClassList("ticket-complete", allDishesComplete);
         }
 
         private sealed class DishView
         {
             public VisualElement Root;
-            public readonly List<VisualElement> Ingredients = new();
         }
 
         private sealed class TicketView

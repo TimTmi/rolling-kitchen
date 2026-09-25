@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 54cb64675fd2ecfdebf5ca6f8e90cfb0
+guid: 62bd85a9ecb7ad8fb92a775e545ecdc2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7195688629189616214
-    second: potato_Chip_3_Burnt_0
+      213: 376845885631400444
+    second: RawBacon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: potato_Chip_3_Burnt_0
+      name: RawBacon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6522a211fa83cd360800000000000000
-      internalID: 7195688629189616214
+      spriteID: cf9802c1653da3500800000000000000
+      internalID: 376845885631400444
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      potato_Chip_3_Burnt_0: 7195688629189616214
+      RawBacon_0: 376845885631400444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

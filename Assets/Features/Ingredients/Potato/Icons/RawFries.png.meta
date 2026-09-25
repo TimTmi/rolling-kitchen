@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a317e48b2a05940c0bbda4bf44dcc025
+guid: 7f432bf8aa186439587f643bd847511b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7961367073847216062
-    second: potato_Chip_3_Cooked_0
+      213: -6768609995916360302
+    second: RawFries_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: potato_Chip_3_Cooked_0
+      name: RawFries_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24878d4d3da838190800000000000000
-      internalID: -7961367073847216062
+      spriteID: 2954f3202111112a0800000000000000
+      internalID: -6768609995916360302
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      potato_Chip_3_Cooked_0: -7961367073847216062
+      RawFries_0: -6768609995916360302
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

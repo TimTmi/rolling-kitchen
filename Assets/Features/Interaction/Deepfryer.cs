@@ -21,7 +21,8 @@ namespace Features.Interaction
         {
             if (_frying != null)
             {
-                return context.HeldPickable == null;
+                return context.HeldPickable == null
+                    || IngredientStack.CanMergeInto(_frying, context.HeldPickable);
             }
 
             return context.HeldPickable is IngredientStack stack
@@ -33,7 +34,15 @@ namespace Features.Interaction
         {
             if (_frying != null)
             {
-                context.PickUp(_frying);
+                if (context.HeldPickable == null)
+                {
+                    context.PickUp(_frying);
+                }
+                else
+                {
+                    IngredientStack.MergeInto(_frying, context.HeldPickable, context);
+                }
+
                 _frying = null;
                 return;
             }
@@ -78,7 +87,7 @@ namespace Features.Interaction
             {
                 if (member == null
                     || member.Stack != stack
-                    || member is not Pickup.Ingredient ingredient
+                    || member is not Ingredient ingredient
                     || !ingredient.HasUnfinishedProcess(ProcessType.DeepFry, out IngredientProcess process))
                 {
                     continue;
@@ -106,7 +115,7 @@ namespace Features.Interaction
 
         private void Fry(Pickable content)
         {
-            if (content is not Pickup.Ingredient ingredient
+            if (content is not Ingredient ingredient
                 || !ingredient.HasUnfinishedProcess(ProcessType.DeepFry, out IngredientProcess process))
             {
                 return;
@@ -120,7 +129,7 @@ namespace Features.Interaction
             }
         }
 
-        private void ReplaceWithResult(Pickup.Ingredient ingredient, IngredientProcess process)
+        private void ReplaceWithResult(Ingredient ingredient, IngredientProcess process)
         {
             Destroy(ingredient.gameObject);
 
@@ -136,7 +145,7 @@ namespace Features.Interaction
 
         private static bool HasDeepFryProcess(Pickable content)
         {
-            return content is Pickup.Ingredient ingredient && ingredient.IngredientData.HasProcess(ProcessType.DeepFry);
+            return content is Ingredient ingredient && ingredient.IngredientData.HasProcess(ProcessType.DeepFry);
         }
     }
 }

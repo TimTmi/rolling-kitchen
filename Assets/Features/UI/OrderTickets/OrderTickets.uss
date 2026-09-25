@@ -3,7 +3,7 @@
     left: 16px;
     top: 16px;
     bottom: 16px;
-    width: 240px;
+    width: 25%;
 }
 
 .order-tickets {
@@ -30,19 +30,26 @@
     margin-bottom: 6px;
 }
 
-.ticket-dish {
+.ticket-time {
+    color: rgb(180, 180, 180);
+    font-size: 12px;
     margin-bottom: 6px;
 }
 
-.ticket-dish-name {
-    color: rgb(235, 235, 235);
-    font-size: 12px;
-    -unity-font-style: bold;
-    margin-bottom: 4px;
+.ticket-dish {
+    border-color: rgba(255, 255, 255, 0.2);
+    border-width: 1px;
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 6px;
 }
 
-.ticket-dish-complete .ticket-dish-name {
-    color: rgb(130, 215, 120);
+.ticket-dish-complete {
+    border-color: rgb(130, 215, 120);
+}
+
+.ticket-complete {
+    border-color: rgb(130, 215, 120);
 }
 
 .ticket-ingredients {
@@ -51,12 +58,7 @@
 }
 
 .ticket-ingredient {
-    width: 28px;
-    height: 28px;
+    width: 64px;
+    height: 64px;
     margin-right: 4px;
-    opacity: 0.25;
-}
-
-.ticket-ingredient-present {
-    opacity: 1;
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   id: sliced_lettuce
   displayName: Lettuce
-  icon: {fileID: 3847864973036105750, guid: 45ba80656d072ccb5ac7e0ee74b6ba26, type: 3}
+  icon: {fileID: 6202863444259620530, guid: 4516673eb89ebfb18ac25678e85a82d6, type: 3}
   stackingRole: 2
-  stackHeight: 0.01
+  stackHeight: 0.004599958
   processes: []

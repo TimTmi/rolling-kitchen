@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Pickables.IngredientData
   id: cooked_bacon
   displayName: Bacon
-  icon: {fileID: -4396206974578190670, guid: d3e0aa57d53b2c4c7bf7ed67e8783041, type: 3}
+  icon: {fileID: 8074975734215669667, guid: 880b1a1fab9962aaba2b1cf8d4356f60, type: 3}
   stackingRole: 2
-  stackHeight: 0.02400077
+  stackHeight: 0.003360108
   processes:
   - type: 1
     duration: 6

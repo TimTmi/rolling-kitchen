@@ -7,6 +7,9 @@ namespace Features.Pickup
 {
     public class IngredientStack : Pickable
     {
+        private const float MinAdjacentRotation = 45f;
+        private const int MaxYawAttempts = 8;
+
         private readonly List<Pickable> _contents = new();
 
         public Pickable Root { get; private set; }
@@ -81,6 +84,11 @@ namespace Features.Pickup
                 return false;
             }
 
+            if (heldGroup.Role == StackingRole.None || targetGroup.Role == StackingRole.None)
+            {
+                return false;
+            }
+
             return !HasRoleConflict(heldGroup, targetGroup)
                 && (FindInsertionIndex(heldGroup.Contents, targetGroup.Contents) >= 0
                     || FindInsertionIndex(targetGroup.Contents, heldGroup.Contents) >= 0);
@@ -88,27 +96,32 @@ namespace Features.Pickup
 
         public static void Merge(Pickable held, Pickable target, in InteractionContext context)
         {
+            Pickable heldPickable = context.HeldPickable;
             Group heldGroup = GroupOf(held);
             Group targetGroup = GroupOf(target);
 
             if (heldGroup.Role < targetGroup.Role)
             {
-                if (!TryInsert(targetGroup, heldGroup))
+                if (!TryInsert(targetGroup, heldGroup, context)
+                    && TryInsert(heldGroup, targetGroup, context)
+                    && context.HeldPickable == heldPickable)
                 {
-                    TryInsert(heldGroup, targetGroup);
                     context.Release();
                 }
 
                 return;
             }
 
-            if (!TryInsert(heldGroup, targetGroup))
+            if (!TryInsert(heldGroup, targetGroup, context))
             {
-                TryInsert(targetGroup, heldGroup);
+                TryInsert(targetGroup, heldGroup, context);
                 return;
             }
 
-            context.Release();
+            if (context.HeldPickable == heldPickable)
+            {
+                context.Release();
+            }
         }
 
         public static bool CanMergeInto(Pickable contents, Pickable host)
@@ -116,16 +129,18 @@ namespace Features.Pickup
             Group contentsGroup = GroupOf(contents);
             Group hostGroup = GroupOf(host);
 
-            return !HasRoleConflict(contentsGroup, hostGroup)
+            return contentsGroup.Role != StackingRole.None
+                && hostGroup.Role != StackingRole.None
+                && !HasRoleConflict(contentsGroup, hostGroup)
                 && FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents) >= 0;
         }
 
-        public static void MergeInto(Pickable contents, Pickable host)
+        public static void MergeInto(Pickable contents, Pickable host, in InteractionContext context)
         {
-            TryInsert(GroupOf(contents), GroupOf(host));
+            TryInsert(GroupOf(contents), GroupOf(host), context);
         }
 
-        private static bool TryInsert(Group contentsGroup, Group hostGroup)
+        private static bool TryInsert(Group contentsGroup, Group hostGroup, in InteractionContext context)
         {
             int index = FindInsertionIndex(contentsGroup.Contents, hostGroup.Contents);
             if (index < 0)
@@ -134,18 +149,63 @@ namespace Features.Pickup
             }
 
             IngredientStack stack = hostGroup.Stack ?? FormOn(hostGroup.Contents[0]);
+            stack._contents.InsertRange(index, contentsGroup.Contents);
+
+            if (index == 0)
+            {
+                stack = stack.ReRoot(context);
+            }
 
             foreach (Pickable content in contentsGroup.Contents)
             {
                 content.Stack = stack;
-                content.transform.SetParent(stack.transform);
+
+                if (content != stack.Root)
+                {
+                    content.transform.SetParent(stack.transform);
+                }
             }
 
-            stack._contents.InsertRange(index, contentsGroup.Contents);
+            stack.RandomizeRotations(index, contentsGroup.Contents.Count);
             stack.Arrange();
 
             contentsGroup.Stack?.Dissolve();
             return true;
+        }
+
+        private IngredientStack ReRoot(in InteractionContext context)
+        {
+            Pickable bottom = _contents[0];
+            if (bottom == Root)
+            {
+                return this;
+            }
+
+            bottom.transform.SetParent(null, true);
+
+            IngredientStack stack = FormOn(bottom);
+            stack._contents.Clear();
+            stack._contents.AddRange(_contents);
+
+            foreach (Pickable content in stack._contents)
+            {
+                content.Stack = stack;
+
+                if (content != bottom)
+                {
+                    content.transform.SetParent(stack.transform, true);
+                }
+            }
+
+            Dissolve();
+
+            Pickable held = context.HeldPickable;
+            if (held != null && stack._contents.Any(content => content.gameObject == held.gameObject))
+            {
+                context.PickUp(stack);
+            }
+
+            return stack;
         }
 
         private static int FindInsertionIndex(List<Pickable> contents, List<Pickable> host)
@@ -235,23 +295,62 @@ namespace Features.Pickup
             _contents.Insert(index, content);
             content.Stack = this;
             content.transform.SetParent(transform);
+            RandomizeRotations(index, 1);
+        }
+
+        private void RandomizeRotations(int index, int count)
+        {
+            int last = index + count - 1;
+
+            for (int i = index; i <= last; i++)
+            {
+                if (_contents[i].Data.StackingRole == StackingRole.Container)
+                {
+                    _contents[i].transform.localRotation = Quaternion.identity;
+                    continue;
+                }
+
+                float? below = i > 0 ? Yaw(_contents[i - 1]) : null;
+                float? above = i == last && last + 1 < _contents.Count ? Yaw(_contents[last + 1]) : null;
+
+                _contents[i].transform.localRotation = Quaternion.Euler(0f, RandomYaw(below, above), 0f);
+            }
+        }
+
+        private float Yaw(Pickable content)
+        {
+            return (content == Root ? transform : content.transform).localEulerAngles.y;
+        }
+
+        private static float RandomYaw(float? below, float? above)
+        {
+            for (int attempt = 0; attempt < MaxYawAttempts; attempt++)
+            {
+                float angle = Random.Range(0f, 360f);
+
+                if (MeetsDelta(angle, below) && MeetsDelta(angle, above))
+                {
+                    return angle;
+                }
+            }
+
+            return Random.Range(0f, 360f);
+        }
+
+        private static bool MeetsDelta(float angle, float? other)
+        {
+            return !other.HasValue || Mathf.Abs(Mathf.DeltaAngle(angle, other.Value)) >= MinAdjacentRotation;
         }
 
         private void Arrange()
         {
             float height = 0f;
 
-            for (int i = 0; i < _contents.Count && _contents[i] != Root; i++)
-            {
-                height -= _contents[i].Data.StackHeight;
-            }
-
             foreach (Pickable content in _contents)
             {
                 if (content != Root)
                 {
                     content.transform.localPosition = new Vector3(0f, height, 0f);
-                    content.transform.localRotation = Quaternion.identity;
                 }
 
                 height += content.Data.StackHeight;

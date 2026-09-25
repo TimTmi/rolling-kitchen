@@ -31,7 +31,7 @@ namespace Features.Pickup
                 return;
             }
 
-            IngredientStack.MergeInto(Instantiate(pickable), context.HeldPickable);
+            IngredientStack.MergeInto(Instantiate(pickable), context.HeldPickable, context);
         }
 
         public string GetInteractionPrompt(in InteractionContext context)

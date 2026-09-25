@@ -15,6 +15,8 @@ MonoBehaviour:
   id: onion
   displayName: Onion
   icon: {fileID: 138702223785225510, guid: 81ad4b0fe28c593d9b8abb8d69764a05, type: 3}
+  stackingRole: 4
+  stackHeight: 0.1
   processes:
   - type: 0
     duration: 0

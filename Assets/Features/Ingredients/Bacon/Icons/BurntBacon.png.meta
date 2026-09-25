@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2e0df490706be91498e87fd850a2dc0c
+guid: a0bf630c0a41b2276a6f16e1508c334a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8481521276803907915
-    second: onion_Ring_0
+      213: 701683287746537559
+    second: BurntBacon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: onion_Ring_0
+      name: BurntBacon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5be7f25f5559b4a80800000000000000
-      internalID: -8481521276803907915
+      spriteID: 758e5f68b31ecb900800000000000000
+      internalID: 701683287746537559
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      onion_Ring_0: -8481521276803907915
+      BurntBacon_0: 701683287746537559
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
