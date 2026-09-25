@@ -139,6 +139,7 @@ namespace Features.Customer
 
         private void TimeOut(int slotIndex)
         {
+            Audio.AudioController.PlayGrunt();
             Order order = orderManager.GetOrder(slotIndex);
             OrderTimedOut?.Invoke(slotIndex, order);
             orderManager.ClearOrder(slotIndex);

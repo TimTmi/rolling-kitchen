@@ -64,6 +64,7 @@ namespace Features.Minigame
 
             if (_swept >= 360f)
             {
+                Audio.AudioController.PlaySlicing();
                 Complete();
             }
         }

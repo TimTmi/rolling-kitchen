@@ -77,6 +77,7 @@ namespace Features.Minigame
 
             _line++;
             _cutting = false;
+            Audio.AudioController.PlaySlicing();
             if (_line >= lineCount)
             {
                 Complete();
