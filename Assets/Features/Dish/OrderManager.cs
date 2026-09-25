@@ -8,13 +8,18 @@ namespace Features.Dish
 {
     public class OrderManager : MonoBehaviour
     {
-        [SerializeField] private Tray[] trays = Array.Empty<Tray>();
+        [SerializeField] private OrderSlot[] slots = Array.Empty<OrderSlot>();
 
         private Order[] _orders;
 
         public event Action<int, Order> Served;
 
-        public int SlotCount => trays.Length;
+        public int SlotCount => slots.Length;
+
+        public OrderSlot GetSlot(int slotIndex)
+        {
+            return slots[slotIndex];
+        }
 
         public Order GetOrder(int slotIndex)
         {
@@ -74,7 +79,7 @@ namespace Features.Dish
                 }
             }
 
-            return CountMatches(trays[slotIndex], dish) > earlierDuplicates;
+            return CountMatches(slots[slotIndex].Tray, dish) > earlierDuplicates;
         }
 
         public bool TryServe(int slotIndex)
@@ -95,16 +100,16 @@ namespace Features.Dish
             }
 
             _orders[slotIndex] = null;
-            trays[slotIndex].Clear();
+            slots[slotIndex].Tray.Clear();
             Served?.Invoke(slotIndex, order);
             return true;
         }
 
         private void EnsureInitialized()
         {
-            if (_orders == null || _orders.Length != trays.Length)
+            if (_orders == null || _orders.Length != slots.Length)
             {
-                _orders = new Order[trays.Length];
+                _orders = new Order[slots.Length];
             }
         }
 

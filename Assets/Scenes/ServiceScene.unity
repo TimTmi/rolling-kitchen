@@ -6180,6 +6180,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7615674824886848276, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 780631193}
+    - targetCorrespondingSourceObject: {fileID: 6243375475385493339, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 780631192}
     - targetCorrespondingSourceObject: {fileID: 5551870642171148458, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 935022608}
@@ -6189,7 +6195,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2704453997773062601, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
   m_PrefabInstance: {fileID: 780631187}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 780631191}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a7a825c48caff978a1ddc8251c7e859, type: 3}
@@ -6200,12 +6206,52 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6158613313011160757, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
   m_PrefabInstance: {fileID: 780631187}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 780631190}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a7a825c48caff978a1ddc8251c7e859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrayInteractable
+--- !u!1 &780631190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7615674824886848276, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+  m_PrefabInstance: {fileID: 780631187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &780631191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6243375475385493339, guid: d7d900d3f8b9ae761af39878dfdc05f8, type: 3}
+  m_PrefabInstance: {fileID: 780631187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &780631192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780631191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118ae607ed784f3bbb90d659b611146f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Dish.OrderSlot
+  tray: {fileID: 780631188}
+  pathStart: {fileID: 669892927}
+  pathEnd: {fileID: 1314178410}
+--- !u!114 &780631193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780631190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118ae607ed784f3bbb90d659b611146f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Dish.OrderSlot
+  tray: {fileID: 780631189}
+  pathStart: {fileID: 1773704571}
+  pathEnd: {fileID: 1893335479}
 --- !u!1 &801299437
 GameObject:
   m_ObjectHideFlags: 0
@@ -10267,11 +10313,6 @@ MonoBehaviour:
   minFreeTime: 2
   maxFreeTime: 5
   maxOrderSize: 3
-  orderSlotPaths:
-  - pathStart: {fileID: 1773704571}
-    pathEnd: {fileID: 1893335479}
-  - pathStart: {fileID: 669892927}
-    pathEnd: {fileID: 1314178410}
   customerPrefab: {fileID: 2274650938124765031, guid: 6f484d4ec233ce1dfa4b90444dec2f50, type: 3}
 --- !u!4 &1476286823
 Transform:
@@ -13374,9 +13415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0671b8fe14c8aa484bb641461f98ccd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Dish.OrderManager
-  trays:
-  - {fileID: 780631189}
-  - {fileID: 780631188}
+  slots:
+  - {fileID: 780631193}
+  - {fileID: 780631192}
 --- !u!4 &1882668565
 Transform:
   m_ObjectHideFlags: 0

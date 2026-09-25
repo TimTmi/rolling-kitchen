@@ -30,7 +30,6 @@ namespace Features.Service
         [SerializeField] private float minFreeTime = 5f;
         [SerializeField] private float maxFreeTime = 10f;
         [SerializeField] private int maxOrderSize = 1;
-        [SerializeField] private OrderSlotPath[] orderSlotPaths = Array.Empty<OrderSlotPath>();
         [SerializeField] private CustomerController customerPrefab;
 
         private Action<Pickable> _selectionHandler;
@@ -49,21 +48,6 @@ namespace Features.Service
         public event Action PoiFocusEnded;
 
         public Camera PoiCamera => poiCamera;
-
-        public OrderSlotPath GetSlotPath(int slotIndex)
-        {
-            return orderSlotPaths[slotIndex];
-        }
-
-        [Serializable]
-        public class OrderSlotPath
-        {
-            [SerializeField] private Transform pathStart;
-            [SerializeField] private Transform pathEnd;
-
-            public Transform PathStart => pathStart;
-            public Transform PathEnd => pathEnd;
-        }
 
         private void Update()
         {
@@ -88,10 +72,10 @@ namespace Features.Service
         private void SendCustomerToCounter(int slotIndex)
         {
             _slotStates[slotIndex] = SlotState.Incoming;
-            OrderSlotPath path = orderSlotPaths[slotIndex];
+            OrderSlot slot = orderManager.GetSlot(slotIndex);
             CustomerController customer = _customers[slotIndex];
-            customer.transform.position = path.PathStart.position;
-            customer.WalkTo(path.PathEnd);
+            customer.transform.position = slot.PathStart.position;
+            customer.WalkTo(slot.PathEnd);
         }
 
         private void OnCustomerArrived(int slotIndex)
@@ -112,8 +96,8 @@ namespace Features.Service
         private void OnOrderServed(int slotIndex, Order order)
         {
             _slotStates[slotIndex] = SlotState.Returning;
-            OrderSlotPath path = orderSlotPaths[slotIndex];
-            _customers[slotIndex].WalkTo(path.PathStart);
+            OrderSlot slot = orderManager.GetSlot(slotIndex);
+            _customers[slotIndex].WalkTo(slot.PathStart);
         }
 
         private void EnsureSpawnTimersInitialized()
@@ -184,10 +168,10 @@ namespace Features.Service
             _slotStates = new SlotState[orderManager.SlotCount];
             for (int i = 0; i < _customers.Length; i++)
             {
-                OrderSlotPath path = orderSlotPaths[i];
+                OrderSlot slot = orderManager.GetSlot(i);
                 CustomerController customer = Instantiate(customerPrefab, transform);
                 customer.Init(orderManager, i);
-                customer.transform.position = path.PathStart.position;
+                customer.transform.position = slot.PathStart.position;
                 int slotIndex = i;
                 customer.Arrived += () => OnCustomerArrived(slotIndex);
                 _customers[i] = customer;
