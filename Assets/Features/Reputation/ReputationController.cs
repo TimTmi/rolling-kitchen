@@ -25,6 +25,11 @@ namespace Features.Reputation
             _rep = maxRep;
         }
 
+        private void Start()
+        {
+            ReputationChanged?.Invoke(_rep);
+        }
+
         private void OnEnable()
         {
             customerScheduler.OrderTimedOut += OnOrderTimedOut;

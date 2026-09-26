@@ -10088,6 +10088,7 @@ MonoBehaviour:
   interactionController: {fileID: 88830869}
   handController: {fileID: 3193077325376431242}
   customerScheduler: {fileID: 1476286824}
+  reputationController: {fileID: 466780783}
 --- !u!114 &1349066858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10541,7 +10542,7 @@ MonoBehaviour:
   orderCount: 6
   minFreeTime: 2
   maxFreeTime: 5
-  waitTimeMultiplier: 1
+  waitTimeMultiplier: 3
 --- !u!1 &1484982538
 GameObject:
   m_ObjectHideFlags: 0
