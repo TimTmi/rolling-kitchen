@@ -25,14 +25,14 @@
     width: 32px;
     height: 32px;
     margin-bottom: 8px;
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: transparent;
     border-width: 0;
     border-radius: 8px;
-    background-image: url('project://database/Assets/Features/UI/x.png?fileID=2800000&guid=de6bfd61a407e57d79453f7a43eaefbe&type=3#x');
+    background-image: url('project://database/Assets/Features/UI/x.svg?fileID=12408&guid=3d9aecbc1fc7878b3a183f64f9294eab&type=3#x');
 }
 
 .close-button:hover {
-    background-color: rgba(255, 255, 255, 0.22);
+    background-color: rgba(255, 255, 255, 0.13);
 }
 
 .pickable-list {

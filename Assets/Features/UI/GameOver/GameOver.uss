@@ -1,0 +1,60 @@
+.game-over-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.panel {
+    width: 60%;
+    height: 70%;
+    background-color: rgb(32, 34, 40);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+    border-radius: 12px;
+    padding: 32px;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 42px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    margin-bottom: 24px;
+}
+
+.buttons {
+    flex-direction: row;
+}
+
+.icon-button {
+    width: 48px;
+    height: 48px;
+    margin: 0 8px;
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 8px;
+}
+
+.icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+.home-button {
+    background-image: url("project://database/Assets/Features/UI/house.svg?fileID=7388822144124034973&guid=98ae33757b0f7edd38a72f2dce931764&type=3#house");
+}
+
+.replay-button {
+    background-image: url("project://database/Assets/Features/UI/rotate-ccw.svg?fileID=7388822144124034973&guid=6ceb1b816242fcd57a6f6c8e52c0d8b6&type=3#rotate-ccw");
+}
+
+.next-level-button {
+    background-image: url("");
+    display: none;
+}

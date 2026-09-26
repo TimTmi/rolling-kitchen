@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="GameOver.uss" />
+    <ui:VisualElement name="GameOverRoot" class="game-over-root">
+        <ui:VisualElement name="Panel" class="panel">
+            <ui:Label text="Game Over" name="Title" class="title" />
+            <ui:VisualElement name="Buttons" class="buttons">
+                <ui:Button name="HomeButton" class="icon-button home-button" />
+                <ui:Button name="ReplayButton" class="icon-button replay-button" />
+                <ui:Button name="NextLevelButton" class="icon-button next-level-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
