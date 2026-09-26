@@ -126,6 +126,7 @@ namespace Features.Customer
 
         private void OnOrderServed(int slotIndex, Order order)
         {
+            Audio.AudioController.PlayYeah();
             SendCustomerHome(slotIndex);
         }
 

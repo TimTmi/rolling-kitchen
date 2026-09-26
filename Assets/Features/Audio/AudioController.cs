@@ -11,6 +11,7 @@ namespace Features.Audio
         [SerializeField] private AudioClip ding;
         [SerializeField] private AudioClip grunt;
         [SerializeField] private AudioClip slicing;
+        [SerializeField] private AudioClip yeah;
 
         private static AudioController instance;
 
@@ -21,6 +22,7 @@ namespace Features.Audio
         public static void PlayDing() => PlayOneShot(instance?.ding);
         public static void PlayGrunt() => PlayOneShot(instance?.grunt);
         public static void PlaySlicing() => PlayOneShot(instance?.slicing);
+        public static void PlayYeah() => PlayOneShot(instance?.yeah);
 
         private void Awake()
         {

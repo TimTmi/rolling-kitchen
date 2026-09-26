@@ -7298,6 +7298,7 @@ MonoBehaviour:
   ding: {fileID: 8300000, guid: ab6226610f00c1da4aa79c56193d6fcf, type: 3}
   grunt: {fileID: 8300000, guid: f1e30ea15d65b6b289defe69505c6106, type: 3}
   slicing: {fileID: 8300000, guid: edf1d1b769331ba05bc9bd3e6e353353, type: 3}
+  yeah: {fileID: 8300000, guid: 06cf8d2047874a4d1a6a59254bc2042e, type: 3}
 --- !u!1 &892030604
 GameObject:
   m_ObjectHideFlags: 0
