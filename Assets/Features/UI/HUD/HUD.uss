@@ -23,3 +23,19 @@
     -unity-text-outline-width: 1px;
     -unity-text-outline-color: rgb(0, 0, 0);
 }
+
+.orders-left-panel {
+    margin-bottom: 8px;
+    padding: 10px;
+    background-color: rgba(20, 22, 28, 0.75);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.orders-left-counter {
+    -unity-font-style: bold;
+    font-size: 18px;
+    color: rgb(235, 235, 235);
+}

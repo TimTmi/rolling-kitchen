@@ -1,7 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="Ticket" class="ticket">
-        <ui:Label text="Tray" name="TrayLabel" class="ticket-tray" />
-        <ui:Label text="" name="TimeLeft" class="ticket-time" />
+        <ui:VisualElement name="Header" class="ticket-header">
+            <ui:Label text="Tray" name="TrayLabel" class="ticket-tray" />
+            <ui:Label text="" name="TimeLeft" class="ticket-time" />
+        </ui:VisualElement>
         <ui:VisualElement name="Dishes" class="ticket-dishes" />
     </ui:VisualElement>
 </ui:UXML>
