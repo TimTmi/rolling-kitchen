@@ -1,14 +1,15 @@
 using System.Linq;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Dish
 {
     public class OrderFactory
     {
-        private readonly DishData[] _dishes;
+        private readonly LevelDish[] _dishes;
         private readonly int _maxOrderSize;
 
-        public OrderFactory(DishData[] dishes, int maxOrderSize)
+        public OrderFactory(LevelDish[] dishes, int maxOrderSize)
         {
             _dishes = dishes;
             _maxOrderSize = maxOrderSize;
@@ -33,19 +34,28 @@ namespace Features.Dish
 
         private DishData CreateDish()
         {
-            DishData dish = _dishes[UnityEngine.Random.Range(0, _dishes.Length)];
-            if (dish.Toppings.Length == 0)
+            LevelDish entry = _dishes[UnityEngine.Random.Range(0, _dishes.Length)];
+            DishData dish = entry.Dish;
+            Ingredient[] toppingPool = GetToppingPool(dish, entry.AllowedToppings);
+            if (toppingPool.Length == 0)
             {
                 return dish;
             }
 
             DishData randomized = Object.Instantiate(dish);
             randomized.name = dish.name;
-            randomized.SetToppings(dish.Toppings
+            randomized.SetToppings(toppingPool
                 .OrderBy(_ => UnityEngine.Random.value)
-                .Take(UnityEngine.Random.Range(1, dish.Toppings.Length + 1))
+                .Take(UnityEngine.Random.Range(1, toppingPool.Length + 1))
                 .ToArray());
             return randomized;
+        }
+
+        private static Ingredient[] GetToppingPool(DishData dish, Ingredient[] allowedToppings)
+        {
+            return dish.Toppings
+                .Where(topping => topping != null && allowedToppings.Contains(topping))
+                .ToArray();
         }
     }
 }

@@ -4154,9 +4154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Reputation.ReputationController
   customerScheduler: {fileID: 1476286824}
   orderManager: {fileID: 1882668564}
-  maxRep: 10
-  repLoss: -5
-  repGain: 2
+  serviceConfig: {fileID: 11400000, guid: 5eafa49f8a39dfd5493e0718b0460147, type: 2}
 --- !u!1 &477283723
 GameObject:
   m_ObjectHideFlags: 0
@@ -10535,15 +10533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Customer.CustomerScheduler
   orderManager: {fileID: 1882668564}
   customerPrefab: {fileID: 2274650938124765031, guid: 6f484d4ec233ce1dfa4b90444dec2f50, type: 3}
-  dishes:
-  - {fileID: 11400000, guid: a44e071647b2ceded96b777ec18bea69, type: 2}
-  - {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
-  - {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
-  maxOrderSize: 3
-  orderCount: 6
-  minFreeTime: 2
-  maxFreeTime: 5
-  waitTimeMultiplier: 3
+  serviceConfig: {fileID: 11400000, guid: 5eafa49f8a39dfd5493e0718b0460147, type: 2}
 --- !u!1 &1484982538
 GameObject:
   m_ObjectHideFlags: 0
@@ -11280,7 +11270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1564844906
 Transform:
   m_ObjectHideFlags: 0

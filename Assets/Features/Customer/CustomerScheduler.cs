@@ -1,5 +1,6 @@
 using System;
 using Features.Dish;
+using Features.Service;
 using UnityEngine;
 
 namespace Features.Customer
@@ -8,15 +9,13 @@ namespace Features.Customer
     {
         [SerializeField] private OrderManager orderManager;
         [SerializeField] private CustomerController customerPrefab;
-        [SerializeField] private DishData[] dishes = Array.Empty<DishData>();
-        [SerializeField] private int maxOrderSize = 1;
-        [SerializeField] private int orderCount = 10;
-        [SerializeField] private float minFreeTime = 5f;
-        [SerializeField] private float maxFreeTime = 10f;
-        [SerializeField] private float waitTimeMultiplier = 1f;
+        [SerializeField] private ServiceConfig serviceConfig;
 
         private OrderFactory _orderFactory;
         private int _ordersLeft;
+        private float _minFreeTime;
+        private float _maxFreeTime;
+        private float _waitTimeMultiplier;
         private float[] _spawnTimers;
         private float[] _waitRemaining;
         private CustomerController[] _customers;
@@ -34,18 +33,22 @@ namespace Features.Customer
 
         public float WaitTimeMultiplier
         {
-            get => waitTimeMultiplier;
-            set => waitTimeMultiplier = value;
+            get => _waitTimeMultiplier;
+            set => _waitTimeMultiplier = value;
         }
 
         public int OrdersLeft => _ordersLeft;
 
-        public int OrderCount => orderCount;
+        public int OrderCount => serviceConfig.CurrentLevel.OrderCount;
 
         private void Awake()
         {
-            _ordersLeft = orderCount;
-            _orderFactory = new OrderFactory(dishes, maxOrderSize);
+            LevelData level = serviceConfig.CurrentLevel;
+            _ordersLeft = level.OrderCount;
+            _minFreeTime = level.MinFreeTime;
+            _maxFreeTime = level.MaxFreeTime;
+            _waitTimeMultiplier = level.WaitTimeMultiplier;
+            _orderFactory = new OrderFactory(level.Dishes, level.MaxOrderSize);
         }
 
         private void OnEnable()
@@ -89,8 +92,8 @@ namespace Features.Customer
 
         public void SetFreeTimeRange(float min, float max)
         {
-            minFreeTime = min;
-            maxFreeTime = max;
+            _minFreeTime = min;
+            _maxFreeTime = max;
         }
 
         public float GetRemainingWaitTime(int slotIndex)
@@ -116,7 +119,7 @@ namespace Features.Customer
                 {
                     _ordersLeft--;
                     OrdersLeftChanged?.Invoke(_ordersLeft);
-                    _waitRemaining[slotIndex] = order.ExpectedDuration * waitTimeMultiplier;
+                    _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
                 }
             }
 
@@ -196,7 +199,7 @@ namespace Features.Customer
 
         private float RandomSpawnDelay()
         {
-            return UnityEngine.Random.Range(minFreeTime, maxFreeTime);
+            return UnityEngine.Random.Range(_minFreeTime, _maxFreeTime);
         }
     }
 }
