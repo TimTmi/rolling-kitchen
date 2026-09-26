@@ -80,7 +80,7 @@ namespace Features.UI.HUD
                 return;
             }
 
-            _ordersLeftCounter.text = $"Orders left: {ordersLeft}";
+            _ordersLeftCounter.text = $"Orders: {ordersLeft} / {customerScheduler.OrderCount}";
         }
 
         private void OnFocusLost(IInteractable interactable)

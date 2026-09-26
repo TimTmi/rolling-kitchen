@@ -40,6 +40,8 @@ namespace Features.Customer
 
         public int OrdersLeft => _ordersLeft;
 
+        public int OrderCount => orderCount;
+
         private void Awake()
         {
             _ordersLeft = orderCount;

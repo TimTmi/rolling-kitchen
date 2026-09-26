@@ -55,6 +55,6 @@
 }
 
 .next-level-button {
-    background-image: url("");
+    background-image: url("project://database/Assets/Features/UI/chevron-right.svg?fileID=7388822144124034973&guid=382a104a9fd20396bb7bccf9df42ed8c&type=3#chevron-right");
     display: none;
 }
