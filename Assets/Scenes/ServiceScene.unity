@@ -10037,6 +10037,7 @@ MonoBehaviour:
   panelRenderer: {fileID: 1349066855}
   interactionController: {fileID: 88830869}
   handController: {fileID: 3193077325376431242}
+  customerScheduler: {fileID: 1476286824}
 --- !u!114 &1349066858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10487,9 +10488,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
   - {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
   maxOrderSize: 3
+  orderCount: 6
   minFreeTime: 2
   maxFreeTime: 5
-  waitTimeMultiplier: 3
+  waitTimeMultiplier: 1
 --- !u!1 &1484982538
 GameObject:
   m_ObjectHideFlags: 0

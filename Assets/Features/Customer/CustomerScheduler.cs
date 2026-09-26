@@ -10,11 +10,13 @@ namespace Features.Customer
         [SerializeField] private CustomerController customerPrefab;
         [SerializeField] private DishData[] dishes = Array.Empty<DishData>();
         [SerializeField] private int maxOrderSize = 1;
+        [SerializeField] private int orderCount = 10;
         [SerializeField] private float minFreeTime = 5f;
         [SerializeField] private float maxFreeTime = 10f;
         [SerializeField] private float waitTimeMultiplier = 1f;
 
         private OrderFactory _orderFactory;
+        private int _ordersLeft;
         private float[] _spawnTimers;
         private float[] _waitRemaining;
         private CustomerController[] _customers;
@@ -28,6 +30,7 @@ namespace Features.Customer
         }
 
         public event Action<int, Order> OrderTimedOut;
+        public event Action<int> OrdersLeftChanged;
 
         public float WaitTimeMultiplier
         {
@@ -35,8 +38,11 @@ namespace Features.Customer
             set => waitTimeMultiplier = value;
         }
 
+        public int OrdersLeft => _ordersLeft;
+
         private void Awake()
         {
+            _ordersLeft = orderCount;
             _orderFactory = new OrderFactory(dishes, maxOrderSize);
         }
 
@@ -54,6 +60,7 @@ namespace Features.Customer
         {
             EnsureSpawnTimersInitialized();
             SpawnCustomers();
+            OrdersLeftChanged?.Invoke(_ordersLeft);
         }
 
         private void Update()
@@ -61,7 +68,7 @@ namespace Features.Customer
             EnsureSpawnTimersInitialized();
             for (int i = 0; i < _spawnTimers.Length; i++)
             {
-                if (orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free)
+                if (_ordersLeft <= 0 || orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free)
                 {
                     continue;
                 }
@@ -105,6 +112,8 @@ namespace Features.Customer
                 Order order = _orderFactory.Create();
                 if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
+                    _ordersLeft--;
+                    OrdersLeftChanged?.Invoke(_ordersLeft);
                     _waitRemaining[slotIndex] = order.ExpectedDuration * waitTimeMultiplier;
                 }
             }
