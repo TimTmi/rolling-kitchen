@@ -3,6 +3,7 @@
     <ui:VisualElement name="GameOverRoot" class="game-over-root">
         <ui:VisualElement name="Panel" class="panel">
             <ui:Label text="Game Over" name="Title" class="title" />
+            <ui:Label text="Orders served: 0" name="OrdersServed" class="orders-served" />
             <ui:VisualElement name="Buttons" class="buttons">
                 <ui:Button name="HomeButton" class="icon-button home-button" />
                 <ui:Button name="ReplayButton" class="icon-button replay-button" />

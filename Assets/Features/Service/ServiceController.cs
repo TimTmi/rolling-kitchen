@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Features.Customer;
 using Features.Interaction;
 using Features.Pickup;
 using Features.Player;
+using Features.Reputation;
 using Features.UI;
+using Features.UI.GameOver;
 using Features.UI.PickableSelection;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,7 +20,10 @@ namespace Features.Service
         [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
         [SerializeField] private UI.HUD.HUDController hud;
+        [SerializeField] private GameOverController gameOver;
         [SerializeField] private ServiceConfig serviceConfig;
+        [SerializeField] private CustomerScheduler customerScheduler;
+        [SerializeField] private ReputationController reputationController;
         [SerializeField] private Fridge fridge;
         [SerializeField] private PickableSelectionController pickableSelectionController;
         [SerializeField] private Core.PoiCameraController poiCameraController;
@@ -26,6 +32,7 @@ namespace Features.Service
 
         private Action<Pickable> _selectionHandler;
         private bool _poiFocusCancellable;
+        private bool _gameOver;
 
         public event Action PoiFocusEnded;
 
@@ -46,6 +53,9 @@ namespace Features.Service
 
             poiCameraController.PoiFocusStarted += OnPoiFocusStarted;
             poiCameraController.PlayerFocusEnded += OnPlayerFocusEnded;
+
+            reputationController.ReputationChanged += OnReputationChanged;
+            customerScheduler.OrdersCompleted += OnOrdersCompleted;
         }
 
         private void OnDisable()
@@ -55,6 +65,9 @@ namespace Features.Service
             pickableSelectionController.PickableSelected -= OnPickableSelected;
             poiCameraController.PoiFocusStarted -= OnPoiFocusStarted;
             poiCameraController.PlayerFocusEnded -= OnPlayerFocusEnded;
+
+            reputationController.ReputationChanged -= OnReputationChanged;
+            customerScheduler.OrdersCompleted -= OnOrdersCompleted;
         }
 
         private void OnPoiFocusStarted()
@@ -76,7 +89,7 @@ namespace Features.Service
 
         public void OnCancel(InputAction.CallbackContext context)
         {
-            if (!context.performed)
+            if (!context.performed || _gameOver)
             {
                 return;
             }
@@ -105,6 +118,40 @@ namespace Features.Service
         private void OnFridgeOpened(IReadOnlyList<Pickable> pickables)
         {
             ShowPickableSelection(pickables, (pickable => handController.PickUp(Instantiate(pickable).GetComponent<Pickable>())));
+        }
+
+        private void OnReputationChanged(int rep)
+        {
+            if (_gameOver || rep > 0)
+            {
+                return;
+            }
+
+            _gameOver = true;
+            DisablePlayerControl();
+            if (serviceConfig.GameMode == GameMode.Endless)
+            {
+                gameOver.ShowEndlessGameOver();
+            }
+            else
+            {
+                gameOver.ShowLevelFailed();
+            }
+
+            uiController.ShowComponent(gameOver);
+        }
+
+        private void OnOrdersCompleted()
+        {
+            if (_gameOver || serviceConfig.GameMode != GameMode.Campaign)
+            {
+                return;
+            }
+
+            _gameOver = true;
+            DisablePlayerControl();
+            gameOver.ShowLevelComplete(serviceConfig.LevelIndex + 1 < serviceConfig.Levels.Length);
+            uiController.ShowComponent(gameOver);
         }
 
         private void ShowPickableSelection(IReadOnlyList<Pickable> pickables, Action<Pickable> selectionHandler)

@@ -30,6 +30,7 @@ namespace Features.Customer
 
         public event Action<int, Order> OrderTimedOut;
         public event Action<int> OrdersLeftChanged;
+        public event Action OrdersCompleted;
 
         public float WaitTimeMultiplier
         {
@@ -112,13 +113,17 @@ namespace Features.Customer
 
         private void OnCustomerArrived(int slotIndex)
         {
-            if (_slotStates[slotIndex] == SlotState.Incoming)
+            if (_ordersLeft > 0 && _slotStates[slotIndex] == SlotState.Incoming)
             {
                 Order order = _orderFactory.Create();
                 if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
-                    _ordersLeft--;
-                    OrdersLeftChanged?.Invoke(_ordersLeft);
+                    if (serviceConfig.GameMode == GameMode.Campaign)
+                    {
+                        _ordersLeft--;
+                        OrdersLeftChanged?.Invoke(_ordersLeft);
+                    }
+
                     _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
                 }
             }
@@ -131,6 +136,7 @@ namespace Features.Customer
         {
             Audio.AudioController.PlayYeah();
             SendCustomerHome(slotIndex);
+            CheckOrdersCompleted();
         }
 
         private void TickWaitTimes()
@@ -159,6 +165,25 @@ namespace Features.Customer
             OrderTimedOut?.Invoke(slotIndex, order);
             orderManager.ClearOrder(slotIndex);
             SendCustomerHome(slotIndex);
+            CheckOrdersCompleted();
+        }
+
+        private void CheckOrdersCompleted()
+        {
+            if (_ordersLeft > 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < orderManager.SlotCount; i++)
+            {
+                if (orderManager.GetOrder(i) != null)
+                {
+                    return;
+                }
+            }
+
+            OrdersCompleted?.Invoke();
         }
 
         private void SendCustomerHome(int slotIndex)

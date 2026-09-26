@@ -46,6 +46,12 @@
     background-color: rgba(255, 255, 255, 0.13);
 }
 
+.orders-served {
+    font-size: 20px;
+    color: rgb(235, 235, 235);
+    margin-bottom: 32px;
+}
+
 .home-button {
     background-image: url("project://database/Assets/Features/UI/house.svg?fileID=7388822144124034973&guid=98ae33757b0f7edd38a72f2dce931764&type=3#house");
 }

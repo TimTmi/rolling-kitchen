@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::Features.Service.LevelData
   maxOrderSize: 1
-  orderCount: 6
+  orderCount: 2
   minFreeTime: 5
   maxFreeTime: 10
-  waitTimeMultiplier: 13
+  waitTimeMultiplier: 1
   maxRep: 10
   repLoss: -5
   repGain: 2
