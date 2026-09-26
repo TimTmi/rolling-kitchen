@@ -36,6 +36,6 @@
 
 .orders-left-counter {
     -unity-font-style: bold;
-    font-size: 18px;
+    font-size: 12px;
     color: rgb(235, 235, 235);
 }
