@@ -17,6 +17,7 @@ namespace Features.Service
         [SerializeField] private HandController handController;
         [SerializeField] private UIController uiController;
         [SerializeField] private UI.HUD.HUDController hud;
+        [SerializeField] private ServiceConfig serviceConfig;
         [SerializeField] private Fridge fridge;
         [SerializeField] private PickableSelectionController pickableSelectionController;
         [SerializeField] private Core.PoiCameraController poiCameraController;
@@ -33,6 +34,7 @@ namespace Features.Service
         private void Start()
         {
             Core.CursorController.Lock();
+            fridge.LimitIngredients(serviceConfig.CurrentLevel.GetIngredients());
         }
 
         private void OnEnable()

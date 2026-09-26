@@ -36,7 +36,7 @@ namespace Features.Dish
         {
             LevelDish entry = _dishes[UnityEngine.Random.Range(0, _dishes.Length)];
             DishData dish = entry.Dish;
-            Ingredient[] toppingPool = GetToppingPool(dish, entry.AllowedToppings);
+            Ingredient[] toppingPool = entry.GetToppingPool();
             if (toppingPool.Length == 0)
             {
                 return dish;
@@ -49,13 +49,6 @@ namespace Features.Dish
                 .Take(UnityEngine.Random.Range(1, toppingPool.Length + 1))
                 .ToArray());
             return randomized;
-        }
-
-        private static Ingredient[] GetToppingPool(DishData dish, Ingredient[] allowedToppings)
-        {
-            return dish.Toppings
-                .Where(topping => topping != null && allowedToppings.Contains(topping))
-                .ToArray();
         }
     }
 }
