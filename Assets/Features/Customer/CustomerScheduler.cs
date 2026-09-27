@@ -105,6 +105,12 @@ namespace Features.Customer
         private void SendCustomerToCounter(int slotIndex)
         {
             _slotStates[slotIndex] = SlotState.Incoming;
+            if (serviceConfig.GameMode == GameMode.Campaign)
+            {
+                _ordersLeft--;
+                OrdersLeftChanged?.Invoke(_ordersLeft);
+            }
+
             OrderSlot slot = orderManager.GetSlot(slotIndex);
             CustomerController customer = _customers[slotIndex];
             customer.transform.position = slot.PathStart.position;
@@ -113,17 +119,11 @@ namespace Features.Customer
 
         private void OnCustomerArrived(int slotIndex)
         {
-            if (_ordersLeft > 0 && _slotStates[slotIndex] == SlotState.Incoming)
+            if (_slotStates[slotIndex] == SlotState.Incoming)
             {
                 Order order = _orderFactory.Create();
                 if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
-                    if (serviceConfig.GameMode == GameMode.Campaign)
-                    {
-                        _ordersLeft--;
-                        OrdersLeftChanged?.Invoke(_ordersLeft);
-                    }
-
                     _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
                 }
             }
@@ -177,7 +177,7 @@ namespace Features.Customer
 
             for (int i = 0; i < orderManager.SlotCount; i++)
             {
-                if (orderManager.GetOrder(i) != null)
+                if (_slotStates[i] == SlotState.Incoming || orderManager.GetOrder(i) != null)
                 {
                     return;
                 }
