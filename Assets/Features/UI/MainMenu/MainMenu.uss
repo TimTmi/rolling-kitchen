@@ -36,3 +36,46 @@
 .menu-button:hover {
     background-color: rgba(255, 255, 255, 0.13);
 }
+
+.mode-buttons {
+    display: none;
+    flex-direction: row;
+}
+
+.mode-button {
+    width: 220px;
+    margin: 0 8px;
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+    border-radius: 8px;
+}
+
+.mode-button:hover {
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+.mode-icon {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 12px;
+    background-size: 100% 100%;
+}
+
+.mode-label {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.campaign-icon {
+    background-image: url("project://database/Assets/Features/UI/map-pinned.svg?fileID=7388822144124034973&guid=8c2d24d052344621a3f1d38688b5db87&type=3#map-pinned");
+}
+
+.endless-icon {
+    background-size: contain;
+    background-image: url("project://database/Assets/Features/UI/infinity.svg?fileID=7388822144124034973&guid=a5b6299dc21442e7bfe602b74838742f&type=3#infinity");
+}

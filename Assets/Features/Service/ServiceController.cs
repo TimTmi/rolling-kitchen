@@ -57,8 +57,9 @@ namespace Features.Service
             }
         }
 
-        private void OnMenuPlayRequested()
+        private void OnMenuPlayRequested(GameMode gameMode)
         {
+            serviceConfig.SetGameMode(gameMode);
             customerScheduler.enabled = true;
             hud.Show();
             EnablePlayerControl();

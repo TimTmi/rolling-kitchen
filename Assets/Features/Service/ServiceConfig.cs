@@ -18,6 +18,11 @@ namespace Features.Service
 
         public GameMode GameMode => gameMode;
 
+        public void SetGameMode(GameMode value)
+        {
+            gameMode = value;
+        }
+
         public int LevelIndex => levelIndex;
 
         public LevelData[] Levels => levels;
