@@ -20,6 +20,7 @@ namespace Features.UI.MainMenu
         private Button _exitButton;
         private Button _campaignButton;
         private Button _endlessButton;
+        private Button _backButton;
         private VisualElement _buttons;
         private VisualElement _modeButtons;
         private Label _title;
@@ -39,10 +40,12 @@ namespace Features.UI.MainMenu
             _buttons = root.Q("Buttons");
             _modeButtons = root.Q("ModeButtons");
             _title = root.Q<Label>("Title");
+            _backButton = root.Q<Button>("BackButton");
 
             _playButton.clicked += ShowModeSelection;
             _campaignButton.clicked += () => StartGame(GameMode.Campaign);
             _endlessButton.clicked += () => StartGame(GameMode.Endless);
+            _backButton.clicked += ShowMainMenu;
             _exitButton.clicked += QuitGame;
         }
 

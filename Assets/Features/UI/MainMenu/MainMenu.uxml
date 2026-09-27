@@ -8,14 +8,17 @@
             <ui:Button text="Exit" name="ExitButton" class="menu-button" />
         </ui:VisualElement>
         <ui:VisualElement name="ModeButtons" class="mode-buttons">
-            <ui:Button name="CampaignButton" class="mode-button">
-                <ui:VisualElement name="CampaignIcon" class="mode-icon campaign-icon" />
-                <ui:Label text="Campaign" class="mode-label" />
-            </ui:Button>
-            <ui:Button name="EndlessButton" class="mode-button">
-                <ui:VisualElement name="EndlessIcon" class="mode-icon endless-icon" />
-                <ui:Label text="Endless" class="mode-label" />
-            </ui:Button>
+            <ui:VisualElement name="ModeRow" class="mode-row">
+                <ui:Button name="CampaignButton" class="mode-button">
+                    <ui:VisualElement name="CampaignIcon" class="mode-icon campaign-icon" />
+                    <ui:Label text="Campaign" class="mode-label" />
+                </ui:Button>
+                <ui:Button name="EndlessButton" class="mode-button">
+                    <ui:VisualElement name="EndlessIcon" class="mode-icon endless-icon" />
+                    <ui:Label text="Endless" class="mode-label" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:Button name="BackButton" class="back-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
