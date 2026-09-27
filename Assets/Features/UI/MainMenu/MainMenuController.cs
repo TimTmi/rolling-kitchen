@@ -30,6 +30,7 @@ namespace Features.UI.MainMenu
             _exitButton = root.Q<Button>("ExitButton");
 
             _playButton.clicked += StartGame;
+            _exitButton.clicked += QuitGame;
         }
 
         protected override void Initialize()
@@ -68,6 +69,15 @@ namespace Features.UI.MainMenu
             Core.CursorController.Lock();
 
             PlayRequested?.Invoke();
+        }
+
+        private void QuitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
 
         private void EnterMenuState()
