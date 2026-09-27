@@ -4338,7 +4338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b806de190cb2ef743bef77b312416b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.UI.MainMenu.MainMenuController
-  panelRenderer: {fileID: 0}
+  panelRenderer: {fileID: 479633332}
   menuCamera: {fileID: 1464128894}
   playerCamera: {fileID: 985315592}
   rotationSpeed: 12
