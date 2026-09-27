@@ -51,8 +51,13 @@ namespace Features.UI.OrderTickets
                 TicketView view = _tickets[i];
                 if (!ReferenceEquals(order, view.Order))
                 {
+                    bool isNewOrder = order != null && view.Order == null;
                     RebuildTicket(view, order);
                     view.Order = order;
+                    if (isNewOrder)
+                    {
+                        view.Element.BringToFront();
+                    }
                 }
 
                 UpdateTicket(view, i);
@@ -63,7 +68,7 @@ namespace Features.UI.OrderTickets
         {
             TemplateContainer element = ticketTemplate.Instantiate();
             _list.Add(element);
-            return new TicketView { Root = element.Q("Ticket") };
+            return new TicketView { Element = element, Root = element.Q("Ticket") };
         }
 
         private static void RebuildTicket(TicketView view, Order order)
@@ -131,6 +136,7 @@ namespace Features.UI.OrderTickets
 
         private sealed class TicketView
         {
+            public VisualElement Element;
             public VisualElement Root;
             public Order Order;
             public readonly List<DishView> Dishes = new();
