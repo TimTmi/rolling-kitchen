@@ -7,6 +7,7 @@ using Features.Player;
 using Features.Reputation;
 using Features.UI;
 using Features.UI.GameOver;
+using Features.UI.MainMenu;
 using Features.UI.PickableSelection;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +22,7 @@ namespace Features.Service
         [SerializeField] private UIController uiController;
         [SerializeField] private UI.HUD.HUDController hud;
         [SerializeField] private GameOverController gameOver;
+        [SerializeField] private MainMenuController mainMenu;
         [SerializeField] private ServiceConfig serviceConfig;
         [SerializeField] private CustomerScheduler customerScheduler;
         [SerializeField] private ReputationController reputationController;
@@ -40,8 +42,26 @@ namespace Features.Service
 
         private void Start()
         {
-            Core.CursorController.Lock();
             fridge.LimitIngredients(serviceConfig.CurrentLevel.GetIngredients());
+
+            if (mainMenu != null)
+            {
+                mainMenu.PlayRequested += OnMenuPlayRequested;
+                customerScheduler.enabled = false;
+                hud.Hide();
+                DisablePlayerControl();
+            }
+            else
+            {
+                Core.CursorController.Lock();
+            }
+        }
+
+        private void OnMenuPlayRequested()
+        {
+            customerScheduler.enabled = true;
+            hud.Show();
+            EnablePlayerControl();
         }
 
         private void OnEnable()
@@ -89,7 +109,7 @@ namespace Features.Service
 
         public void OnCancel(InputAction.CallbackContext context)
         {
-            if (!context.performed || _gameOver)
+            if (!context.performed || _gameOver || (mainMenu != null && mainMenu.MenuVisible))
             {
                 return;
             }
@@ -150,7 +170,14 @@ namespace Features.Service
 
             _gameOver = true;
             DisablePlayerControl();
-            gameOver.ShowLevelComplete(serviceConfig.LevelIndex + 1 < serviceConfig.Levels.Length);
+            int levelIndex = serviceConfig.LevelIndex;
+            int highestCompletedLevelIndex = PlayerPrefs.GetInt("HighestCompletedLevelIndex", -1);
+            if (highestCompletedLevelIndex < levelIndex)
+            {
+                PlayerPrefs.SetInt("HighestCompletedLevelIndex", levelIndex);
+                PlayerPrefs.Save();
+            }
+            gameOver.ShowLevelComplete(levelIndex + 1 < serviceConfig.Levels.Length);
             uiController.ShowComponent(gameOver);
         }
 
