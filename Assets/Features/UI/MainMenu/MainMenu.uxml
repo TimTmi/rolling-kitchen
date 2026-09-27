@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="MainMenu.uss" />
+    <ui:VisualElement name="MainMenuRoot" class="main-menu-root">
+        <ui:Label text="Rolling Kitchen" name="Title" class="title" />
+        <ui:VisualElement name="Buttons" class="buttons">
+            <ui:Button text="Play" name="PlayButton" class="menu-button" />
+            <ui:Button text="Settings" name="SettingsButton" class="menu-button" />
+            <ui:Button text="Exit" name="ExitButton" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
