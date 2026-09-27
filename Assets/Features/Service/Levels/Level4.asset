@@ -10,17 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e83f561c8e76a852931886b4193a9da, type: 3}
-  m_Name: Level1
+  m_Name: Level4
   m_EditorClassIdentifier: Assembly-CSharp::Features.Service.LevelData
-  maxOrderSize: 1
+  maxOrderSize: 2
   orderCount: 6
-  minFreeTime: 5
-  maxFreeTime: 10
-  waitTimeMultiplier: 13
+  minFreeTime: 2
+  maxFreeTime: 4
+  waitTimeMultiplier: 10
   maxRep: 10
   repLoss: -5
-  repGain: 2
+  repGain: 1
   dishes:
   - dish: {fileID: 11400000, guid: a44e071647b2ceded96b777ec18bea69, type: 2}
     allowedToppings:
     - {fileID: 6665150913982500476, guid: c71bf7257859cd5bb8b8be8c2147f1d8, type: 3}
+    - {fileID: 2672913992213735569, guid: b5251fdf3a5ee5bda9561cea6bea0bd3, type: 3}
+    - {fileID: 7893648094086281446, guid: 73f52f1ce0f42a164be888f0a9750099, type: 3}
+    - {fileID: -5761278092052448540, guid: f5ba31fc802cfb640a010bcf34f91b04, type: 3}
+  - dish: {fileID: 11400000, guid: 95044da8216c815d09f32b4913c74abe, type: 2}
+    allowedToppings:
+    - {fileID: 7893648094086281446, guid: 73f52f1ce0f42a164be888f0a9750099, type: 3}
