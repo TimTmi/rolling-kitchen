@@ -100,3 +100,26 @@
 .back-button:hover {
     background-color: rgba(255, 255, 255, 0.13);
 }
+
+.level-buttons {
+    display: none;
+    align-items: center;
+}
+
+.level-list {
+    width: 320px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.level-button {
+    width: 64px;
+    height: 64px;
+    margin: 6px;
+    font-size: 24px;
+}
+
+.level-button.locked {
+    opacity: 0.4;
+}

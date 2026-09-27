@@ -23,6 +23,11 @@ namespace Features.Service
             gameMode = value;
         }
 
+        public void SetLevelIndex(int value)
+        {
+            levelIndex = value;
+        }
+
         public int LevelIndex => levelIndex;
 
         public LevelData[] Levels => levels;

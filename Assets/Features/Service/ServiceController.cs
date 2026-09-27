@@ -47,6 +47,7 @@ namespace Features.Service
             if (mainMenu != null)
             {
                 mainMenu.PlayRequested += OnMenuPlayRequested;
+                mainMenu.SetLevels(serviceConfig.Levels, PlayerPrefs.GetInt("HighestCompletedLevelIndex", -1));
                 customerScheduler.enabled = false;
                 hud.Hide();
                 DisablePlayerControl();
@@ -57,9 +58,14 @@ namespace Features.Service
             }
         }
 
-        private void OnMenuPlayRequested(GameMode gameMode)
+        private void OnMenuPlayRequested(GameMode gameMode, int levelIndex)
         {
             serviceConfig.SetGameMode(gameMode);
+            if (gameMode == GameMode.Campaign)
+            {
+                serviceConfig.SetLevelIndex(levelIndex);
+            }
+
             customerScheduler.enabled = true;
             hud.Show();
             EnablePlayerControl();

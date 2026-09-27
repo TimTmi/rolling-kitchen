@@ -20,5 +20,9 @@
             </ui:VisualElement>
             <ui:Button name="BackButton" class="back-button" />
         </ui:VisualElement>
+        <ui:VisualElement name="LevelButtons" class="level-buttons">
+            <ui:VisualElement name="LevelList" class="level-list" />
+            <ui:Button name="LevelBackButton" class="back-button" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
