@@ -17,6 +17,8 @@ namespace Features.Service
         [SerializeField] private LevelData[] levels = Array.Empty<LevelData>();
         [SerializeField] private int endlessRampOrders = 6;
 
+        public const string HighestCompletedLevelIndexKey = "HighestCompletedLevelIndex";
+
         public GameMode GameMode => gameMode;
 
         public void SetGameMode(GameMode value)
@@ -34,6 +36,8 @@ namespace Features.Service
         public LevelData[] Levels => levels;
 
         public LevelData CurrentLevel => levels[levelIndex];
+
+        public LevelData EndlessLevel => levels[Mathf.Clamp(PlayerPrefs.GetInt(HighestCompletedLevelIndexKey, 0), 0, levels.Length - 1)];
 
         public int EndlessRampOrders => endlessRampOrders;
     }

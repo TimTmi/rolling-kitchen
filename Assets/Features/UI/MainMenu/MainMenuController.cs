@@ -58,7 +58,7 @@ namespace Features.UI.MainMenu
 
         protected override void Initialize()
         {
-            _highestCompletedLevelIndex = PlayerPrefs.GetInt("HighestCompletedLevelIndex", -1);
+            _highestCompletedLevelIndex = PlayerPrefs.GetInt(ServiceConfig.HighestCompletedLevelIndexKey, -1);
             Show();
         }
 

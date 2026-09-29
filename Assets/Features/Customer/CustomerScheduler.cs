@@ -51,10 +51,11 @@ namespace Features.Customer
 
         private void Awake()
         {
-            LevelData level = serviceConfig.CurrentLevel;
+            bool endless = serviceConfig.GameMode == GameMode.Endless;
+            LevelData level = endless ? serviceConfig.EndlessLevel : serviceConfig.CurrentLevel;
             _ordersLeft = level.OrderCount;
             _orderFactory = new OrderFactory(level.Dishes, level.MaxOrderSize);
-            if (serviceConfig.GameMode == GameMode.Endless)
+            if (endless)
             {
                 _difficultyLevel = serviceConfig.Levels[0];
                 ApplyDifficulty();

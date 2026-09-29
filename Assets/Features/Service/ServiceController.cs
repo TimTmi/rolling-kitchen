@@ -41,7 +41,8 @@ namespace Features.Service
         private void Start()
         {
             Core.CursorController.Lock();
-            fridge.LimitIngredients(serviceConfig.CurrentLevel.GetIngredients());
+            LevelData level = serviceConfig.GameMode == GameMode.Endless ? serviceConfig.EndlessLevel : serviceConfig.CurrentLevel;
+            fridge.LimitIngredients(level.GetIngredients());
         }
 
         private void OnEnable()
@@ -151,10 +152,10 @@ namespace Features.Service
             _gameOver = true;
             DisablePlayerControl();
             int levelIndex = serviceConfig.LevelIndex;
-            int highestCompletedLevelIndex = PlayerPrefs.GetInt("HighestCompletedLevelIndex", -1);
+            int highestCompletedLevelIndex = PlayerPrefs.GetInt(ServiceConfig.HighestCompletedLevelIndexKey, -1);
             if (highestCompletedLevelIndex < levelIndex)
             {
-                PlayerPrefs.SetInt("HighestCompletedLevelIndex", levelIndex);
+                PlayerPrefs.SetInt(ServiceConfig.HighestCompletedLevelIndexKey, levelIndex);
                 PlayerPrefs.Save();
             }
             gameOver.ShowLevelComplete(levelIndex + 1 < serviceConfig.Levels.Length);
