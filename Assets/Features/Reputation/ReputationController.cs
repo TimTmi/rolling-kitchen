@@ -13,6 +13,7 @@ namespace Features.Reputation
         [SerializeField] private ServiceConfig serviceConfig;
 
         private int _rep;
+        private int _servedOrders;
 
         public event Action<int> ReputationChanged;
 
@@ -48,7 +49,18 @@ namespace Features.Reputation
 
         private void OnOrderServed(int slotIndex, Order order)
         {
-            AddRep(serviceConfig.CurrentLevel.RepGain);
+            _servedOrders++;
+            AddRep(GetRepGain());
+        }
+
+        private int GetRepGain()
+        {
+            if (serviceConfig.GameMode != GameMode.Endless)
+            {
+                return serviceConfig.CurrentLevel.RepGain;
+            }
+
+            return EndlessDifficulty.ForServedOrders(serviceConfig.Levels[0], serviceConfig.EndlessRampOrders, _servedOrders).RepGain;
         }
 
         private void AddRep(int delta)

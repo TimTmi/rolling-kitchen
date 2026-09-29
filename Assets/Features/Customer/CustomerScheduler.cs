@@ -14,6 +14,8 @@ namespace Features.Customer
         private OrderFactory _orderFactory;
         private int _ordersLeft;
         private int _sentOrders;
+        private int _servedOrders;
+        private LevelData _difficultyLevel;
         private float _minFreeTime;
         private float _maxFreeTime;
         private float _waitTimeMultiplier;
@@ -41,16 +43,37 @@ namespace Features.Customer
 
         public int OrdersLeft => _ordersLeft;
 
+        public int ServedOrders => _servedOrders;
+
+        public GameMode GameMode => serviceConfig.GameMode;
+
         public int OrderCount => serviceConfig.CurrentLevel.OrderCount;
 
         private void Awake()
         {
             LevelData level = serviceConfig.CurrentLevel;
             _ordersLeft = level.OrderCount;
-            _minFreeTime = level.MinFreeTime;
-            _maxFreeTime = level.MaxFreeTime;
-            _waitTimeMultiplier = level.WaitTimeMultiplier;
             _orderFactory = new OrderFactory(level.Dishes, level.MaxOrderSize);
+            if (serviceConfig.GameMode == GameMode.Endless)
+            {
+                _difficultyLevel = serviceConfig.Levels[0];
+                ApplyDifficulty();
+            }
+            else
+            {
+                _minFreeTime = level.MinFreeTime;
+                _maxFreeTime = level.MaxFreeTime;
+                _waitTimeMultiplier = level.WaitTimeMultiplier;
+            }
+        }
+
+        private void ApplyDifficulty()
+        {
+            EndlessDifficulty difficulty = EndlessDifficulty.ForServedOrders(_difficultyLevel, serviceConfig.EndlessRampOrders, _servedOrders);
+            _orderFactory.MaxOrderSize = difficulty.MaxOrderSize;
+            _minFreeTime = difficulty.MinFreeTime;
+            _maxFreeTime = difficulty.MaxFreeTime;
+            _waitTimeMultiplier = difficulty.WaitTimeMultiplier;
         }
 
         private void OnEnable()
@@ -142,6 +165,13 @@ namespace Features.Customer
         {
             Audio.AudioController.PlayYeah();
             SendCustomerHome(slotIndex);
+            _servedOrders++;
+            if (serviceConfig.GameMode == GameMode.Endless)
+            {
+                ApplyDifficulty();
+                OrdersLeftChanged?.Invoke(_servedOrders);
+            }
+
             CheckOrdersCompleted();
         }
 

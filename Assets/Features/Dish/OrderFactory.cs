@@ -7,7 +7,13 @@ namespace Features.Dish
     public class OrderFactory
     {
         private readonly LevelDish[] _dishes;
-        private readonly int _maxOrderSize;
+        private int _maxOrderSize;
+
+        public int MaxOrderSize
+        {
+            get => _maxOrderSize;
+            set => _maxOrderSize = value;
+        }
 
         public OrderFactory(LevelDish[] dishes, int maxOrderSize)
         {

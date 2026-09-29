@@ -2,6 +2,7 @@ using Features.Customer;
 using Features.Interaction;
 using Features.Player;
 using Features.Reputation;
+using Features.Service;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -45,7 +46,9 @@ namespace Features.UI.HUD
 
         protected override void Initialize()
         {
-            UpdateOrdersLeft(customerScheduler.OrdersLeft);
+            UpdateOrdersLeft(customerScheduler.GameMode == GameMode.Endless
+                ? customerScheduler.ServedOrders
+                : customerScheduler.OrdersLeft);
             UpdateReputation(reputationController.Rep, reputationController.MaxRep);
         }
 
@@ -95,14 +98,16 @@ namespace Features.UI.HUD
             _reputationFill.style.width = maxRep > 0 ? Length.Percent(100f * rep / maxRep) : Length.Percent(0f);
         }
 
-        private void UpdateOrdersLeft(int ordersLeft)
+        private void UpdateOrdersLeft(int value)
         {
             if (_ordersLeftCounter == null)
             {
                 return;
             }
 
-            _ordersLeftCounter.text = $"Orders: {ordersLeft} / {customerScheduler.OrderCount}";
+            _ordersLeftCounter.text = customerScheduler.GameMode == GameMode.Endless
+                ? $"Served: {value}"
+                : $"Orders: {value} / {customerScheduler.OrderCount}";
         }
 
         private void OnFocusLost(IInteractable interactable)

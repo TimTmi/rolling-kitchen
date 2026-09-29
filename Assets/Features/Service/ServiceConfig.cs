@@ -15,6 +15,7 @@ namespace Features.Service
         [SerializeField] private GameMode gameMode = GameMode.Campaign;
         [SerializeField] private int levelIndex = 0;
         [SerializeField] private LevelData[] levels = Array.Empty<LevelData>();
+        [SerializeField] private int endlessRampOrders = 6;
 
         public GameMode GameMode => gameMode;
 
@@ -33,5 +34,7 @@ namespace Features.Service
         public LevelData[] Levels => levels;
 
         public LevelData CurrentLevel => levels[levelIndex];
+
+        public int EndlessRampOrders => endlessRampOrders;
     }
 }
