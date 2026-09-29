@@ -1,0 +1,37 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="Pause.uss" />
+    <ui:VisualElement name="PauseRoot" class="pause-root">
+        <ui:Label text="Paused" name="Title" class="title" />
+        <ui:VisualElement name="Buttons" class="buttons">
+            <ui:Button name="ExitButton" class="mode-button">
+                <ui:VisualElement name="ExitIcon" class="mode-icon exit-icon" />
+                <ui:Label text="Exit" class="mode-label" />
+            </ui:Button>
+            <ui:Button name="HomeButton" class="mode-button">
+                <ui:VisualElement name="HomeIcon" class="mode-icon home-icon" />
+                <ui:Label text="Home" class="mode-label" />
+            </ui:Button>
+            <ui:Button name="SettingsButton" class="mode-button">
+                <ui:VisualElement name="SettingsIcon" class="mode-icon settings-icon" />
+                <ui:Label text="Settings" class="mode-label" />
+            </ui:Button>
+            <ui:Button name="RestartButton" class="mode-button">
+                <ui:VisualElement name="RestartIcon" class="mode-icon restart-icon" />
+                <ui:Label text="Restart" class="mode-label" />
+            </ui:Button>
+            <ui:Button name="ContinueButton" class="mode-button">
+                <ui:VisualElement name="ContinueIcon" class="mode-icon continue-icon" />
+                <ui:Label text="Continue" class="mode-label" />
+            </ui:Button>
+        </ui:VisualElement>
+        <ui:VisualElement name="SettingsPanel" class="settings-panel">
+            <ui:VisualElement name="SensitivityRow" class="settings-row">
+                <ui:Label text="Camera Sensitivity" class="settings-label" />
+                <ui:Slider name="SensitivitySlider" class="settings-slider" low="0.1" high="3" show-input-field="true" />
+            </ui:VisualElement>
+            <ui:Button name="ResetSensitivityButton" text="Reset to Default" class="menu-button" />
+            <ui:Button name="ResetDataButton" text="Reset Data" class="menu-button" />
+            <ui:Button name="SettingsBackButton" class="back-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

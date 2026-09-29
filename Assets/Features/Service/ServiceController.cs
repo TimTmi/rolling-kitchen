@@ -7,6 +7,7 @@ using Features.Player;
 using Features.Reputation;
 using Features.UI;
 using Features.UI.GameOver;
+using Features.UI.Pause;
 using Features.UI.PickableSelection;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +22,7 @@ namespace Features.Service
         [SerializeField] private UIController uiController;
         [SerializeField] private UI.HUD.HUDController hud;
         [SerializeField] private GameOverController gameOver;
+        [SerializeField] private PauseController pause;
         [SerializeField] private ServiceConfig serviceConfig;
         [SerializeField] private CustomerScheduler customerScheduler;
         [SerializeField] private ReputationController reputationController;
@@ -52,6 +54,8 @@ namespace Features.Service
             pickableSelectionController.CloseRequested += HideUIComponent;
             pickableSelectionController.PickableSelected += OnPickableSelected;
 
+            pause.CloseRequested += HideUIComponent;
+
             poiCameraController.PoiFocusStarted += OnPoiFocusStarted;
             poiCameraController.PlayerFocusEnded += OnPlayerFocusEnded;
 
@@ -64,6 +68,8 @@ namespace Features.Service
             fridge.Opened -= OnFridgeOpened;
             pickableSelectionController.CloseRequested -= HideUIComponent;
             pickableSelectionController.PickableSelected -= OnPickableSelected;
+
+            pause.CloseRequested -= HideUIComponent;
             poiCameraController.PoiFocusStarted -= OnPoiFocusStarted;
             poiCameraController.PlayerFocusEnded -= OnPlayerFocusEnded;
 
@@ -101,7 +107,19 @@ namespace Features.Service
                 return;
             }
 
-            HideUIComponent();
+            if (uiController.HasActiveComponent())
+            {
+                HideUIComponent();
+                return;
+            }
+
+            PauseGame();
+        }
+
+        private void PauseGame()
+        {
+            Time.timeScale = 0f;
+            ShowUIComponent(pause);
         }
 
         public void FocusPoi(Transform poi, bool cancellable)
@@ -186,6 +204,7 @@ namespace Features.Service
 
         private void HideUIComponent()
         {
+            Time.timeScale = 1f;
             uiController.HideComponent();
             EnablePlayerControl();
         }
