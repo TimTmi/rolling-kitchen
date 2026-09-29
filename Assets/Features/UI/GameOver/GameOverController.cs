@@ -25,6 +25,7 @@ namespace Features.UI.GameOver
         protected override void OnDisabled()
         {
             orderManager.Served -= OnOrderServed;
+            Time.timeScale = 1f;
         }
 
         protected override void BindElements(VisualElement root)
@@ -46,20 +47,28 @@ namespace Features.UI.GameOver
 
         public void ShowLevelFailed()
         {
+            Pause();
             SetTitle("Level Failed");
             SetButtons(home: true, replay: true, next: false);
         }
 
         public void ShowLevelComplete(bool hasNext)
         {
+            Pause();
             SetTitle("Level Complete");
             SetButtons(home: true, replay: true, next: hasNext);
         }
 
         public void ShowEndlessGameOver()
         {
+            Pause();
             SetTitle("Game Over");
             SetButtons(home: true, replay: true, next: false);
+        }
+
+        private void Pause()
+        {
+            Time.timeScale = 0f;
         }
 
         private void OnOrderServed(int slotIndex, Order order)
