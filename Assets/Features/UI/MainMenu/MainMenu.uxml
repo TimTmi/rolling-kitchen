@@ -25,6 +25,7 @@
                 <ui:Button name="EndlessButton" class="mode-button">
                     <ui:VisualElement name="EndlessIcon" class="mode-icon endless-icon" />
                     <ui:Label text="Endless" class="mode-label" />
+                    <ui:Label name="EndlessHighscore" class="mode-sublabel" />
                 </ui:Button>
             </ui:VisualElement>
             <ui:Button name="BackButton" class="back-button" />

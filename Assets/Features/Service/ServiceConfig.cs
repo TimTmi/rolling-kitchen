@@ -18,6 +18,7 @@ namespace Features.Service
         [SerializeField] private int endlessRampOrders = 6;
 
         public const string HighestCompletedLevelIndexKey = "HighestCompletedLevelIndex";
+        public const string EndlessHighScoreKey = "EndlessHighScore";
 
         public GameMode GameMode => gameMode;
 

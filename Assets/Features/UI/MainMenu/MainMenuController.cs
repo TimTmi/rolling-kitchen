@@ -19,6 +19,7 @@ namespace Features.UI.MainMenu
         private Button _exitButton;
         private Button _campaignButton;
         private Button _endlessButton;
+        private Label _endlessHighscore;
         private Button _backButton;
         private Button _levelBackButton;
         private VisualElement _buttons;
@@ -40,6 +41,7 @@ namespace Features.UI.MainMenu
             _exitButton = root.Q<Button>("ExitButton");
             _campaignButton = root.Q<Button>("CampaignButton");
             _endlessButton = root.Q<Button>("EndlessButton");
+            _endlessHighscore = root.Q<Label>("EndlessHighscore");
             _buttons = root.Q("Buttons");
             _modeButtons = root.Q("ModeButtons");
             _title = root.Q<Label>("Title");
@@ -59,6 +61,7 @@ namespace Features.UI.MainMenu
         protected override void Initialize()
         {
             _highestCompletedLevelIndex = PlayerPrefs.GetInt(ServiceConfig.HighestCompletedLevelIndexKey, -1);
+            UpdateEndlessHighscore();
             Show();
         }
 
@@ -72,10 +75,19 @@ namespace Features.UI.MainMenu
 
         private void ShowModeSelection()
         {
+            UpdateEndlessHighscore();
             _title.style.display = DisplayStyle.None;
             _buttons.style.display = DisplayStyle.None;
             _levelButtons.style.display = DisplayStyle.None;
             _modeButtons.style.display = DisplayStyle.Flex;
+        }
+
+        private void UpdateEndlessHighscore()
+        {
+            if (_endlessHighscore != null)
+            {
+                _endlessHighscore.text = $"Highscore: {PlayerPrefs.GetInt(ServiceConfig.EndlessHighScoreKey, 0)}";
+            }
         }
 
         private void ShowLevelSelection()

@@ -77,6 +77,11 @@
     color: rgb(255, 255, 255);
 }
 
+.mode-sublabel {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
 .campaign-icon {
     background-image: url("project://database/Assets/Features/UI/map-pinned.svg?fileID=7388822144124034973&guid=8c2d24d052344621a3f1d38688b5db87&type=3#map-pinned");
 }
