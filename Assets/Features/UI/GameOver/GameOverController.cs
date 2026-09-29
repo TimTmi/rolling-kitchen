@@ -7,6 +7,8 @@ namespace Features.UI.GameOver
 {
     public class GameOverController : UIComponent
     {
+        public const string EndlessHighScoreKey = "EndlessHighScore";
+
         [SerializeField] private OrderManager orderManager;
 
         private Label _title;
@@ -62,8 +64,20 @@ namespace Features.UI.GameOver
         public void ShowEndlessGameOver()
         {
             Pause();
+            SaveEndlessHighScore();
             SetTitle("Game Over");
             SetButtons(home: true, replay: true, next: false);
+        }
+
+        private void SaveEndlessHighScore()
+        {
+            if (_servedCount <= PlayerPrefs.GetInt(EndlessHighScoreKey, 0))
+            {
+                return;
+            }
+
+            PlayerPrefs.SetInt(EndlessHighScoreKey, _servedCount);
+            PlayerPrefs.Save();
         }
 
         private void Pause()
