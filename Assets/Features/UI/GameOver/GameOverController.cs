@@ -1,4 +1,5 @@
 using Features.Dish;
+using Features.Service;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -33,6 +34,8 @@ namespace Features.UI.GameOver
             _homeButton = root.Q<Button>("HomeButton");
             _replayButton = root.Q<Button>("ReplayButton");
             _nextLevelButton = root.Q<Button>("NextLevelButton");
+
+            _homeButton.clicked += GameFlow.LoadMainMenu;
         }
 
         protected override void Initialize()

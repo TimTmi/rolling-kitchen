@@ -9,10 +9,8 @@ namespace Features.UI.MainMenu
     public class MainMenuController : UIComponent
     {
         [SerializeField] private Camera menuCamera;
-        [SerializeField] private Camera playerCamera;
+        [SerializeField] private ServiceConfig serviceConfig;
         [SerializeField] private float rotationSpeed = 12f;
-
-        public event Action<GameMode, int> PlayRequested;
 
         public bool MenuVisible { get; private set; }
 
@@ -28,7 +26,6 @@ namespace Features.UI.MainMenu
         private VisualElement _levelButtons;
         private VisualElement _levelList;
         private Label _title;
-        private IReadOnlyList<LevelData> _levels;
         private int _highestCompletedLevelIndex;
 
         protected override void OnEnabled()
@@ -61,6 +58,7 @@ namespace Features.UI.MainMenu
 
         protected override void Initialize()
         {
+            _highestCompletedLevelIndex = PlayerPrefs.GetInt("HighestCompletedLevelIndex", -1);
             Show();
         }
 
@@ -70,12 +68,6 @@ namespace Features.UI.MainMenu
             {
                 menuCamera.transform.RotateAround(menuCamera.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
             }
-        }
-
-        public void SetLevels(IReadOnlyList<LevelData> levels, int highestCompletedLevelIndex)
-        {
-            _levels = levels;
-            _highestCompletedLevelIndex = highestCompletedLevelIndex;
         }
 
         private void ShowModeSelection()
@@ -111,12 +103,13 @@ namespace Features.UI.MainMenu
         {
             _levelList.Clear();
 
-            if (_levels == null)
+            if (serviceConfig == null)
             {
                 return;
             }
 
-            for (int i = 0; i < _levels.Count; i++)
+            LevelData[] levels = serviceConfig.Levels;
+            for (int i = 0; i < levels.Length; i++)
             {
                 int levelIndex = i;
                 Button button = new Button(() => StartGame(GameMode.Campaign, levelIndex))
@@ -144,21 +137,7 @@ namespace Features.UI.MainMenu
             }
 
             MenuVisible = false;
-            Hide();
-
-            if (menuCamera != null)
-            {
-                menuCamera.enabled = false;
-            }
-
-            if (playerCamera != null)
-            {
-                playerCamera.enabled = true;
-            }
-
-            Core.CursorController.Lock();
-
-            PlayRequested?.Invoke(gameMode, levelIndex);
+            GameFlow.StartGame(serviceConfig, gameMode, levelIndex);
         }
 
         private void QuitGame()
@@ -174,17 +153,6 @@ namespace Features.UI.MainMenu
         {
             MenuVisible = true;
             ShowMainMenu();
-
-            if (menuCamera != null)
-            {
-                menuCamera.enabled = true;
-            }
-
-            if (playerCamera != null)
-            {
-                playerCamera.enabled = false;
-            }
-
             Core.CursorController.Unlock();
         }
     }

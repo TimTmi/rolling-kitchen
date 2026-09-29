@@ -7,7 +7,6 @@ using Features.Player;
 using Features.Reputation;
 using Features.UI;
 using Features.UI.GameOver;
-using Features.UI.MainMenu;
 using Features.UI.PickableSelection;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,7 +21,6 @@ namespace Features.Service
         [SerializeField] private UIController uiController;
         [SerializeField] private UI.HUD.HUDController hud;
         [SerializeField] private GameOverController gameOver;
-        [SerializeField] private MainMenuController mainMenu;
         [SerializeField] private ServiceConfig serviceConfig;
         [SerializeField] private CustomerScheduler customerScheduler;
         [SerializeField] private ReputationController reputationController;
@@ -42,33 +40,8 @@ namespace Features.Service
 
         private void Start()
         {
+            Core.CursorController.Lock();
             fridge.LimitIngredients(serviceConfig.CurrentLevel.GetIngredients());
-
-            if (mainMenu != null)
-            {
-                mainMenu.PlayRequested += OnMenuPlayRequested;
-                mainMenu.SetLevels(serviceConfig.Levels, PlayerPrefs.GetInt("HighestCompletedLevelIndex", -1));
-                customerScheduler.enabled = false;
-                hud.Hide();
-                DisablePlayerControl();
-            }
-            else
-            {
-                Core.CursorController.Lock();
-            }
-        }
-
-        private void OnMenuPlayRequested(GameMode gameMode, int levelIndex)
-        {
-            serviceConfig.SetGameMode(gameMode);
-            if (gameMode == GameMode.Campaign)
-            {
-                serviceConfig.SetLevelIndex(levelIndex);
-            }
-
-            customerScheduler.enabled = true;
-            hud.Show();
-            EnablePlayerControl();
         }
 
         private void OnEnable()
@@ -116,7 +89,7 @@ namespace Features.Service
 
         public void OnCancel(InputAction.CallbackContext context)
         {
-            if (!context.performed || _gameOver || (mainMenu != null && mainMenu.MenuVisible))
+            if (!context.performed || _gameOver)
             {
                 return;
             }
