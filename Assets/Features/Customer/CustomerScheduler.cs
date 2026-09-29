@@ -13,6 +13,7 @@ namespace Features.Customer
 
         private OrderFactory _orderFactory;
         private int _ordersLeft;
+        private int _sentOrders;
         private float _minFreeTime;
         private float _maxFreeTime;
         private float _waitTimeMultiplier;
@@ -74,7 +75,8 @@ namespace Features.Customer
             EnsureSpawnTimersInitialized();
             for (int i = 0; i < _spawnTimers.Length; i++)
             {
-                if (_ordersLeft <= 0 || orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free)
+                if (orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free
+                    || (serviceConfig.GameMode == GameMode.Campaign && _sentOrders >= OrderCount))
                 {
                     continue;
                 }
@@ -107,7 +109,7 @@ namespace Features.Customer
             _slotStates[slotIndex] = SlotState.Incoming;
             if (serviceConfig.GameMode == GameMode.Campaign)
             {
-                _ordersLeft--;
+                _sentOrders++;
             }
 
             OrderSlot slot = orderManager.GetSlot(slotIndex);
@@ -126,6 +128,7 @@ namespace Features.Customer
                     _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
                     if (serviceConfig.GameMode == GameMode.Campaign)
                     {
+                        _ordersLeft--;
                         OrdersLeftChanged?.Invoke(_ordersLeft);
                     }
                 }
