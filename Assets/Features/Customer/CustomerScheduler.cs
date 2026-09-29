@@ -108,7 +108,6 @@ namespace Features.Customer
             if (serviceConfig.GameMode == GameMode.Campaign)
             {
                 _ordersLeft--;
-                OrdersLeftChanged?.Invoke(_ordersLeft);
             }
 
             OrderSlot slot = orderManager.GetSlot(slotIndex);
@@ -125,6 +124,10 @@ namespace Features.Customer
                 if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
                     _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
+                    if (serviceConfig.GameMode == GameMode.Campaign)
+                    {
+                        OrdersLeftChanged?.Invoke(_ordersLeft);
+                    }
                 }
             }
 
