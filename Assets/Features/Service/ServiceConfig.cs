@@ -19,6 +19,9 @@ namespace Features.Service
 
         public const string HighestCompletedLevelIndexKey = "HighestCompletedLevelIndex";
         public const string EndlessHighScoreKey = "EndlessHighScore";
+        public const string CameraSensitivityKey = "CameraSensitivity";
+        public const float DefaultCameraSensitivity = 1f;
+        public const float CameraSensitivityScale = 16000f;
 
         public GameMode GameMode => gameMode;
 

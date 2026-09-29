@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 34a2a8463cbe915ceac3b9a8af30d553, type: 2}
   - {fileID: 11400000, guid: 1b5f79459049d606f8c873e8bbe5ca5f, type: 2}
   - {fileID: 11400000, guid: a0991f642305028ea96ffd6b0e5ffebe, type: 2}
-  endlessRampOrders: 1
+  endlessRampOrders: 16

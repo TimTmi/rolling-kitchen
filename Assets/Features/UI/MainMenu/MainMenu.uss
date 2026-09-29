@@ -142,3 +142,24 @@
 .level-button.locked {
     opacity: 0.4;
 }
+
+.settings-panel {
+    display: none;
+    align-items: center;
+}
+
+.settings-row {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.settings-label {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    margin-right: 16px;
+}
+
+.settings-slider {
+    width: 260px;
+}

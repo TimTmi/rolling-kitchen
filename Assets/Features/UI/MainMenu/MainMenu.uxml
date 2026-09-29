@@ -34,5 +34,14 @@
             <ui:VisualElement name="LevelList" class="level-list" />
             <ui:Button name="LevelBackButton" class="back-button" />
         </ui:VisualElement>
+        <ui:VisualElement name="SettingsPanel" class="settings-panel">
+            <ui:VisualElement name="SensitivityRow" class="settings-row">
+                <ui:Label text="Camera Sensitivity" class="settings-label" />
+                <ui:Slider name="SensitivitySlider" class="settings-slider" low="0.1" high="3" show-input-field="true" />
+            </ui:VisualElement>
+            <ui:Button name="ResetSensitivityButton" text="Reset to Default" class="menu-button" />
+            <ui:Button name="ResetDataButton" text="Reset Data" class="menu-button" />
+            <ui:Button name="SettingsBackButton" class="back-button" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
