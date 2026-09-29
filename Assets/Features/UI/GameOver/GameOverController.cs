@@ -8,6 +8,7 @@ namespace Features.UI.GameOver
     public class GameOverController : UIComponent
     {
         [SerializeField] private OrderManager orderManager;
+        [SerializeField] private ServiceConfig serviceConfig;
 
         private Label _title;
         private Label _ordersServed;
@@ -37,6 +38,8 @@ namespace Features.UI.GameOver
             _nextLevelButton = root.Q<Button>("NextLevelButton");
 
             _homeButton.clicked += GameFlow.LoadMainMenu;
+            _replayButton.clicked += Replay;
+            _nextLevelButton.clicked += NextLevel;
         }
 
         protected override void Initialize()
@@ -76,6 +79,16 @@ namespace Features.UI.GameOver
 
             PlayerPrefs.SetInt(ServiceConfig.EndlessHighScoreKey, _servedCount);
             PlayerPrefs.Save();
+        }
+
+        private void Replay()
+        {
+            GameFlow.StartGame(serviceConfig, serviceConfig.GameMode, serviceConfig.LevelIndex);
+        }
+
+        private void NextLevel()
+        {
+            GameFlow.StartGame(serviceConfig, GameMode.Campaign, serviceConfig.LevelIndex + 1);
         }
 
         private void Pause()

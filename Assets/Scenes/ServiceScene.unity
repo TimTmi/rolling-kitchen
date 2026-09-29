@@ -11381,6 +11381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.UI.GameOver.GameOverController
   panelRenderer: {fileID: 1564844907}
   orderManager: {fileID: 1882668564}
+  serviceConfig: {fileID: 11400000, guid: 5eafa49f8a39dfd5493e0718b0460147, type: 2}
 --- !u!1 &2846137591
 GameObject:
   m_ObjectHideFlags: 0
