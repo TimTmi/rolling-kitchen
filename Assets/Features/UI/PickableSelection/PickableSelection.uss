@@ -30,7 +30,8 @@
     border-width: 1px;
     border-radius: 8px;
     background-image: url("project://database/Assets/Features/UI/x.svg?fileID=7388822144124034973&guid=3d9aecbc1fc7878b3a183f64f9294eab&type=3#x");
-    background-size: 60% 60%;
+    background-size: auto 60%;
+    background-position: center;
 }
 
 .close-button:hover {

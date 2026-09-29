@@ -3,9 +3,18 @@
     <ui:VisualElement name="MainMenuRoot" class="main-menu-root">
         <ui:Label text="Rolling Kitchen" name="Title" class="title" />
         <ui:VisualElement name="Buttons" class="buttons">
-            <ui:Button text="Play" name="PlayButton" class="menu-button" />
-            <ui:Button text="Settings" name="SettingsButton" class="menu-button" />
-            <ui:Button text="Exit" name="ExitButton" class="menu-button" />
+            <ui:Button name="PlayButton" class="mode-button">
+                <ui:VisualElement name="PlayIcon" class="mode-icon play-icon" />
+                <ui:Label text="Play" class="mode-label" />
+            </ui:Button>
+            <ui:Button name="SettingsButton" class="mode-button">
+                <ui:VisualElement name="SettingsIcon" class="mode-icon settings-icon" />
+                <ui:Label text="Settings" class="mode-label" />
+            </ui:Button>
+            <ui:Button name="ExitButton" class="mode-button">
+                <ui:VisualElement name="ExitIcon" class="mode-icon exit-icon" />
+                <ui:Label text="Exit" class="mode-label" />
+            </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement name="ModeButtons" class="mode-buttons">
             <ui:VisualElement name="ModeRow" class="mode-row">
