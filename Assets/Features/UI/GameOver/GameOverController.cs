@@ -1,4 +1,5 @@
 using Features.Dish;
+using Features.Ingredients;
 using Features.Service;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,6 +16,10 @@ namespace Features.UI.GameOver
         private Button _homeButton;
         private Button _replayButton;
         private Button _nextLevelButton;
+        private VisualElement _unlockPanel;
+        private VisualElement _unlockIcon;
+        private Label _unlockLabel;
+        private Button _unlockOkButton;
 
         private int _servedCount;
 
@@ -36,6 +41,12 @@ namespace Features.UI.GameOver
             _homeButton = root.Q<Button>("HomeButton");
             _replayButton = root.Q<Button>("ReplayButton");
             _nextLevelButton = root.Q<Button>("NextLevelButton");
+            _unlockPanel = root.Q<VisualElement>("UnlockPanel");
+            _unlockIcon = root.Q<VisualElement>("UnlockIcon");
+            _unlockLabel = root.Q<Label>("UnlockLabel");
+            _unlockOkButton = root.Q<Button>("UnlockOkButton");
+
+            _unlockOkButton.clicked += HideUnlock;
 
             _homeButton.clicked += GameFlow.LoadMainMenu;
             _replayButton.clicked += Replay;
@@ -53,6 +64,7 @@ namespace Features.UI.GameOver
             Pause();
             SetTitle("Level Failed");
             SetButtons(home: true, replay: true, next: false);
+            HideUnlock();
         }
 
         public void ShowLevelComplete(bool hasNext)
@@ -60,6 +72,10 @@ namespace Features.UI.GameOver
             Pause();
             SetTitle("Level Complete");
             SetButtons(home: true, replay: true, next: hasNext);
+            if (hasNext)
+            {
+                ShowUnlock();
+            }
         }
 
         public void ShowEndlessGameOver()
@@ -68,6 +84,29 @@ namespace Features.UI.GameOver
             SaveEndlessHighScore();
             SetTitle("Game Over");
             SetButtons(home: true, replay: true, next: false);
+            HideUnlock();
+        }
+
+        private void ShowUnlock()
+        {
+            IngredientData ingredient = serviceConfig.Levels[serviceConfig.LevelIndex + 1].UnlockedIngredient;
+            if (ingredient == null)
+            {
+                return;
+            }
+
+            _unlockLabel.text = $"Unlocked {ingredient.DisplayName}";
+            if (ingredient.Icon != null)
+            {
+                _unlockIcon.style.backgroundImage = new StyleBackground(ingredient.Icon);
+            }
+
+            _unlockPanel.style.display = DisplayStyle.Flex;
+        }
+
+        private void HideUnlock()
+        {
+            _unlockPanel.style.display = DisplayStyle.None;
         }
 
         private void SaveEndlessHighScore()
