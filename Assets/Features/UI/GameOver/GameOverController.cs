@@ -78,6 +78,14 @@ namespace Features.UI.GameOver
             }
         }
 
+        public void ShowTutorialComplete()
+        {
+            Pause();
+            SetTitle("Tutorial Complete");
+            SetButtons(home: true, replay: true, next: false);
+            HideUnlock();
+        }
+
         public void ShowEndlessGameOver()
         {
             Pause();

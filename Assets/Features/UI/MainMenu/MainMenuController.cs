@@ -19,6 +19,7 @@ namespace Features.UI.MainMenu
         private Button _exitButton;
         private Button _campaignButton;
         private Button _endlessButton;
+        private Button _tutorialButton;
         private Label _endlessHighscore;
         private Button _backButton;
         private Button _levelBackButton;
@@ -46,6 +47,7 @@ namespace Features.UI.MainMenu
             _exitButton = root.Q<Button>("ExitButton");
             _campaignButton = root.Q<Button>("CampaignButton");
             _endlessButton = root.Q<Button>("EndlessButton");
+            _tutorialButton = root.Q<Button>("TutorialButton");
             _endlessHighscore = root.Q<Label>("EndlessHighscore");
             _buttons = root.Q("Buttons");
             _modeButtons = root.Q("ModeButtons");
@@ -63,6 +65,7 @@ namespace Features.UI.MainMenu
             _playButton.clicked += ShowModeSelection;
             _campaignButton.clicked += ShowLevelSelection;
             _endlessButton.clicked += () => StartGame(GameMode.Endless);
+            _tutorialButton.clicked += () => StartGame(GameMode.Tutorial);
             _backButton.clicked += ShowMainMenu;
             _levelBackButton.clicked += ShowModeSelection;
             _settingsButton.clicked += ShowSettings;

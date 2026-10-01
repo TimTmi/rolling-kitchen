@@ -43,7 +43,7 @@ namespace Features.Service
         private void Start()
         {
             Core.CursorController.Lock();
-            LevelData level = serviceConfig.GameMode == GameMode.Endless ? serviceConfig.EndlessLevel : serviceConfig.CurrentLevel;
+            LevelData level = serviceConfig.ActiveLevel;
             fridge.LimitIngredients(level.GetIngredients());
         }
 
@@ -162,21 +162,29 @@ namespace Features.Service
 
         private void OnOrdersCompleted()
         {
-            if (_gameOver || serviceConfig.GameMode != GameMode.Campaign)
+            if (_gameOver || serviceConfig.GameMode == GameMode.Endless)
             {
                 return;
             }
 
             _gameOver = true;
             DisablePlayerControl();
-            int levelIndex = serviceConfig.LevelIndex;
-            int highestCompletedLevelIndex = PlayerPrefs.GetInt(ServiceConfig.HighestCompletedLevelIndexKey, -1);
-            if (highestCompletedLevelIndex < levelIndex)
+            if (serviceConfig.GameMode == GameMode.Tutorial)
             {
-                PlayerPrefs.SetInt(ServiceConfig.HighestCompletedLevelIndexKey, levelIndex);
-                PlayerPrefs.Save();
+                gameOver.ShowTutorialComplete();
             }
-            gameOver.ShowLevelComplete(levelIndex + 1 < serviceConfig.Levels.Length);
+            else
+            {
+                int levelIndex = serviceConfig.LevelIndex;
+                int highestCompletedLevelIndex = PlayerPrefs.GetInt(ServiceConfig.HighestCompletedLevelIndexKey, -1);
+                if (highestCompletedLevelIndex < levelIndex)
+                {
+                    PlayerPrefs.SetInt(ServiceConfig.HighestCompletedLevelIndexKey, levelIndex);
+                    PlayerPrefs.Save();
+                }
+                gameOver.ShowLevelComplete(levelIndex + 1 < serviceConfig.Levels.Length);
+            }
+
             uiController.ShowComponent(gameOver);
         }
 

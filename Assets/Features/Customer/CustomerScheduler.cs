@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Features.Dish;
 using Features.Service;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Features.Customer
         [SerializeField] private ServiceConfig serviceConfig;
 
         private OrderFactory _orderFactory;
+        private LevelData _level;
         private int _ordersLeft;
         private int _sentOrders;
         private int _servedOrders;
@@ -47,14 +49,14 @@ namespace Features.Customer
 
         public GameMode GameMode => serviceConfig.GameMode;
 
-        public int OrderCount => serviceConfig.CurrentLevel.OrderCount;
+        public int OrderCount => _level.OrderCount;
 
         private void Awake()
         {
+            _level = serviceConfig.ActiveLevel;
             bool endless = serviceConfig.GameMode == GameMode.Endless;
-            LevelData level = endless ? serviceConfig.EndlessLevel : serviceConfig.CurrentLevel;
-            _ordersLeft = level.OrderCount;
-            _orderFactory = new OrderFactory(level.Dishes, level.MaxOrderSize);
+            _ordersLeft = _level.OrderCount;
+            _orderFactory = new OrderFactory(_level.Dishes, _level.MaxOrderSize);
             if (endless)
             {
                 _difficultyLevel = serviceConfig.Levels[0];
@@ -62,9 +64,9 @@ namespace Features.Customer
             }
             else
             {
-                _minFreeTime = level.MinFreeTime;
-                _maxFreeTime = level.MaxFreeTime;
-                _waitTimeMultiplier = level.WaitTimeMultiplier;
+                _minFreeTime = _level.MinFreeTime;
+                _maxFreeTime = _level.MaxFreeTime;
+                _waitTimeMultiplier = _level.WaitTimeMultiplier;
             }
         }
 
@@ -100,7 +102,7 @@ namespace Features.Customer
             for (int i = 0; i < _spawnTimers.Length; i++)
             {
                 if (orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free
-                    || (serviceConfig.GameMode == GameMode.Campaign && _sentOrders >= OrderCount))
+                    || _sentOrders >= SentOrderLimit())
                 {
                     continue;
                 }
@@ -114,7 +116,20 @@ namespace Features.Customer
                 SendCustomerToCounter(i);
             }
 
-            TickWaitTimes();
+            if (serviceConfig.GameMode != GameMode.Tutorial)
+            {
+                TickWaitTimes();
+            }
+        }
+
+        private int SentOrderLimit()
+        {
+            return serviceConfig.GameMode switch
+            {
+                GameMode.Campaign => OrderCount,
+                GameMode.Tutorial => 1,
+                _ => int.MaxValue
+            };
         }
 
         public void SetFreeTimeRange(float min, float max)
@@ -131,7 +146,7 @@ namespace Features.Customer
         private void SendCustomerToCounter(int slotIndex)
         {
             _slotStates[slotIndex] = SlotState.Incoming;
-            if (serviceConfig.GameMode == GameMode.Campaign)
+            if (serviceConfig.GameMode != GameMode.Endless)
             {
                 _sentOrders++;
             }
@@ -146,11 +161,11 @@ namespace Features.Customer
         {
             if (_slotStates[slotIndex] == SlotState.Incoming)
             {
-                Order order = _orderFactory.Create();
+                Order order = CreateOrder();
                 if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
                     _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
-                    if (serviceConfig.GameMode == GameMode.Campaign)
+                    if (serviceConfig.GameMode != GameMode.Endless)
                     {
                         _ordersLeft--;
                         OrdersLeftChanged?.Invoke(_ordersLeft);
@@ -160,6 +175,27 @@ namespace Features.Customer
 
             _slotStates[slotIndex] = SlotState.Free;
             _spawnTimers[slotIndex] = RandomSpawnDelay();
+        }
+
+        private Order CreateOrder()
+        {
+            if (serviceConfig.GameMode != GameMode.Tutorial)
+            {
+                return _orderFactory.Create();
+            }
+
+            DishData[] dishes = _level.Dishes
+                .Where(entry => entry?.Dish != null)
+                .Select(entry =>
+                {
+                    DishData dish = Instantiate(entry.Dish);
+                    dish.name = entry.Dish.name;
+                    dish.SetToppings(entry.GetToppingPool());
+                    return dish;
+                })
+                .ToArray();
+
+            return dishes.Length == 0 ? null : new Order(dishes);
         }
 
         private void OnOrderServed(int slotIndex, Order order)

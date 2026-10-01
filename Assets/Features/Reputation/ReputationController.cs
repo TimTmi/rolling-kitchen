@@ -18,11 +18,11 @@ namespace Features.Reputation
         public event Action<int> ReputationChanged;
 
         public int Rep => _rep;
-        public int MaxRep => serviceConfig.CurrentLevel.MaxRep;
+        public int MaxRep => serviceConfig.ActiveLevel.MaxRep;
 
         private void Awake()
         {
-            _rep = serviceConfig.CurrentLevel.MaxRep;
+            _rep = serviceConfig.ActiveLevel.MaxRep;
         }
 
         private void Start()
@@ -44,7 +44,7 @@ namespace Features.Reputation
 
         private void OnOrderTimedOut(int slotIndex, Order order)
         {
-            AddRep(serviceConfig.CurrentLevel.RepLoss);
+            AddRep(serviceConfig.ActiveLevel.RepLoss);
         }
 
         private void OnOrderServed(int slotIndex, Order order)
@@ -57,7 +57,7 @@ namespace Features.Reputation
         {
             if (serviceConfig.GameMode != GameMode.Endless)
             {
-                return serviceConfig.CurrentLevel.RepGain;
+                return serviceConfig.ActiveLevel.RepGain;
             }
 
             return EndlessDifficulty.ForServedOrders(serviceConfig.Levels[0], serviceConfig.EndlessRampOrders, _servedOrders).RepGain;
@@ -65,7 +65,7 @@ namespace Features.Reputation
 
         private void AddRep(int delta)
         {
-            _rep = Mathf.Clamp(_rep + delta, 0, serviceConfig.CurrentLevel.MaxRep);
+            _rep = Mathf.Clamp(_rep + delta, 0, serviceConfig.ActiveLevel.MaxRep);
             ReputationChanged?.Invoke(_rep);
         }
     }

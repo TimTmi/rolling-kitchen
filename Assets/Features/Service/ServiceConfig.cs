@@ -6,7 +6,8 @@ namespace Features.Service
     public enum GameMode
     {
         Campaign,
-        Endless
+        Endless,
+        Tutorial
     }
 
     [CreateAssetMenu(fileName = "ServiceConfig", menuName = "Scriptable Objects/ServiceConfig")]
@@ -15,6 +16,7 @@ namespace Features.Service
         [SerializeField] private GameMode gameMode = GameMode.Campaign;
         [SerializeField] private int levelIndex = 0;
         [SerializeField] private LevelData[] levels = Array.Empty<LevelData>();
+        [SerializeField] private LevelData tutorialLevel;
         [SerializeField] private int endlessRampOrders = 6;
 
         public const string HighestCompletedLevelIndexKey = "HighestCompletedLevelIndex";
@@ -42,6 +44,15 @@ namespace Features.Service
         public LevelData CurrentLevel => levels[levelIndex];
 
         public LevelData EndlessLevel => levels[Mathf.Clamp(PlayerPrefs.GetInt(HighestCompletedLevelIndexKey, 0), 0, levels.Length - 1)];
+
+        public LevelData TutorialLevel => tutorialLevel;
+
+        public LevelData ActiveLevel => GameMode switch
+        {
+            GameMode.Endless => EndlessLevel,
+            GameMode.Tutorial => tutorialLevel,
+            _ => CurrentLevel
+        };
 
         public int EndlessRampOrders => endlessRampOrders;
     }

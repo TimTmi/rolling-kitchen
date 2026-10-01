@@ -90,6 +90,10 @@
     background-image: url("project://database/Assets/Features/UI/infinity.svg?fileID=7388822144124034973&guid=a5b6299dc21442e7bfe602b74838742f&type=3#infinity");
 }
 
+.tutorial-icon {
+    background-image: url("project://database/Assets/Features/UI/graduation-cap.svg?fileID=7388822144124034973&guid=6100a09fa6d847a2b3a8e860b89fda78&type=3#graduation-cap");
+}
+
 .play-icon {
     background-image: url("project://database/Assets/Features/UI/play.svg?fileID=7388822144124034973&guid=14de24f105eb3702eb4dadf2aa713699&type=3#play");
 }

@@ -18,6 +18,10 @@
         </ui:VisualElement>
         <ui:VisualElement name="ModeButtons" class="mode-buttons">
             <ui:VisualElement name="ModeRow" class="mode-row">
+                <ui:Button name="TutorialButton" class="mode-button">
+                    <ui:VisualElement name="TutorialIcon" class="mode-icon tutorial-icon" />
+                    <ui:Label text="Tutorial" class="mode-label" />
+                </ui:Button>
                 <ui:Button name="CampaignButton" class="mode-button">
                     <ui:VisualElement name="CampaignIcon" class="mode-icon campaign-icon" />
                     <ui:Label text="Campaign" class="mode-label" />
