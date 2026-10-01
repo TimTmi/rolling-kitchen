@@ -20,6 +20,7 @@ namespace Features.Service
         [SerializeField] private int repLoss = -5;
         [SerializeField] private int repGain = 2;
         [SerializeField] private LevelDish[] dishes = Array.Empty<LevelDish>();
+        [SerializeField] private IngredientData unlockedIngredient;
 
         public int MaxOrderSize => maxOrderSize;
 
@@ -38,6 +39,8 @@ namespace Features.Service
         public int RepGain => repGain;
 
         public LevelDish[] Dishes => dishes;
+
+        public IngredientData UnlockedIngredient => unlockedIngredient;
 
         public IngredientData[] GetIngredients()
         {

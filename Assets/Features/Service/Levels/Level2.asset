@@ -25,3 +25,4 @@ MonoBehaviour:
     allowedToppings:
     - {fileID: 6665150913982500476, guid: c71bf7257859cd5bb8b8be8c2147f1d8, type: 3}
     - {fileID: 2672913992213735569, guid: b5251fdf3a5ee5bda9561cea6bea0bd3, type: 3}
+  unlockedIngredient: {fileID: 11400000, guid: 9b4f0036dd2fe2f27b9c244044afdf55, type: 2}

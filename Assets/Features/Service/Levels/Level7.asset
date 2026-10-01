@@ -36,3 +36,4 @@ MonoBehaviour:
   - dish: {fileID: 11400000, guid: 0ae807f6ada19c9819a3782fb8b34a51, type: 2}
     allowedToppings:
     - {fileID: -6711935558241111177, guid: 59723b214674a7e53aa2018edfd52175, type: 3}
+  unlockedIngredient: {fileID: 11400000, guid: a92b209f9bac128d59fd0537b3d43b9f, type: 2}
