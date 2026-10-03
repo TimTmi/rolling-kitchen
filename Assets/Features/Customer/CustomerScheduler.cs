@@ -13,7 +13,6 @@ namespace Features.Customer
         [SerializeField] private ServiceConfig serviceConfig;
 
         private OrderFactory _orderFactory;
-        private LevelData _level;
         private int _ordersLeft;
         private int _sentOrders;
         private int _servedOrders;
@@ -49,14 +48,15 @@ namespace Features.Customer
 
         public GameMode GameMode => serviceConfig.GameMode;
 
-        public int OrderCount => _level.OrderCount;
+        public int OrderCount => Level.OrderCount;
+
+        private LevelData Level => serviceConfig.ActiveLevel;
 
         private void Awake()
         {
-            _level = serviceConfig.ActiveLevel;
             bool endless = serviceConfig.GameMode == GameMode.Endless;
-            _ordersLeft = _level.OrderCount;
-            _orderFactory = new OrderFactory(_level.Dishes, _level.MaxOrderSize);
+            _ordersLeft = Level.OrderCount;
+            _orderFactory = new OrderFactory(Level.Dishes, Level.MaxOrderSize);
             if (endless)
             {
                 _difficultyLevel = serviceConfig.Levels[0];
@@ -64,9 +64,9 @@ namespace Features.Customer
             }
             else
             {
-                _minFreeTime = _level.MinFreeTime;
-                _maxFreeTime = _level.MaxFreeTime;
-                _waitTimeMultiplier = _level.WaitTimeMultiplier;
+                _minFreeTime = Level.MinFreeTime;
+                _maxFreeTime = Level.MaxFreeTime;
+                _waitTimeMultiplier = Level.WaitTimeMultiplier;
             }
         }
 
@@ -184,7 +184,7 @@ namespace Features.Customer
                 return _orderFactory.Create();
             }
 
-            DishData[] dishes = _level.Dishes
+            DishData[] dishes = Level.Dishes
                 .Where(entry => entry?.Dish != null)
                 .Select(entry =>
                 {

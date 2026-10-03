@@ -10,6 +10,8 @@ namespace Features.Interaction
     {
         public int FryingItemCount => _frying != null ? 1 : 0;
 
+        public Pickable Frying => _frying;
+
         [SerializeField] private Vector3 defaultRotation = new Vector3(-90f, 0f, 0f);
         [SerializeField] private Vector3 fryPosition;
         [SerializeField] private Vector3 submergedOffset = Vector3.zero;

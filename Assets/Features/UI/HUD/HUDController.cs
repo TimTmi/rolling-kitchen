@@ -19,6 +19,7 @@ namespace Features.UI.HUD
         private VisualElement _crosshair;
         private Label _ordersLeftCounter;
         private VisualElement _reputationFill;
+        private Label _tutorialHint;
 
         protected override void OnEnabled()
         {
@@ -42,6 +43,7 @@ namespace Features.UI.HUD
             _crosshair = root.Q("Crosshair");
             _ordersLeftCounter = root.Q<Label>("OrdersLeftCounter");
             _reputationFill = root.Q("ReputationFill");
+            _tutorialHint = root.Q<Label>("TutorialHint");
         }
 
         protected override void Initialize()
@@ -58,6 +60,17 @@ namespace Features.UI.HUD
             {
                 _crosshair.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
             }
+        }
+
+        public void SetTutorialHint(string text)
+        {
+            if (_tutorialHint == null)
+            {
+                return;
+            }
+
+            _tutorialHint.text = text;
+            _tutorialHint.visible = !string.IsNullOrEmpty(text);
         }
 
         private void OnFocusGained(IInteractable interactable)

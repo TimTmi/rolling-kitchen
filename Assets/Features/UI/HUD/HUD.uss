@@ -29,6 +29,25 @@
     margin-bottom: 8px;
 }
 
+.tutorial-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    translate: -50% 0;
+    max-width: 60%;
+    padding: 10px 16px;
+    background-color: rgba(20, 22, 28, 0.75);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+    border-radius: 10px;
+    color: rgb(235, 235, 235);
+    font-size: 14px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    visibility: hidden;
+}
+
 .orders-left-panel {
     margin-right: 8px;
     padding: 10px;
