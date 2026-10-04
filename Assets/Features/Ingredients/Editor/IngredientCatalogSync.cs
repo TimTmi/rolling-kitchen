@@ -7,7 +7,7 @@ namespace Features.Ingredient.Editor
 {
     public class IngredientCatalogSync : AssetPostprocessor
     {
-        const string CatalogPath = "Assets/Features/Ingredient/Resources/IngredientData.asset";
+        const string CatalogPath = "Assets/Features/Ingredients/Resources/IngredientData.asset";
 
         [InitializeOnLoadMethod]
         static void SyncOnLoad()
