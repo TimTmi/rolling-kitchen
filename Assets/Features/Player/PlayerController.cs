@@ -1,3 +1,4 @@
+using Features.Service;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +15,6 @@ namespace Features.Player
         [SerializeField] private float minPitch = -60f;
         [SerializeField] private float maxPitch = 60f;
         [SerializeField] private float moveSpeed = 2f;
-        [SerializeField] private float rotationSpeed = 320f;
         [SerializeField] private float gravity = -2f;
     
         private Vector2 _moveInput;
@@ -45,10 +45,11 @@ namespace Features.Player
             animator.SetFloat(Speed, _moveInput.magnitude);
             
             Vector2 normalizedLookInput = new Vector2(_lookInput.x / Screen.width, _lookInput.y / Screen.height);
-        
-            transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed * normalizedLookInput.x);
+            float lookSpeed = PlayerPrefs.GetFloat(ServiceConfig.CameraSensitivityKey, ServiceConfig.DefaultCameraSensitivity) * ServiceConfig.CameraSensitivityScale;
 
-            _pitch -= Time.deltaTime * rotationSpeed * normalizedLookInput.y;
+            transform.Rotate(Vector3.up, Time.deltaTime * lookSpeed * normalizedLookInput.x);
+
+            _pitch -= Time.deltaTime * lookSpeed * normalizedLookInput.y;
             _pitch = Mathf.Clamp(_pitch, minPitch, maxPitch);
             camera.transform.localRotation = Quaternion.Euler(_pitch, 0, 0);
         }

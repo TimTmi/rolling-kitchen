@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Features.Ingredients;
 using Features.Pickup;
 using UnityEngine;
 
@@ -10,7 +12,14 @@ namespace Features.Interaction
         [SerializeField] private Ingredient[] ingredients;
 
         public event Action<IReadOnlyList<Ingredient>> Opened;
-        
+
+        public void LimitIngredients(IEnumerable<IngredientData> allowed)
+        {
+            ingredients = ingredients
+                .Where(ingredient => ingredient != null && ingredient.IngredientData != null && allowed.Contains(ingredient.IngredientData))
+                .ToArray();
+        }
+
         public bool CanInteract(in InteractionContext context)
         {
             return context.HeldPickable == null || context.HeldPickable is Ingredient;

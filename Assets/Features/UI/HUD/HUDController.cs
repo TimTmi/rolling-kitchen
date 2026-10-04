@@ -1,5 +1,8 @@
+using Features.Customer;
 using Features.Interaction;
 using Features.Player;
+using Features.Reputation;
+using Features.Service;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,26 +12,46 @@ namespace Features.UI.HUD
     {
         [SerializeField] private InteractionController interactionController;
         [SerializeField] private HandController handController;
-        
+        [SerializeField] private CustomerScheduler customerScheduler;
+        [SerializeField] private ReputationController reputationController;
+
         private Label _interactionPrompt;
         private VisualElement _crosshair;
+        private Label _ordersLeftCounter;
+        private VisualElement _reputationFill;
+        private Label _tutorialHint;
 
         protected override void OnEnabled()
         {
             interactionController.FocusGained += OnFocusGained;
             interactionController.FocusLost += OnFocusLost;
+            customerScheduler.OrdersLeftChanged += OnOrdersLeftChanged;
+            reputationController.ReputationChanged += OnReputationChanged;
         }
 
         protected override void OnDisabled()
         {
             interactionController.FocusGained -= OnFocusGained;
             interactionController.FocusLost -= OnFocusLost;
+            customerScheduler.OrdersLeftChanged -= OnOrdersLeftChanged;
+            reputationController.ReputationChanged -= OnReputationChanged;
         }
 
         protected override void BindElements(VisualElement root)
         {
             _interactionPrompt = root.Q<Label>("InteractionPrompt");
             _crosshair = root.Q("Crosshair");
+            _ordersLeftCounter = root.Q<Label>("OrdersLeftCounter");
+            _reputationFill = root.Q("ReputationFill");
+            _tutorialHint = root.Q<Label>("TutorialHint");
+        }
+
+        protected override void Initialize()
+        {
+            UpdateOrdersLeft(customerScheduler.GameMode == GameMode.Endless
+                ? customerScheduler.ServedOrders
+                : customerScheduler.OrdersLeft);
+            UpdateReputation(reputationController.Rep, reputationController.MaxRep);
         }
 
         public void SetCrosshairVisible(bool visible)
@@ -37,6 +60,17 @@ namespace Features.UI.HUD
             {
                 _crosshair.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
             }
+        }
+
+        public void SetTutorialHint(string text)
+        {
+            if (_tutorialHint == null)
+            {
+                return;
+            }
+
+            _tutorialHint.text = text;
+            _tutorialHint.visible = !string.IsNullOrEmpty(text);
         }
 
         private void OnFocusGained(IInteractable interactable)
@@ -55,6 +89,38 @@ namespace Features.UI.HUD
             
             _interactionPrompt.visible = true;
             _interactionPrompt.text = interactable.GetInteractionPrompt(context);
+        }
+
+        private void OnOrdersLeftChanged(int ordersLeft)
+        {
+            UpdateOrdersLeft(ordersLeft);
+        }
+
+        private void OnReputationChanged(int rep)
+        {
+            UpdateReputation(rep, reputationController.MaxRep);
+        }
+
+        private void UpdateReputation(int rep, int maxRep)
+        {
+            if (_reputationFill == null)
+            {
+                return;
+            }
+
+            _reputationFill.style.width = maxRep > 0 ? Length.Percent(100f * rep / maxRep) : Length.Percent(0f);
+        }
+
+        private void UpdateOrdersLeft(int value)
+        {
+            if (_ordersLeftCounter == null)
+            {
+                return;
+            }
+
+            _ordersLeftCounter.text = customerScheduler.GameMode == GameMode.Endless
+                ? $"Served: {value}"
+                : $"Orders: {value} / {customerScheduler.OrderCount}";
         }
 
         private void OnFocusLost(IInteractable interactable)

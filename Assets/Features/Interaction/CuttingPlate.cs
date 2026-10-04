@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Features.Ingredients;
 using Features.Minigame;
 using Features.Pickup;
@@ -17,6 +18,21 @@ namespace Features.Interaction
 
         private IngredientSlots _slots;
         private CuttingMinigame _minigame;
+
+        public IEnumerable<Pickable> Contents
+        {
+            get
+            {
+                _slots.ClearDetached();
+                for (int i = 0; i < _slots.Count; i++)
+                {
+                    if (_slots[i] != null)
+                    {
+                        yield return _slots[i];
+                    }
+                }
+            }
+        }
 
         private void Awake()
         {

@@ -1,14 +1,21 @@
 using System.Linq;
+using Features.Pickup;
 using UnityEngine;
 
 namespace Features.Dish
 {
     public class OrderFactory
     {
-        private readonly DishData[] _dishes;
-        private readonly int _maxOrderSize;
+        private readonly LevelDish[] _dishes;
+        private int _maxOrderSize;
 
-        public OrderFactory(DishData[] dishes, int maxOrderSize)
+        public int MaxOrderSize
+        {
+            get => _maxOrderSize;
+            set => _maxOrderSize = value;
+        }
+
+        public OrderFactory(LevelDish[] dishes, int maxOrderSize)
         {
             _dishes = dishes;
             _maxOrderSize = maxOrderSize;
@@ -21,7 +28,7 @@ namespace Features.Dish
                 return null;
             }
 
-            int dishCount = UnityEngine.Random.Range(1, _maxOrderSize + 1);
+            int dishCount = Random.Range(1, _maxOrderSize + 1);
             DishData[] orderDishes = new DishData[dishCount];
             for (int i = 0; i < dishCount; i++)
             {
@@ -33,17 +40,19 @@ namespace Features.Dish
 
         private DishData CreateDish()
         {
-            DishData dish = _dishes[UnityEngine.Random.Range(0, _dishes.Length)];
-            if (dish.Toppings.Length == 0)
+            LevelDish entry = _dishes[Random.Range(0, _dishes.Length)];
+            DishData dish = entry.Dish;
+            Ingredient[] toppingPool = entry.GetToppingPool();
+            if (toppingPool.Length == 0)
             {
                 return dish;
             }
 
             DishData randomized = Object.Instantiate(dish);
             randomized.name = dish.name;
-            randomized.SetToppings(dish.Toppings
-                .OrderBy(_ => UnityEngine.Random.value)
-                .Take(UnityEngine.Random.Range(1, dish.Toppings.Length + 1))
+            randomized.SetToppings(toppingPool
+                .OrderBy(_ => Random.value)
+                .Take(Random.Range(1, toppingPool.Length + 1))
                 .ToArray());
             return randomized;
         }

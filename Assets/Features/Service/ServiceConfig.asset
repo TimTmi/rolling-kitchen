@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e1786f7e550780b99a5a08d87dc718, type: 3}
+  m_Name: ServiceConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Service.ServiceConfig
+  gameMode: 2
+  levelIndex: 0
+  levels:
+  - {fileID: 11400000, guid: 41c7212f6434d8bb0bee7fb79b1696a0, type: 2}
+  - {fileID: 11400000, guid: 7be2c3ce16ee5ae4fb194a15aebeb120, type: 2}
+  - {fileID: 11400000, guid: ba35618cc20b1e7a2add42af669c52d6, type: 2}
+  - {fileID: 11400000, guid: 45aa440e4f0338365a42fba2a58df9d9, type: 2}
+  - {fileID: 11400000, guid: 34a2a8463cbe915ceac3b9a8af30d553, type: 2}
+  - {fileID: 11400000, guid: 1b5f79459049d606f8c873e8bbe5ca5f, type: 2}
+  - {fileID: 11400000, guid: a0991f642305028ea96ffd6b0e5ffebe, type: 2}
+  tutorialLevel: {fileID: 11400000, guid: f011d571d38e93a369bce1bcc14fbb99, type: 2}
+  endlessRampOrders: 16

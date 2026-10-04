@@ -22,17 +22,20 @@
 
 .close-button {
     align-self: flex-end;
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     margin-bottom: 8px;
-    background-color: rgba(255, 255, 255, 0.12);
-    border-width: 0;
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
     border-radius: 8px;
-    background-image: url('project://database/Assets/Features/UI/x.png?fileID=2800000&guid=de6bfd61a407e57d79453f7a43eaefbe&type=3#x');
+    background-image: url("project://database/Assets/Features/UI/x.svg?fileID=7388822144124034973&guid=3d9aecbc1fc7878b3a183f64f9294eab&type=3#x");
+    background-size: auto 60%;
+    background-position: center;
 }
 
 .close-button:hover {
-    background-color: rgba(255, 255, 255, 0.22);
+    background-color: rgba(255, 255, 255, 0.13);
 }
 
 .pickable-list {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Features.Audio;
 using Features.Ingredients;
@@ -31,6 +32,20 @@ namespace Features.Interaction
         [SerializeField] private int maxSlots = 8;
 
         private IngredientSlots _slots;
+
+        public IEnumerable<Pickable> Contents
+        {
+            get
+            {
+                for (int i = 0; i < _slots.Count; i++)
+                {
+                    if (_slots[i] != null)
+                    {
+                        yield return _slots[i];
+                    }
+                }
+            }
+        }
 
         public bool CanInteract(in InteractionContext context)
         {

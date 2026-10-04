@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Features.Dish;
+using Features.Service;
 using UnityEngine;
 
 namespace Features.Customer
@@ -8,13 +10,16 @@ namespace Features.Customer
     {
         [SerializeField] private OrderManager orderManager;
         [SerializeField] private CustomerController customerPrefab;
-        [SerializeField] private DishData[] dishes = Array.Empty<DishData>();
-        [SerializeField] private int maxOrderSize = 1;
-        [SerializeField] private float minFreeTime = 5f;
-        [SerializeField] private float maxFreeTime = 10f;
-        [SerializeField] private float waitTimeMultiplier = 1f;
+        [SerializeField] private ServiceConfig serviceConfig;
 
         private OrderFactory _orderFactory;
+        private int _ordersLeft;
+        private int _sentOrders;
+        private int _servedOrders;
+        private LevelData _difficultyLevel;
+        private float _minFreeTime;
+        private float _maxFreeTime;
+        private float _waitTimeMultiplier;
         private float[] _spawnTimers;
         private float[] _waitRemaining;
         private CustomerController[] _customers;
@@ -28,16 +33,50 @@ namespace Features.Customer
         }
 
         public event Action<int, Order> OrderTimedOut;
+        public event Action<int> OrdersLeftChanged;
+        public event Action OrdersCompleted;
 
         public float WaitTimeMultiplier
         {
-            get => waitTimeMultiplier;
-            set => waitTimeMultiplier = value;
+            get => _waitTimeMultiplier;
+            set => _waitTimeMultiplier = value;
         }
+
+        public int OrdersLeft => _ordersLeft;
+
+        public int ServedOrders => _servedOrders;
+
+        public GameMode GameMode => serviceConfig.GameMode;
+
+        public int OrderCount => Level.OrderCount;
+
+        private LevelData Level => serviceConfig.ActiveLevel;
 
         private void Awake()
         {
-            _orderFactory = new OrderFactory(dishes, maxOrderSize);
+            bool endless = serviceConfig.GameMode == GameMode.Endless;
+            _ordersLeft = Level.OrderCount;
+            _orderFactory = new OrderFactory(Level.Dishes, Level.MaxOrderSize);
+            if (endless)
+            {
+                _difficultyLevel = serviceConfig.Levels[0];
+                ApplyDifficulty();
+            }
+            else
+            {
+                _minFreeTime = Level.MinFreeTime;
+                _maxFreeTime = Level.MaxFreeTime;
+                _waitTimeMultiplier = Level.WaitTimeMultiplier;
+            }
+        }
+
+        private void ApplyDifficulty()
+        {
+            EndlessDifficulty difficulty = EndlessDifficulty.ForServedOrders(_difficultyLevel, serviceConfig.EndlessRampOrders, _servedOrders);
+            _orderFactory.MaxOrderSize = difficulty.MaxOrderSize;
+            _minFreeTime = difficulty.MinFreeTime;
+            _maxFreeTime = difficulty.MaxFreeTime;
+            _waitTimeMultiplier = difficulty.WaitTimeMultiplier;
         }
 
         private void OnEnable()
@@ -54,6 +93,7 @@ namespace Features.Customer
         {
             EnsureSpawnTimersInitialized();
             SpawnCustomers();
+            OrdersLeftChanged?.Invoke(_ordersLeft);
         }
 
         private void Update()
@@ -61,7 +101,8 @@ namespace Features.Customer
             EnsureSpawnTimersInitialized();
             for (int i = 0; i < _spawnTimers.Length; i++)
             {
-                if (orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free)
+                if (orderManager.GetOrder(i) != null || _slotStates[i] != SlotState.Free
+                    || _sentOrders >= SentOrderLimit())
                 {
                     continue;
                 }
@@ -75,13 +116,26 @@ namespace Features.Customer
                 SendCustomerToCounter(i);
             }
 
-            TickWaitTimes();
+            if (serviceConfig.GameMode != GameMode.Tutorial)
+            {
+                TickWaitTimes();
+            }
+        }
+
+        private int SentOrderLimit()
+        {
+            return serviceConfig.GameMode switch
+            {
+                GameMode.Campaign => OrderCount,
+                GameMode.Tutorial => 1,
+                _ => int.MaxValue
+            };
         }
 
         public void SetFreeTimeRange(float min, float max)
         {
-            minFreeTime = min;
-            maxFreeTime = max;
+            _minFreeTime = min;
+            _maxFreeTime = max;
         }
 
         public float GetRemainingWaitTime(int slotIndex)
@@ -92,6 +146,11 @@ namespace Features.Customer
         private void SendCustomerToCounter(int slotIndex)
         {
             _slotStates[slotIndex] = SlotState.Incoming;
+            if (serviceConfig.GameMode != GameMode.Endless)
+            {
+                _sentOrders++;
+            }
+
             OrderSlot slot = orderManager.GetSlot(slotIndex);
             CustomerController customer = _customers[slotIndex];
             customer.transform.position = slot.PathStart.position;
@@ -102,10 +161,15 @@ namespace Features.Customer
         {
             if (_slotStates[slotIndex] == SlotState.Incoming)
             {
-                Order order = _orderFactory.Create();
+                Order order = CreateOrder();
                 if (order != null && orderManager.TryPlaceOrder(slotIndex, order))
                 {
-                    _waitRemaining[slotIndex] = order.ExpectedDuration * waitTimeMultiplier;
+                    _waitRemaining[slotIndex] = order.ExpectedDuration * _waitTimeMultiplier;
+                    if (serviceConfig.GameMode != GameMode.Endless)
+                    {
+                        _ordersLeft--;
+                        OrdersLeftChanged?.Invoke(_ordersLeft);
+                    }
                 }
             }
 
@@ -113,9 +177,39 @@ namespace Features.Customer
             _spawnTimers[slotIndex] = RandomSpawnDelay();
         }
 
+        private Order CreateOrder()
+        {
+            if (serviceConfig.GameMode != GameMode.Tutorial)
+            {
+                return _orderFactory.Create();
+            }
+
+            DishData[] dishes = Level.Dishes
+                .Where(entry => entry?.Dish != null)
+                .Select(entry =>
+                {
+                    DishData dish = Instantiate(entry.Dish);
+                    dish.name = entry.Dish.name;
+                    dish.SetToppings(entry.GetToppingPool());
+                    return dish;
+                })
+                .ToArray();
+
+            return dishes.Length == 0 ? null : new Order(dishes);
+        }
+
         private void OnOrderServed(int slotIndex, Order order)
         {
+            Audio.AudioController.PlayYeah();
             SendCustomerHome(slotIndex);
+            _servedOrders++;
+            if (serviceConfig.GameMode == GameMode.Endless)
+            {
+                ApplyDifficulty();
+                OrdersLeftChanged?.Invoke(_servedOrders);
+            }
+
+            CheckOrdersCompleted();
         }
 
         private void TickWaitTimes()
@@ -144,6 +238,25 @@ namespace Features.Customer
             OrderTimedOut?.Invoke(slotIndex, order);
             orderManager.ClearOrder(slotIndex);
             SendCustomerHome(slotIndex);
+            CheckOrdersCompleted();
+        }
+
+        private void CheckOrdersCompleted()
+        {
+            if (_ordersLeft > 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < orderManager.SlotCount; i++)
+            {
+                if (_slotStates[i] == SlotState.Incoming || orderManager.GetOrder(i) != null)
+                {
+                    return;
+                }
+            }
+
+            OrdersCompleted?.Invoke();
         }
 
         private void SendCustomerHome(int slotIndex)
@@ -184,7 +297,7 @@ namespace Features.Customer
 
         private float RandomSpawnDelay()
         {
-            return UnityEngine.Random.Range(minFreeTime, maxFreeTime);
+            return UnityEngine.Random.Range(_minFreeTime, _maxFreeTime);
         }
     }
 }
