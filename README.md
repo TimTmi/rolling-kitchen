@@ -6,9 +6,8 @@ fetch ingredients from the fridge, slice them on the cutting board, grill and de
 them, stack them into dishes on the customer's tray and serve before their patience runs
 out.
 
-**▶ [Gameplay demo](https://idk.com)**
+**▶ [Gameplay demo](https://youtu.be/NkoQpSjaXLQ)**
 
-<!-- TODO: replace the demo link and add a screenshot/GIF of gameplay -->
 <!-- ![gameplay](docs/gameplay.gif) -->
 
 ## Features
@@ -282,3 +281,11 @@ Assets/
   grilling and frying in parallel
 - Third-party art is not redistributable, so the project needs manual asset import
   before it runs
+
+## Credits
+
+- **3D art** - see the [Third-Party Assets](#third-party-assets) table.
+- **Sound effects** - the files in `Assets/Shared/Audio/` are released under the
+  [CC0 1.0 Universal Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+  No attribution is required. See [`Assets/Shared/Audio/ATTRIBUTIONS.md`](Assets/Shared/Audio/ATTRIBUTIONS.md)
+  for details.
