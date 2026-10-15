@@ -8,7 +8,9 @@ out.
 
 **▶ [Gameplay demo](https://youtu.be/NkoQpSjaXLQ)**
 
-<!-- ![gameplay](docs/gameplay.gif) -->
+| Take the order | Cook | Serve |
+| :---: | :---: | :---: |
+| ![A customer arrives and places an order](docs/overview/order.gif) | ![Cooking the order](docs/overview/cooking.gif) | ![Serving the order on the tray](docs/overview/serving.gif) |
 
 ## Features
 
@@ -84,9 +86,17 @@ On top of that index:
 - **`GetProducers`** is also used by `LevelData` to collect every ingredient a level
   needs *including its raw sources*, which is what the fridge is limited to.
 
+| Level 1 | Level 4 | Level 7 |
+| :---: | :---: | :---: |
+| ![Fridge contents in level 1](docs/recipe/fridge/fridge-lv1.png) | ![Fridge contents in level 4](docs/recipe/fridge/fridge-lv4.png) | ![Fridge contents in level 7](docs/recipe/fridge/fridge-lv7.png) |
+
 `DishData` sums its required ingredients, `Order` sums its dishes, and
 `CustomerScheduler` sets each customer's patience to
 `order.ExpectedDuration × level.WaitTimeMultiplier`.
+
+| Fully topped burger | Fries |
+| :---: | :---: |
+| ![Order ticket for a fully topped burger with its waiting time](docs/recipe/waiting-time/burger-waiting-time.png) | ![Order ticket for fries with its waiting time](docs/recipe/waiting-time/fries-waiting-time.png) |
 
 **Result.** Adding a new ingredient or recipe is pure data authoring - no timer to tune,
 no code to touch. Randomly topped dishes get proportionally more time automatically.
@@ -105,17 +115,31 @@ item and owns an ordered list of members.
 - **Order checking.** `FindInsertionIndex` searches, top-down, for a position where the
   incoming group can be spliced into the host so that roles never decrease from bottom
   to top. A topping can go between bun and top bun; a box can only go underneath.
+
+  ![Building a burger with items inserted into the right place in the stack](docs/food-stacking/stack-build.gif)
 - **Bidirectional merging.** `Merge` tries inserting the held group into the target, and
   if that fails, the target into the held group - so holding a bun and clicking a patty
   works the same as holding the patty and clicking the bun. If an insert lands at the
   bottom, the stack is **re-rooted** onto the new bottom item and, if the player was
   holding part of it, the hand is re-pointed at the new stack.
+
+  ![Merging a held item into a stack](docs/food-stacking/stack-reverse-1.gif)
+
+  ![Merging the other way round gives the same stack](docs/food-stacking/stack-reverse-2.gif)
+
+  ![Dropping a burger onto a box re-roots the stack onto the box](docs/food-stacking/stack-onto-box.gif)
 - **Conflict detection.** `HasRoleConflict` rejects any merge that would give one stack
   more than one container, base or top.
+
+  ![A conflicting merge is rejected](docs/food-stacking/stack-reject.gif)
 - **In-place cooking.** `ReplaceRoot` / `Replace` swap a member for its process results
   while keeping its position in the stack. The griddle and deep fryer advance cooking
   progress per member, so a patty with cheese on top cooks both, and fries can be scooped
   out of the fryer by clicking it with an empty box.
+
+  ![Patty and cheese cooking together as one stack on the griddle](docs/cooking/griddle-stack.gif)
+
+  ![Frying fries and scooping them out with an empty box](docs/cooking/fryer.gif)
 
 Members get randomized yaw rotations, at least 45° apart from their neighbours, so a
 stack reads as hand-built rather than perfectly aligned.
@@ -165,12 +189,18 @@ point-of-interest camera and spawns the minigame prefab referenced by the ingred
   radius. The cursor's angle around the centre is computed in camera space with `atan2`;
   the knife follows at a capped angular speed, only counts motion in one direction, and
   per-frame progress is clamped so the player has to actually sweep a full 360°.
+
+  ![Circular cut around a bun](docs/cutting/cut-circle.gif)
 - **`LineCuttingMinigame`** (tomato, onion, potato) - a set of cut lines interpolated
   between two authored positions. Holding the mouse and moving horizontally accumulates
   cut distance along the current line; reaching the threshold completes the line and
   moves the knife to the next.
 
+  ![Line-by-line slicing](docs/cutting/cut-line.gif)
+
 Leaving the camera (Escape) cancels the minigame cleanly through the same base class.
+
+![Cancelling a cut with Escape](docs/cutting/cut-cancel.gif)
 
 ### Three game modes from one data-driven loop
 
@@ -181,6 +211,10 @@ service loop per mode would triple the code to maintain.
 level - order count, max dishes per order, spawn intervals, patience multiplier,
 reputation gain/loss, the dishes and allowed toppings, and the ingredient it unlocks -
 and modes differ only in which level they read and a few switches:
+
+| Mode select | Campaign levels |
+| :---: | :---: |
+| ![Tutorial, Campaign and Endless mode select](docs/overview/gamemodes.png) | ![Campaign level selection](docs/gamemodes/level-selection.png) |
 
 - **Campaign** - levels in order; finishing all orders saves progress and shows the
   ingredient unlocked by the next level.
@@ -193,6 +227,12 @@ and modes differ only in which level they read and a few switches:
   `TutorialController` running a list of steps. Each step is a hint plus either a timeout
   or a completion predicate that inspects the hand, trays, griddle, fryer and cutting
   board ("cooked patty and melted cheese are on the griddle").
+
+| Level complete | Endless | Game over |
+| :---: | :---: | :---: |
+| ![Level complete screen with the unlocked ingredient](docs/gamemodes/unlock.png) | ![Endless mode](docs/gamemodes/endless.png) | ![Game over screen](docs/gamemodes/game-over.png) |
+
+![Tutorial steps](docs/gamemodes/tutorial.gif)
 
 ---
 
