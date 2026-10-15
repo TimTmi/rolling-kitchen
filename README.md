@@ -10,7 +10,7 @@ out.
 
 | Take the order | Cook | Serve |
 | :---: | :---: | :---: |
-| ![A customer arrives and places an order](docs/overview/order.gif) | ![Cooking the order](docs/overview/cooking.gif) | ![Serving the order on the tray](docs/overview/serving.gif) |
+| ![A customer arrives and places an order](docs/overview/order.webp) | ![Cooking the order](docs/overview/cooking.webp) | ![Serving the order on the tray](docs/overview/serving.webp) |
 
 ## Features
 
@@ -116,7 +116,7 @@ item and owns an ordered list of members.
   incoming group can be spliced into the host so that roles never decrease from bottom
   to top. A topping can go between bun and top bun; a box can only go underneath.
 
-  ![Building a burger with items inserted into the right place in the stack](docs/food-stacking/stack-build.gif)
+  ![Building a burger with items inserted into the right place in the stack](docs/food-stacking/stack-build.webp)
 - **Bidirectional merging.** `Merge` tries inserting the held group into the target, and
   if that fails, the target into the held group - so holding a bun and clicking a patty
   works the same as holding the patty and clicking the bun. If an insert lands at the
@@ -125,21 +125,21 @@ item and owns an ordered list of members.
 
   ![Merging a held item into a stack](docs/food-stacking/stack-reverse-1.gif)
 
-  ![Merging the other way round gives the same stack](docs/food-stacking/stack-reverse-2.gif)
+  ![Merging the other way round gives the same stack](docs/food-stacking/stack-reverse-2.webp)
 
-  ![Dropping a burger onto a box re-roots the stack onto the box](docs/food-stacking/stack-onto-box.gif)
+  ![Dropping a burger onto a box re-roots the stack onto the box](docs/food-stacking/stack-onto-box.webp)
 - **Conflict detection.** `HasRoleConflict` rejects any merge that would give one stack
   more than one container, base or top.
 
-  ![A conflicting merge is rejected](docs/food-stacking/stack-reject.gif)
+  ![A conflicting merge is rejected](docs/food-stacking/stack-reject.webp)
 - **In-place cooking.** `ReplaceRoot` / `Replace` swap a member for its process results
   while keeping its position in the stack. The griddle and deep fryer advance cooking
   progress per member, so a patty with cheese on top cooks both, and fries can be scooped
   out of the fryer by clicking it with an empty box.
 
-  ![Patty and cheese cooking together as one stack on the griddle](docs/cooking/griddle-stack.gif)
+  ![Patty and cheese cooking together as one stack on the griddle](docs/cooking/griddle-stack.webp)
 
-  ![Frying fries and scooping them out with an empty box](docs/cooking/fryer.gif)
+  ![Frying fries and scooping them out with an empty box](docs/cooking/fryer.webp)
 
 Members get randomized yaw rotations, at least 45° apart from their neighbours, so a
 stack reads as hand-built rather than perfectly aligned.
@@ -196,7 +196,7 @@ point-of-interest camera and spawns the minigame prefab referenced by the ingred
   cut distance along the current line; reaching the threshold completes the line and
   moves the knife to the next.
 
-  ![Line-by-line slicing](docs/cutting/cut-line.gif)
+  ![Line-by-line slicing](docs/cutting/cut-line.webp)
 
 Leaving the camera (Escape) cancels the minigame cleanly through the same base class.
 
@@ -232,7 +232,7 @@ and modes differ only in which level they read and a few switches:
 | :---: | :---: | :---: |
 | ![Level complete screen with the unlocked ingredient](docs/gamemodes/unlock.png) | ![Endless mode](docs/gamemodes/endless.png) | ![Game over screen](docs/gamemodes/game-over.png) |
 
-![Tutorial steps](docs/gamemodes/tutorial.gif)
+![Tutorial steps](docs/gamemodes/tutorial.webp)
 
 ---
 
